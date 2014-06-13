@@ -23,7 +23,7 @@ module.exports = function(grunt) {
     watch: {
       docs: {
         files: ['docs/**/*.less'],
-        tasks: ['less:docs-theme']
+        tasks: ['less:docs']
       }
     }
 

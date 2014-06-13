@@ -6,6 +6,7 @@
   <meta name="author" content="{{ shop.name }}">
 
   <!-- Core CSS -->
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
   <link href="{{ 'cartjs.min.css' | asset_url }}" rel="stylesheet">
 
   {{ content_for_header }}
@@ -31,9 +32,7 @@
   {% include 'navbar' %}
 
   <!-- Content -->
-  <section id="content" class="container">
-    {{ content_for_layout }}
-  </section>
+  {{ content_for_layout }}
 
   <!-- Site Footer -->
   {% include 'footer' %}

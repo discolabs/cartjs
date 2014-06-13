@@ -1,37 +1,43 @@
-{% comment %}
-
-  This snippet renders the footer at the bottom of each page.
-
-{% endcomment %}
 <footer class="footer">
   <div class="container">
 
-    <!-- Social Media Icons -->
-    <ul class="footer-links">
-      {% include 'footer-social' %}
-    </ul>
+    <h3 class="text-center">Authors</h3>
 
-    <!-- Payment Methods -->
-    <ul class="footer-links">
-      {% include 'footer-pay' %}
-    </ul>
+    <div class="row">
+      <div class="col-sm-4 col-sm-offset-2 text-center">
+        <p>
+          <img src="{{ 'author-gavin.png' | asset_url }}" alt="Gavin Ballard" width="100" height="100" />
+        </p>
+        <p>
+          <a href="http://gavinballard.com">Gavin Ballard</a> is an Australian software engineer currently residing in Sweden.
+          He's the author of the <a href="http://bootstrapforshopify.com">Bootstrap for Shopify</a> framework.
+        </p>
+      </div>
 
-    <!-- Footer Links -->
-    <ul class="footer-links">
-      {% for link in linklists.footer.links %}
-        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-        {% unless forloop.last %}
-        <li class="muted">&middot;</li>
-        {% endunless %}
-      {% endfor %}
-    </ul>
+      <div class="col-sm-4 text-center">
+        <p>
+          <img src="{{ 'author-disco.png' | asset_url }}" alt="Gavin Ballard" width="100" height="100" />
+        </p>
+        <p>
+          <a href="http://discolabs.com">Disco</a> is a small Melbourne-based company focusing on Shopify development.
+        </p>
+      </div>
+    </div>
 
-    <!-- Required Shopify Link & Logout Link -->
-    <small>
-      {{ powered_by_link }}
-      &middot; Theme based on <a href="http://bootstrapforshopify.com">Bootstrap for Shopify</a>
-      {% if customer %}&middot; Logged in as <strong>{{ customer.name }}</strong> ({{ 'Logout' | customer_logout_link }}){% endif %}
-    </small>
+    <h3 class="text-center">Thanks</h3>
+
+    <div class="row">
+      <div class="col-sm-4 col-sm-offset-4">
+        <dl class="dl-horizontal">
+          <dt>Michael Richards</dt>
+          <dd><a href="http://www.rivetsjs.com/">Rivets.js</a></dd>
+        </dl>
+      </div>
+    </div>
+
+    <p class="small text-muted text-center">
+      Cart.js is not officially affiliated with or endorsed by Shopify.
+    </p>
 
   </div>
 </footer>
