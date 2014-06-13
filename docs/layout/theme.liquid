@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="{{ shop.name }}">
+
+  <!-- Core CSS -->
+  <link href="{{ 'cartjs.min.css' | asset_url }}" rel="stylesheet">
+
+  {{ content_for_header }}
+
+  <!-- SEO Tags -->
+  {% if template == 'index' %}
+  <title>{{ shop.name }} • {{ page_title }}</title>
+  <meta name="description" content="{{ shop.description }}">
+  {% elsif template == '404' %}
+  <title>Page Not Found • {{ shop.name }}</title>
+  {% else %}
+  <title>{{ page_title }} • {{ shop.name }}</title>
+  <meta name="description" content="{{ page_description }}" />
+  {% endif %}
+  <link rel="canonical" href="{{ canonical_url }}" />
+</head>
+
+<body>
+  <!-- Skip navigation (for screen read accessibility) -->
+  <a href="#content" class="sr-only">Skip to main content</a>
+
+  <!-- Navbar -->
+  {% include 'navbar' %}
+
+  <!-- Content -->
+  <section id="content" class="container">
+    {{ content_for_layout }}
+  </section>
+
+  <!-- Site Footer -->
+  {% include 'footer' %}
+</body>
+</html>

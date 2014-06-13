@@ -1,0 +1,37 @@
+{% comment %}
+
+  This snippet renders the footer at the bottom of each page.
+
+{% endcomment %}
+<footer class="footer">
+  <div class="container">
+
+    <!-- Social Media Icons -->
+    <ul class="footer-links">
+      {% include 'footer-social' %}
+    </ul>
+
+    <!-- Payment Methods -->
+    <ul class="footer-links">
+      {% include 'footer-pay' %}
+    </ul>
+
+    <!-- Footer Links -->
+    <ul class="footer-links">
+      {% for link in linklists.footer.links %}
+        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {% unless forloop.last %}
+        <li class="muted">&middot;</li>
+        {% endunless %}
+      {% endfor %}
+    </ul>
+
+    <!-- Required Shopify Link & Logout Link -->
+    <small>
+      {{ powered_by_link }}
+      &middot; Theme based on <a href="http://bootstrapforshopify.com">Bootstrap for Shopify</a>
+      {% if customer %}&middot; Logged in as <strong>{{ customer.name }}</strong> ({{ 'Logout' | customer_logout_link }}){% endif %}
+    </small>
+
+  </div>
+</footer>

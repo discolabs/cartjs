@@ -1,0 +1,58 @@
+<nav class="navbar navbar-default navbar-{{ settings.navbar_positioning }}" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <!-- Toggle Button for Navbar -->
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <!-- Brand / Logo -->
+      <a class="navbar-brand" href="{{ shop.url }}" title="{{ shop.name }}">
+        {% unless settings.logo_navbar == 'text' %}
+          <img src="{{ 'logo_navbar_image' | asset_url }}" alt="{{ shop.name }}" />
+        {% endunless %}
+        {% unless settings.logo_navbar == 'image' %}
+          {{ shop.name }}
+        {% endunless %}
+      </a>
+    </div>
+
+    <!-- Collapsible Navbar Content -->
+    <div class="collapse navbar-collapse">
+
+      <!-- Display linklist selected in theme settings. -->
+      {% unless linklists[settings.navbar_linklist] == empty %}
+      <ul class="nav navbar-nav">
+        {% for link in linklists[settings.navbar_linklist].links %}
+        <li{% if link.active %} class="active"{% endif %}>{{ link.title | link_to: link.url, link.title }}</li>
+        {% endfor %}
+      </ul>
+      {% endunless %}
+      
+      <!-- Additional (Right) Navigation Links -->
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="/search" title="Search..."><span class="glyphicon glyphicon-search"></span></a>
+        </li>
+        {% if shop.customer_accounts_enabled %}
+          {% if customer %}
+            <li>
+              <a href="/account">{{ customer.first_name }} {{ customer.last_name }}</a>
+            </li>
+          {% else %}
+            <li>
+              {{ "Log In" | customer_login_link }}
+            </li>
+          {% endif %}
+        {% endif %}
+        <li>
+          <a href="/cart">Cart ({{ cart.item_count }})</a>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</nav>
