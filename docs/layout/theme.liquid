@@ -36,5 +36,14 @@
 
   <!-- Site Footer -->
   {% include 'footer' %}
+
+  <!-- Site-wide Javascript -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script type="text/javascript" src="{{ 'cart.min.js' | asset_url }}"></script>
+  <script type="text/javascript">
+    $(function() {
+      Cart.init({{ cart | json }}, {{ settings | json }});
+    });
+  </script>
 </body>
 </html>
