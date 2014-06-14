@@ -1,13 +1,29 @@
 {
   "name": "cartjs",
+  "description": "A Javascript library to power cart management for Shopify themes.",
   "version": "0.0.1",
-  "dependencies": {
-    "grunt-cli": "latest",
-    "grunt-contrib-copy": "latest",
-    "grunt-contrib-concat": "latest",
-    "grunt-contrib-uglify": "latest",
-    "grunt-contrib-less": "latest",
-    "grunt-contrib-watch": "latest",
-    "grunt-exec": "latest"
+  "author": "Gavin Ballard",
+  "url": "http://cartjs.org",
+  "main": "./dist/cart.js",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/discolabs/cartjs/blob/master/LICENSE"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/discolabs/cartjs.git"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-cli": "~0.1.13",
+    "grunt-contrib-concat": "~0.4.0",
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-contrib-coffee": "~0.10.1",
+    "grunt-contrib-less": "~0.11.1",
+    "grunt-contrib-uglify": "~0.5.0",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-exec": "~0.4.5"
   }
 }
