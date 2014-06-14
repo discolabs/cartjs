@@ -1,20 +1,24 @@
 # Item manipulation methods.
 # --------------------------
 
-Cart.addItem = (id, quantity = 1, properties = {}) ->
-  data = Cart.wrapKeys(properties, 'properties')
+addItem = (id, quantity = 1, properties = {}) ->
+  data = wrapKeys(properties, 'properties')
   data.id = id
   data.quantity = quantity
   enqueue '/cart/add.js', data
+  return
 
-Cart.updateItem = (line, quantity = 1, properties = {}) ->
-  data = Cart.wrapKeys(properties, 'properties')
+updateItem = (line, quantity = 1, properties = {}) ->
+  data = wrapKeys(properties, 'properties')
   data.line = line
   data.quantity = quantity
   enqueue '/cart/change.js', data
+  return
 
-Cart.removeItem = (line) ->
-  Cart.updateItem line, 0
+removeItem = (line) ->
+  updateItem line, 0
+  return
 
-Cart.clearItems = () ->
+clearItems = () ->
   enqueue '/cart/clear.js'
+  return

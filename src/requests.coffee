@@ -5,7 +5,7 @@ pendingQueue = []
 processingQueue = []
 processing = false
 
-Cart.enqueue = (url, data, callback, type = 'POST', dataType = 'json') ->
+enqueue = (url, data, callback, type = 'POST', dataType = 'json') ->
   queue = pendingQueue
   if processing and Cart.settings.autoCommit
     queue = processingQueue
@@ -19,15 +19,15 @@ Cart.enqueue = (url, data, callback, type = 'POST', dataType = 'json') ->
   })
 
   if Cart.settings.autoCommit
-    Cart.commit()
+    commit()
 
-Cart.commit = () ->
+commit = () ->
   return if processing
   processing = true
   [].push.apply(processingQueue, pendingQueue.splice(0, pendingQueue.length))
-  Cart.process()
+  process()
 
-Cart.process = () ->
+process = () ->
   if not processingQueue.length
     processing = false
     return

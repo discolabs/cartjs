@@ -3,7 +3,7 @@
 // author: Gavin Ballard
 // license: MIT
 (function() {
-  var Cart, pendingQueue, processing, processingQueue;
+  var Cart, addItem, clearItems, commit, enqueue, getAttribute, getAttributes, getNote, pendingQueue, process, processing, processingQueue, removeItem, setAttribute, setAttributes, setNote, updateItem;
 
   Cart = {
     settings: {
@@ -18,7 +18,7 @@
 
   processing = false;
 
-  Cart.enqueue = function(url, data, callback, type, dataType) {
+  enqueue = function(url, data, callback, type, dataType) {
     var queue;
     if (type == null) {
       type = 'POST';
@@ -38,20 +38,20 @@
       dataType: dataType
     });
     if (Cart.settings.autoCommit) {
-      return Cart.commit();
+      return commit();
     }
   };
 
-  Cart.commit = function() {
+  commit = function() {
     if (processing) {
       return;
     }
     processing = true;
     [].push.apply(processingQueue, pendingQueue.splice(0, pendingQueue.length));
-    return Cart.process();
+    return process();
   };
 
-  Cart.process = function() {
+  process = function() {
     var params;
     if (!processingQueue.length) {
       processing = false;
@@ -62,7 +62,7 @@
     return jQuery.ajax(params);
   };
 
-  Cart.addItem = function(id, quantity, properties) {
+  addItem = function(id, quantity, properties) {
     var data;
     if (quantity == null) {
       quantity = 1;
@@ -70,13 +70,13 @@
     if (properties == null) {
       properties = {};
     }
-    data = Cart.wrapKeys(properties, 'properties');
+    data = wrapKeys(properties, 'properties');
     data.id = id;
     data.quantity = quantity;
-    return enqueue('/cart/add.js', data);
+    enqueue('/cart/add.js', data);
   };
 
-  Cart.updateItem = function(line, quantity, properties) {
+  updateItem = function(line, quantity, properties) {
     var data;
     if (quantity == null) {
       quantity = 1;
@@ -84,21 +84,21 @@
     if (properties == null) {
       properties = {};
     }
-    data = Cart.wrapKeys(properties, 'properties');
+    data = wrapKeys(properties, 'properties');
     data.line = line;
     data.quantity = quantity;
-    return enqueue('/cart/change.js', data);
+    enqueue('/cart/change.js', data);
   };
 
-  Cart.removeItem = function(line) {
-    return Cart.updateItem(line, 0);
+  removeItem = function(line) {
+    updateItem(line, 0);
   };
 
-  Cart.clearItems = function() {
-    return enqueue('/cart/clear.js');
+  clearItems = function() {
+    enqueue('/cart/clear.js');
   };
 
-  Cart.getAttribute = function(attributeName, defaultValue) {
+  getAttribute = function(attributeName, defaultValue) {
     if (attributeName in Cart.cart.attributes) {
       return Cart.cart.attributes[attributeName];
     } else {
@@ -106,23 +106,34 @@
     }
   };
 
-  Cart.setAttribute = function(attributeName, value) {
-    Cart.cart.attributes[attributeName] = value;
+  setAttribute = function(attributeName, value) {
+    var attributes;
+    attributes = {};
+    attributes[attributeName] = value;
+    setAttributes(attributes);
   };
 
-  Cart.getAttributes = function() {
+  getAttributes = function() {
     return Cart.cart.attributes;
   };
 
-  Cart.setAttributes = function(attributes) {
-    var attributeName, value;
+  setAttributes = function(attributes) {
+    var wrappedAttributes;
     if (attributes == null) {
       attributes = {};
     }
-    for (attributeName in attributes) {
-      value = attributes[attributeName];
-      Cart.setAttribute(attributeName, value);
-    }
+    wrappedAttributes = wrapKeys(attributes);
+    enqueue('/cart/update.js', wrappedAttributes);
+  };
+
+  getNote = function() {
+    return Cart.cart.note;
+  };
+
+  setNote = function(note) {
+    enqueue('/cart/update.js', {
+      note: note
+    });
   };
 
   Cart.factory = function(exports) {
@@ -145,15 +156,17 @@
       Cart.cart = cart;
       exports.configure(settings);
     };
-    exports.commit = Cart.commit;
-    exports.addItem = Cart.addItem;
-    exports.removeItem = Cart.removeItem;
-    exports.updateItem = Cart.updateItem;
-    exports.clearItems = Cart.clearItems;
-    exports.getAttribute = Cart.getAttribute;
-    exports.setAttribute = Cart.setAttribute;
-    exports.getAttributes = Cart.getAttributes;
-    return exports.setAttributes = Cart.setAttributes;
+    exports.commit = commit;
+    exports.addItem = addItem;
+    exports.removeItem = removeItem;
+    exports.updateItem = updateItem;
+    exports.clearItems = clearItems;
+    exports.getAttribute = getAttribute;
+    exports.setAttribute = setAttribute;
+    exports.getAttributes = getAttributes;
+    exports.setAttributes = setAttributes;
+    exports.getNote = getNote;
+    return exports.setNote = setNote;
   };
 
   if (typeof exports === 'object') {

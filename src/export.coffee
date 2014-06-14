@@ -22,19 +22,21 @@ Cart.factory = (exports) ->
     return
 
   # General methods.
-  exports.commit = Cart.commit;
+  exports.commit = commit;
 
   # Item manipulation methods.
-  exports.addItem = Cart.addItem
-  exports.removeItem = Cart.removeItem
-  exports.updateItem = Cart.updateItem
-  exports.clearItems = Cart.clearItems
+  exports.addItem = addItem
+  exports.removeItem = removeItem
+  exports.updateItem = updateItem
+  exports.clearItems = clearItems
 
   # Attribute methods.
-  exports.getAttribute = Cart.getAttribute
-  exports.setAttribute = Cart.setAttribute
-  exports.getAttributes = Cart.getAttributes
-  exports.setAttributes = Cart.setAttributes
+  exports.getAttribute = getAttribute
+  exports.setAttribute = setAttribute
+  exports.getAttributes = getAttributes
+  exports.setAttributes = setAttributes
+  exports.getNote = getNote
+  exports.setNote = setNote
 
 # Exports Cart.js for CommonJS, AMD and the browser.
 if typeof exports == 'object'
