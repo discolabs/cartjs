@@ -72,12 +72,14 @@
       if (processing) {
         return;
       }
+      jQuery(document).trigger('cart.requestStarted');
       return CartJS.Queue.process();
     },
     process: function() {
       var params;
       if (!queue.length) {
         processing = false;
+        jQuery(document).trigger('cart.requestComplete');
         return;
       }
       processing = true;
