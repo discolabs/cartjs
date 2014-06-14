@@ -26,6 +26,12 @@ if 'rivets' of window
   rivets.formatters.gt = (a, b) ->
     a > b
 
+  rivets.formatters.plus = (a, b) ->
+    parseInt(a) + parseInt(b)
+
+  rivets.formatters.minus = (a, b) ->
+    parseInt(a) - parseInt(b)
+
   # If Shopify money formatter is available, add formatters to Rivets.js
   if 'Shopify' of window
     if 'formatMoney' of window.Shopify

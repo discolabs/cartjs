@@ -8,7 +8,8 @@
 
   CartJS = {
     settings: {
-      autoCommit: true
+      autoCommit: true,
+      dataAPI: false
     },
     cart: null
   };
@@ -19,6 +20,9 @@
     }
     CartJS.configure(settings);
     CartJS.cart = new CartJS.Cart(cart);
+    if (CartJS.settings.dataAPI) {
+      CartJS.Data.bind();
+    }
     return CartJS.Rivets.bindElements({
       cart: CartJS.cart
     });
@@ -121,6 +125,7 @@
 
   CartJS.Item = (function() {
     function Item(item) {
+      this.propertyArray = __bind(this.propertyArray, this);
       this.update = __bind(this.update, this);
       this.update(item);
     }
@@ -131,6 +136,20 @@
       for (key in item) {
         value = item[key];
         _results.push(this[key] = value);
+      }
+      return _results;
+    };
+
+    Item.prototype.propertyArray = function() {
+      var name, value, _ref, _results;
+      _ref = this.properties;
+      _results = [];
+      for (name in _ref) {
+        value = _ref[name];
+        _results.push({
+          name: name,
+          value: value
+        });
       }
       return _results;
     };
@@ -208,6 +227,26 @@
     }
   };
 
+  CartJS.Data = {
+    bind: function() {
+      jQuery(document).on('click', '[data-cart-add]', CartJS.Data.add);
+      return jQuery(document).on('click', '[data-cart-remove]', CartJS.Data.remove);
+    },
+    unbind: function() {},
+    add: function(e) {
+      var id;
+      e.preventDefault();
+      id = jQuery(e.target).attr('data-cart-add');
+      return CartJS.Core.addItem(id);
+    },
+    remove: function(e) {
+      var line;
+      e.preventDefault();
+      line = jQuery(e.target).attr('data-cart-remove');
+      return CartJS.Core.removeItem(line);
+    }
+  };
+
   if ('rivets' in window) {
     CartJS.Rivets = {
       views: [],
@@ -232,6 +271,9 @@
     };
     rivets.formatters.gt = function(a, b) {
       return a > b;
+    };
+    rivets.formatters.plus = function(a, b) {
+      return parseInt(a) + parseInt(b);
     };
     if ('Shopify' in window) {
       if ('formatMoney' in window.Shopify) {

@@ -21,6 +21,7 @@ module.exports = (grunt) ->
             'src/cart.coffee'
             'src/item.coffee'
             'src/core.coffee'
+            'src/data.coffee'
             'src/rivets.coffee'
             'src/export.coffee'
           ]
