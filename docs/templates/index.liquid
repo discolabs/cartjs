@@ -18,17 +18,16 @@
 
   <div class="row">
     <div class="col-md-6 col-md-offset-1">
-      <table class="table table-bordered table-condensed table-striped">
+      <table class="table table-bordered table-condensed table-striped table-vertical-middle" data-cart-view>
         <thead>
           <tr>
             <th>Item</th>
-            <th class="text-right">Price</th>
-            <th class="text-center">Qty</th>
+            <th class="text-center">Price</th>
+            <th colspan="2" class="text-center">Qty</th>
             <th class="text-right">Line Price</th>
-            <th></th>
           </tr>
         </thead>
-        <tbody data-cart-view>
+        <tbody>
           <tr rv-each-item="cart.items">
             <td>
               <h5 rv-text="item.title"></h5>
@@ -36,15 +35,21 @@
                 <li rv-each-property="item.propertyArray < properties"><strong rv-text="property.name"></strong>: <span rv-text="property.value"></span></li>
               </ul>
             </td>
-            <td rv-text="item.price | money" class="text-right"></td>
+            <td rv-text="item.price | money" class="text-center"></td>
             <td rv-text="item.quantity" class="text-center"></td>
-            <td rv-text="item.line_price | money" class="text-right"></td>
             <td class="text-center"><a href="#" class="close" rv-data-cart-remove="index | plus 1">&times;</a></td>
+            <td rv-text="item.line_price | money" class="text-right"></td>
           </tr>
           <tr rv-show="cart.item_count | lt 1">
             <td colspan="5" class="text-center">You don't have any items in your cart.</td>
           </tr>
         </tbody>
+        <tfoot rv-show="cart.item_count | gt 0">
+          <tr>
+            <td colspan="4"></td>
+            <td rv-text="cart.total_price | money" class="text-right"></td>
+          </tr>
+        </tfoot>
       </table>
     </div>
 

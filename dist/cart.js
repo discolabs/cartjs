@@ -275,6 +275,9 @@
     rivets.formatters.plus = function(a, b) {
       return parseInt(a) + parseInt(b);
     };
+    rivets.formatters.minus = function(a, b) {
+      return parseInt(a) - parseInt(b);
+    };
     if ('Shopify' in window) {
       if ('formatMoney' in window.Shopify) {
         rivets.formatters.money = function(value) {
