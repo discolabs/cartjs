@@ -15,10 +15,13 @@ module.exports = (grunt) ->
           join: true
         files:
           'dist/cart.js': [
+            'src/cartjs.coffee'
+            'src/utils.coffee'
+            'src/queue.coffee'
             'src/cart.coffee'
-            'src/requests.coffee'
-            'src/items.coffee'
-            'src/attributes.coffee'
+            'src/item.coffee'
+            'src/core.coffee'
+            'src/rivets.coffee'
             'src/export.coffee'
           ]
 

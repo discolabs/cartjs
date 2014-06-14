@@ -43,9 +43,9 @@
   <script type="text/javascript" src="{{ 'cart.min.js' | asset_url }}"></script>
   <script type="text/javascript">
     $(function() {
-      Cart.init({{ cart | json }}, {});
-
-      mycart = {{ cart | json }};
+      CartJS.init({{ cart | json }}, {
+        autoCommit: true
+      });
     });
   </script>
 </body>

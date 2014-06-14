@@ -3,181 +3,261 @@
 // author: Gavin Ballard
 // license: MIT
 (function() {
-  var Cart, addItem, clearItems, commit, enqueue, getAttribute, getAttributes, getNote, pendingQueue, process, processing, processingQueue, removeItem, setAttribute, setAttributes, setNote, updateItem;
+  var CartJS, processing, queue,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
-  Cart = {
+  CartJS = {
     settings: {
-      autoCommit: false
+      autoCommit: true
     },
     cart: null
   };
 
-  pendingQueue = [];
+  CartJS.init = function(cart, settings) {
+    if (settings == null) {
+      settings = {};
+    }
+    CartJS.configure(settings);
+    CartJS.cart = new CartJS.Cart(cart);
+    return CartJS.Rivets.bindElements({
+      cart: CartJS.cart
+    });
+  };
 
-  processingQueue = [];
+  CartJS.configure = function(settings) {
+    var setting, value;
+    if (settings == null) {
+      settings = {};
+    }
+    for (setting in settings) {
+      value = settings[setting];
+      CartJS.settings[setting] = value;
+    }
+  };
+
+  CartJS.Utils = {
+    wrapKeys: function(obj, type) {
+      var key, value, wrapped;
+      if (type == null) {
+        type = 'properties';
+      }
+      wrapped = {};
+      for (key in obj) {
+        value = obj[key];
+        wrapped["" + type + "[" + key + "]"] = value;
+      }
+      return wrapped;
+    }
+  };
+
+  queue = [];
 
   processing = false;
 
-  enqueue = function(url, data, callback, type, dataType) {
-    var queue;
-    if (type == null) {
-      type = 'POST';
-    }
-    if (dataType == null) {
-      dataType = 'json';
-    }
-    queue = pendingQueue;
-    if (processing && Cart.settings.autoCommit) {
-      queue = processingQueue;
-    }
-    queue.push({
-      url: url,
-      data: data,
-      callback: callback,
-      type: type,
-      dataType: dataType
-    });
-    if (Cart.settings.autoCommit) {
-      return commit();
-    }
-  };
-
-  commit = function() {
-    if (processing) {
-      return;
-    }
-    processing = true;
-    [].push.apply(processingQueue, pendingQueue.splice(0, pendingQueue.length));
-    return process();
-  };
-
-  process = function() {
-    var params;
-    if (!processingQueue.length) {
-      processing = false;
-      return;
-    }
-    params = processingQueue.shift();
-    params.complete = process;
-    return jQuery.ajax(params);
-  };
-
-  addItem = function(id, quantity, properties) {
-    var data;
-    if (quantity == null) {
-      quantity = 1;
-    }
-    if (properties == null) {
-      properties = {};
-    }
-    data = wrapKeys(properties, 'properties');
-    data.id = id;
-    data.quantity = quantity;
-    enqueue('/cart/add.js', data);
-  };
-
-  updateItem = function(line, quantity, properties) {
-    var data;
-    if (quantity == null) {
-      quantity = 1;
-    }
-    if (properties == null) {
-      properties = {};
-    }
-    data = wrapKeys(properties, 'properties');
-    data.line = line;
-    data.quantity = quantity;
-    enqueue('/cart/change.js', data);
-  };
-
-  removeItem = function(line) {
-    updateItem(line, 0);
-  };
-
-  clearItems = function() {
-    enqueue('/cart/clear.js');
-  };
-
-  getAttribute = function(attributeName, defaultValue) {
-    if (attributeName in Cart.cart.attributes) {
-      return Cart.cart.attributes[attributeName];
-    } else {
-      return defaultValue;
+  CartJS.Queue = {
+    add: function(url, data, callback, type, dataType) {
+      if (type == null) {
+        type = 'POST';
+      }
+      if (dataType == null) {
+        dataType = 'json';
+      }
+      queue.push({
+        url: url,
+        data: data,
+        success: callback,
+        type: type,
+        dataType: dataType
+      });
+      if (processing) {
+        return;
+      }
+      return CartJS.Queue.process();
+    },
+    process: function() {
+      var params;
+      if (!queue.length) {
+        processing = false;
+        return;
+      }
+      processing = true;
+      params = queue.shift();
+      params.complete = CartJS.Queue.process;
+      return jQuery.ajax(params);
     }
   };
 
-  setAttribute = function(attributeName, value) {
-    var attributes;
-    attributes = {};
-    attributes[attributeName] = value;
-    setAttributes(attributes);
-  };
+  CartJS.Cart = (function() {
+    function Cart(cart) {
+      this.update = __bind(this.update, this);
+      this.update(cart);
+    }
 
-  getAttributes = function() {
-    return Cart.cart.attributes;
-  };
+    Cart.prototype.update = function(cart) {
+      var item, key, value;
+      for (key in cart) {
+        value = cart[key];
+        if (key !== 'items') {
+          this[key] = value;
+        }
+      }
+      return this.items = (function() {
+        var _i, _len, _ref, _results;
+        _ref = cart.items;
+        _results = [];
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          item = _ref[_i];
+          _results.push(new CartJS.Item(item));
+        }
+        return _results;
+      })();
+    };
 
-  setAttributes = function(attributes) {
-    var wrappedAttributes;
-    if (attributes == null) {
+    return Cart;
+
+  })();
+
+  CartJS.Item = (function() {
+    function Item(item) {
+      this.update = __bind(this.update, this);
+      this.update(item);
+    }
+
+    Item.prototype.update = function(item) {
+      var key, value, _results;
+      _results = [];
+      for (key in item) {
+        value = item[key];
+        _results.push(this[key] = value);
+      }
+      return _results;
+    };
+
+    return Item;
+
+  })();
+
+  CartJS.Core = {
+    getCart: function() {
+      return CartJS.Queue.add('/cart.js', {}, void 0, 'GET');
+    },
+    addItem: function(id, quantity, properties) {
+      var data;
+      if (quantity == null) {
+        quantity = 1;
+      }
+      if (properties == null) {
+        properties = {};
+      }
+      data = CartJS.Utils.wrapKeys(properties);
+      data.id = id;
+      data.quantity = quantity;
+      return CartJS.Queue.add('/cart/add.js', data);
+    },
+    updateItem: function(line, quantity, properties) {
+      var data;
+      if (quantity == null) {
+        quantity = 1;
+      }
+      if (properties == null) {
+        properties = {};
+      }
+      data = CartJS.Utils.wrapKeys(properties);
+      data.line = line;
+      data.quantity = quantity;
+      return CartJS.Queue.add('/cart/change.js', data);
+    },
+    removeItem: function(line) {
+      return CartJS.Core.updateItem(line, 0);
+    },
+    clear: function() {
+      return CartJS.Queue.add('/cart/clear.js');
+    },
+    getAttribute: function(attributeName, defaultValue) {
+      if (attributeName in CartJS.cart.attributes) {
+        return CartJS.cart.attributes[attributeName];
+      } else {
+        return defaultValue;
+      }
+    },
+    setAttribute: function(attributeName, value) {
+      var attributes;
       attributes = {};
+      attributes[attributeName] = value;
+      return setAttributes(attributes);
+    },
+    getAttributes: function() {
+      return CartJS.cart.attributes;
+    },
+    setAttributes: function(attributes) {
+      if (attributes == null) {
+        attributes = {};
+      }
+      return CartJS.Queue.add('/cart/update.js', CartJS.Utils.wrapKeys(attributes, 'attributes'));
+    },
+    getNote: function() {
+      return CartJS.cart.note;
+    },
+    setNote: function(note) {
+      return CartJS.Queue.add('/cart/update.js', {
+        note: note
+      });
     }
-    wrappedAttributes = wrapKeys(attributes);
-    enqueue('/cart/update.js', wrappedAttributes);
   };
 
-  getNote = function() {
-    return Cart.cart.note;
-  };
-
-  setNote = function(note) {
-    enqueue('/cart/update.js', {
-      note: note
-    });
-  };
-
-  Cart.factory = function(exports) {
-    exports._ = Cart;
-    exports.settings = Cart.settings;
-    exports.configure = function(settings) {
-      var setting, value;
-      if (settings == null) {
-        settings = {};
-      }
-      for (setting in settings) {
-        value = settings[setting];
-        Cart.settings[setting] = value;
+  if ('rivets' in window) {
+    CartJS.Rivets = {
+      views: [],
+      bindElements: function(models) {
+        CartJS.Rivets.unbindElements();
+        return jQuery('[data-cart-view]').each(function() {
+          return CartJS.Rivets.views.push(rivets.bind(this, models));
+        });
+      },
+      unbindElements: function() {
+        var view, _i, _len, _ref;
+        _ref = CartJS.Rivets.views;
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          view = _ref[_i];
+          view.unbind();
+        }
+        return CartJS.Rivets.views = [];
       }
     };
-    exports.init = function(cart, settings) {
-      if (settings == null) {
-        settings = {};
-      }
-      Cart.cart = cart;
-      exports.configure(settings);
+  } else {
+    CartJS.Rivets = {
+      bindElements: function() {},
+      unbindElements: function() {}
     };
-    exports.commit = commit;
-    exports.addItem = addItem;
-    exports.removeItem = removeItem;
-    exports.updateItem = updateItem;
-    exports.clearItems = clearItems;
-    exports.getAttribute = getAttribute;
-    exports.setAttribute = setAttribute;
-    exports.getAttributes = getAttributes;
-    exports.setAttributes = setAttributes;
-    exports.getNote = getNote;
-    return exports.setNote = setNote;
+  }
+
+  CartJS.factory = function(exports) {
+    exports._ = CartJS;
+    exports.init = CartJS.init;
+    exports.configure = CartJS.configure;
+    exports.settings = CartJS.settings;
+    exports.getCart = CartJS.Core.getCart;
+    exports.addItem = CartJS.Core.addItem;
+    exports.updateItem = CartJS.Core.updateItem;
+    exports.removeItem = CartJS.Core.removeItem;
+    exports.clear = CartJS.Core.clear;
+    exports.getAttribute = CartJS.Core.getAttribute;
+    exports.setAttribute = CartJS.Core.setAttribute;
+    exports.getAttributes = CartJS.Core.getAttributes;
+    exports.setAttributes = CartJS.Core.setAttributes;
+    exports.getNote = CartJS.Core.getNote;
+    return exports.setNote = CartJS.Core.setNote;
   };
 
   if (typeof exports === 'object') {
-    Cart.factory(exports);
+    CartJS.factory(exports);
   } else if (typeof define === 'function' && define.amd) {
     define(['exports'], function(exports) {
-      Cart.factory(this.Cart = exports);
+      CartJS.factory(this.CartJS = exports);
       return exports;
     });
   } else {
-    Cart.factory(this.Cart = {});
+    CartJS.factory(this.CartJS = {});
   }
 
 }).call(this);

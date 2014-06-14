@@ -1,49 +1,35 @@
-# Export the Cart module.
-# -----------------------
+# Export the CartJS module.
+# -------------------------
 
-# Cart.js module factory.
-Cart.factory = (exports) ->
-  # Exposes the full Cart namespace. This is mainly used for isolated testing.
-  exports._ = Cart
+# CartJS module factory.
+CartJS.factory = (exports) ->
+  # Exposes the full CartJS namespace. This is mainly used for isolated testing.
+  exports._ = CartJS
 
-  # Exposes the settings object.
-  exports.settings = Cart.settings
+  # Export initialisation and configuration.
+  exports.init = CartJS.init
+  exports.configure = CartJS.configure
+  exports.settings = CartJS.settings
 
-  # Merges an object literal onto the setting object.
-  exports.configure = (settings = {}) ->
-    for setting, value of settings
-      Cart.settings[setting] = value
-    return
+  # Export core API as top-level methods.
+  exports.getCart = CartJS.Core.getCart
+  exports.addItem = CartJS.Core.addItem
+  exports.updateItem = CartJS.Core.updateItem
+  exports.removeItem = CartJS.Core.removeItem
+  exports.clear = CartJS.Core.clear
+  exports.getAttribute = CartJS.Core.getAttribute
+  exports.setAttribute = CartJS.Core.setAttribute
+  exports.getAttributes = CartJS.Core.getAttributes
+  exports.setAttributes = CartJS.Core.setAttributes
+  exports.getNote = CartJS.Core.getNote
+  exports.setNote = CartJS.Core.setNote
 
-  # Initialises Cart.js
-  exports.init = (cart, settings = {}) ->
-    Cart.cart = cart
-    exports.configure(settings)
-    return
-
-  # General methods.
-  exports.commit = commit;
-
-  # Item manipulation methods.
-  exports.addItem = addItem
-  exports.removeItem = removeItem
-  exports.updateItem = updateItem
-  exports.clearItems = clearItems
-
-  # Attribute methods.
-  exports.getAttribute = getAttribute
-  exports.setAttribute = setAttribute
-  exports.getAttributes = getAttributes
-  exports.setAttributes = setAttributes
-  exports.getNote = getNote
-  exports.setNote = setNote
-
-# Exports Cart.js for CommonJS, AMD and the browser.
+# Exports CartJS for CommonJS, AMD and the browser.
 if typeof exports == 'object'
-  Cart.factory(exports)
+  CartJS.factory(exports)
 else if typeof define == 'function' && define.amd
   define ['exports'], (exports) ->
-    Cart.factory(@Cart = exports)
+    CartJS.factory(@CartJS = exports)
     return exports
 else
-  Cart.factory(@Cart = {})
+  CartJS.factory(@CartJS = {})
