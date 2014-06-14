@@ -16,6 +16,9 @@ module.exports = (grunt) ->
         files:
           'dist/cart.js': [
             'src/cart.coffee'
+            'src/requests.coffee'
+            'src/items.coffee'
+            'src/attributes.coffee'
             'src/export.coffee'
           ]
 
