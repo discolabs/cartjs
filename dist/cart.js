@@ -139,7 +139,7 @@
 
   CartJS.Core = {
     getCart: function() {
-      return CartJS.Queue.add('/cart.js', {}, void 0, 'GET');
+      return CartJS.Queue.add('/cart.js', {}, CartJS.cart.update, 'GET');
     },
     addItem: function(id, quantity, properties) {
       var data;
@@ -152,7 +152,8 @@
       data = CartJS.Utils.wrapKeys(properties);
       data.id = id;
       data.quantity = quantity;
-      return CartJS.Queue.add('/cart/add.js', data);
+      CartJS.Queue.add('/cart/add.js', data);
+      return CartJS.Core.getCart();
     },
     updateItem: function(line, quantity, properties) {
       var data;
@@ -165,13 +166,13 @@
       data = CartJS.Utils.wrapKeys(properties);
       data.line = line;
       data.quantity = quantity;
-      return CartJS.Queue.add('/cart/change.js', data);
+      return CartJS.Queue.add('/cart/change.js', data, CartJS.cart.update);
     },
     removeItem: function(line) {
       return CartJS.Core.updateItem(line, 0);
     },
     clear: function() {
-      return CartJS.Queue.add('/cart/clear.js');
+      return CartJS.Queue.add('/cart/clear.js', {}, CartJS.cart.update);
     },
     getAttribute: function(attributeName, defaultValue) {
       if (attributeName in CartJS.cart.attributes) {
@@ -193,7 +194,7 @@
       if (attributes == null) {
         attributes = {};
       }
-      return CartJS.Queue.add('/cart/update.js', CartJS.Utils.wrapKeys(attributes, 'attributes'));
+      return CartJS.Queue.add('/cart/update.js', CartJS.Utils.wrapKeys(attributes, 'attributes'), CartJS.cart.update);
     },
     getNote: function() {
       return CartJS.cart.note;
@@ -201,7 +202,7 @@
     setNote: function(note) {
       return CartJS.Queue.add('/cart/update.js', {
         note: note
-      });
+      }, CartJS.cart.update);
     }
   };
 
@@ -224,6 +225,22 @@
         return CartJS.Rivets.views = [];
       }
     };
+    rivets.formatters.lt = function(a, b) {
+      return a < b;
+    };
+    rivets.formatters.gt = function(a, b) {
+      return a > b;
+    };
+    if ('Shopify' in window) {
+      if ('formatMoney' in window.Shopify) {
+        rivets.formatters.money = function(value) {
+          return Shopify.formatMoney(value, CartJS.settings.money_format);
+        };
+        rivets.formatters.money_with_currency = function(value) {
+          return Shopify.formatMoney(value, CartJS.settings.money_with_currency_format);
+        };
+      }
+    }
   } else {
     CartJS.Rivets = {
       bindElements: function() {},

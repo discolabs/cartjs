@@ -19,6 +19,29 @@
   <div class="row">
     <div class="col-md-4 col-md-offset-4">
       <button></button>
+
+      <table class="table table-bordered table-condensed table-striped">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th class="text-right">Price</th>
+            <th class="text-center">Qty</th>
+            <th class="text-right">Line Price</th>
+          </tr>
+        </thead>
+        <tbody data-cart-view>
+          <tr rv-each-item="cart.items">
+            <td rv-text="item.title"></td>
+            <td rv-text="item.price | money" class="text-right"></td>
+            <td rv-text="item.quantity" class="text-center"></td>
+            <td rv-text="item.line_price | money" class="text-right"></td>
+          </tr>
+          <tr rv-show="cart.item_count | lt 1">
+            <td colspan="4" class="text-center">You don't have any items in your cart.</td>
+          </tr>
+        </tbody>
+      </table>
+
     </div>
   </div>
 
