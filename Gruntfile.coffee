@@ -10,7 +10,7 @@ module.exports = (grunt) ->
         '// license: <%= pkg.licenses[0].type %>\n'
 
     coffee:
-      all:
+      build:
         options:
           join: true
         files:
@@ -27,14 +27,14 @@ module.exports = (grunt) ->
           ]
 
     concat:
-      all:
+      build:
         options:
           banner: '<%= meta.banner %>'
         files:
           'dist/rivets-cart.js': ['node_modules/rivets/dist/rivets.js', 'dist/cart.js']
 
     uglify:
-      all:
+      build:
         options:
           banner: '<%= meta.banner %>'
           report: 'gzip'
@@ -46,10 +46,26 @@ module.exports = (grunt) ->
       build:
         src: ['dist/rivets-cart.js']
 
+    compress:
+      docs:
+        options:
+          archive: 'cartjs.zip'
+        files: [
+          flatten: true
+          expand: true
+          cwd: 'dist/'
+          src: '*.js'
+        ]
+
     copy:
       docs:
-        src: 'dist/cart.min.js'
-        dest: 'docs/assets/cart.min.js'
+        files: [
+          src: 'dist/rivets-cart.min.js'
+          dest: 'docs/assets/rivets-cart.min.js'
+        ,
+          src: 'cartjs.zip'
+          dest: 'docs/assets/cartjs.zip'
+        ]
 
     less:
       docs:
@@ -59,7 +75,7 @@ module.exports = (grunt) ->
           'docs/assets/cartjs.min.css': 'docs/less/cartjs.less'
 
     watch:
-      all:
+      build:
         files: 'src/*.coffee'
         tasks: ['build']
       docs:
@@ -67,6 +83,7 @@ module.exports = (grunt) ->
         tasks: ['less:docs']
 
   grunt.loadNpmTasks 'grunt-contrib-clean'
+  grunt.loadNpmTasks 'grunt-contrib-compress'
   grunt.loadNpmTasks 'grunt-contrib-concat'
   grunt.loadNpmTasks 'grunt-contrib-copy'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
@@ -75,5 +92,5 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-watch'
 
   grunt.registerTask 'default', ['watch']
-  grunt.registerTask 'build',   ['coffee', 'concat', 'uglify', 'clean']
-  grunt.registerTask 'docs',    ['build', 'copy:docs', 'less:docs']
+  grunt.registerTask 'build',   ['coffee:build', 'concat:build', 'uglify:build', 'clean:build']
+  grunt.registerTask 'docs',    ['build', 'compress:docs', 'copy:docs', 'less:docs']
