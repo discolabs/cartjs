@@ -1,7 +1,3 @@
-// Cart.js
-// version: 0.0.1
-// author: Gavin Ballard
-// license: MIT
 (function() {
   var CartJS, processing, queue,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
@@ -37,14 +33,10 @@
   };
 
   CartJS.configure = function(settings) {
-    var setting, value;
     if (settings == null) {
       settings = {};
     }
-    for (setting in settings) {
-      value = settings[setting];
-      CartJS.settings[setting] = value;
-    }
+    return CartJS.Utils.extend(CartJS.settings, settings);
   };
 
   CartJS.Utils = {

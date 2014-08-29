@@ -31,7 +31,7 @@ module.exports = (grunt) ->
         options:
           banner: '<%= meta.banner %>'
         files:
-          'dist/cart.js': 'dist/cart.js'
+          'dist/rivets-cart.js': ['node_modules/rivets/dist/rivets.js', 'dist/cart.js']
 
     uglify:
       all:
@@ -40,6 +40,11 @@ module.exports = (grunt) ->
           report: 'gzip'
         files:
           'dist/cart.min.js': 'dist/cart.js'
+          'dist/rivets-cart.min.js': 'dist/rivets-cart.js'
+
+    clean:
+      build:
+        src: ['dist/rivets-cart.js']
 
     copy:
       docs:
@@ -61,6 +66,7 @@ module.exports = (grunt) ->
         files: 'docs/**/*.less'
         tasks: ['less:docs']
 
+  grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-contrib-concat'
   grunt.loadNpmTasks 'grunt-contrib-copy'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
@@ -69,5 +75,5 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-watch'
 
   grunt.registerTask 'default', ['watch']
-  grunt.registerTask 'build',   ['coffee', 'concat', 'uglify']
+  grunt.registerTask 'build',   ['coffee', 'concat', 'uglify', 'clean']
   grunt.registerTask 'docs',    ['build', 'copy:docs', 'less:docs']
