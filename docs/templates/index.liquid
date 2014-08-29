@@ -3,9 +3,7 @@
 <section class="jumbotron jumbotron-primary">
   <div class="container text-center">
 
-    <p class="lead">
-      A Javascript library to power cart management for Shopify themes.
-    </p>
+    <h3>A Javascript library to power cart management for Shopify themes.</h3>
 
     <p class="lead">
       <a href="{{ 'cartjs.zip' | asset_url }}" class="btn btn-outline-inverse btn-lg">Download Cart.js</a>
@@ -14,52 +12,88 @@
   </div>
 </section>
 
-<section class="container">
+<section class="jumbotron">
+  <div class="container">
 
-  <div class="row">
-    <div class="col-md-6 col-md-offset-1">
-      <table class="table table-bordered table-condensed table-striped table-vertical-middle" data-cart-view>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th class="text-center">Price</th>
-            <th colspan="2" class="text-center">Qty</th>
-            <th class="text-right">Line Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr rv-each-item="cart.items">
-            <td>
-              <h5 rv-text="item.title"></h5>
-              <ul class="small">
-                <li rv-each-property="item.propertyArray < properties"><strong rv-text="property.name"></strong>: <span rv-text="property.value"></span></li>
-              </ul>
-            </td>
-            <td rv-text="item.price | money" class="text-center"></td>
-            <td rv-text="item.quantity" class="text-center"></td>
-            <td class="text-center"><a href="#" class="close" rv-data-cart-remove="index | plus 1">&times;</a></td>
-            <td rv-text="item.line_price | money" class="text-right"></td>
-          </tr>
-          <tr rv-show="cart.item_count | lt 1">
-            <td colspan="5" class="text-center">You don't have any items in your cart.</td>
-          </tr>
-        </tbody>
-        <tfoot rv-show="cart.item_count | gt 0">
-          <tr>
-            <td colspan="4"></td>
-            <td rv-text="cart.total_price | money" class="text-right"></td>
-          </tr>
-        </tfoot>
-      </table>
-    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <h3>What is Cart.js?</h3>
 
-    <div class="col-md-4">
-      {% for product in collections.frontpage.products %}
-      <div class="form-group">
-        <button class="btn btn-default btn-small" data-cart-add="{{ product.variants.first.id }}">Add a {{ product.title | escape }}</button>
+        <p>
+          Cart.js is a very small open source Javascript library that makes the addition of powerful Ajax cart functionality to your Shopify theme a breeze.
+        </p>
+        <p>
+          It's designed to be simple to use, while providing some really powerful and nifty features.
+        </p>
       </div>
-      {% endfor %}
-    </div>
-  </div>
 
+      <div class="col-md-6">
+        <h3>Why should I use it?</h3>
+
+        <p>
+          There are lots of things to consider when working with Shopify's Ajax API &mdash; the need for synchronous requests, maintaining line item properties, updating your page to make sure it stays in sync with your cart.
+        </p>
+        <p>
+          Cart.js handles all of this for you, without forcing any particular design paradigm on you.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="jumbotron">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-6">
+        <h3>Okay, show me what it can do!</h3>
+
+        <p>
+          Sure! This site is actually hosted on Shopify, so we can see Cart.js in action right here.
+          Why not start by clicking the button below to add a product to your cart?
+        </p>
+        <div class="form-group text-center">
+          <button class="btn btn-default" data-cart-add="{{ collections.frontpage.products.first.variants.first.id }}">Add a Product</button>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <table class="table table-bordered table-condensed table-striped table-vertical-middle" data-cart-view>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th class="text-center">Price</th>
+              <th colspan="2" class="text-center">Qty</th>
+              <th class="text-right">Line Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr rv-each-item="cart.items">
+              <td>
+                <strong rv-text="item.title"></strong>
+                <ul class="small" rv-hide="item.propertyArray|empty">
+                  <li rv-each-property="item.propertyArray < properties"><strong rv-text="property.name"></strong>: <span rv-text="property.value"></span></li>
+                </ul>
+              </td>
+              <td rv-text="item.price | money" class="text-center"></td>
+              <td rv-text="item.quantity" class="text-center"></td>
+              <td class="text-center"><a href="#" class="close" rv-data-cart-remove="index | plus 1">&times;</a></td>
+              <td rv-text="item.line_price | money" class="text-right"></td>
+            </tr>
+            <tr rv-show="cart.item_count | lt 1">
+              <td colspan="5" class="text-center">You don't have any items in your cart.</td>
+            </tr>
+          </tbody>
+          <tfoot rv-show="cart.item_count | gt 0">
+            <tr>
+              <td colspan="4"></td>
+              <td rv-text="cart.total_price | money" class="text-right"></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+
+  </div>
 </section>
