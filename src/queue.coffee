@@ -7,8 +7,7 @@ processing = false
 
 CartJS.Queue =
 
-  # Add a new request to the queue. Starts processing the queue if we're not
-  # already doing so.
+  # Add a new request to the queue. Starts processing the queue if we're not already doing so.
   add: (url, data, callback, type = 'POST', dataType = 'json') ->
     queue.push({
       url: url,

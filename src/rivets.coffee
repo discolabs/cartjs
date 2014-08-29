@@ -1,14 +1,16 @@
 # CartJS.Rivets
-# Adds Rivets.js functionality to CartJS if rivets is available.
-# --------------------------------------------------------------
+# Adds Rivets.js functionality to CartJS if Rivets.js is available.
+# -----------------------------------------------------------------
 
 if 'rivets' of window
 
-  # Add the
+  # Rivets.js has been loaded, so declare the CartJS.Rivets module.
   CartJS.Rivets =
 
+    # Maintain a list of all bound Rivets.js views so that we can unbind later if needed.
     views: []
 
+    # Bind all Rivets.js view elements that are currently present on the page.
     bindElements: () ->
       CartJS.Rivets.unbindElements()
 
@@ -17,15 +19,17 @@ if 'rivets' of window
         cart: CartJS.cart
       }, CartJS.settings.rivetsModels)
 
+      # Iterate through and bind all elements marked as Rivets.js views via the [data-cart-view] attribute.
       jQuery('[data-cart-view]').each () ->
         CartJS.Rivets.views.push(rivets.bind(this, models))
 
+    # Unbind all currently bound Rivets.js views.
     unbindElements: () ->
       for view in CartJS.Rivets.views
         view.unbind()
       CartJS.Rivets.views = []
 
-  # Add useful formatters to Rivets.js
+  # Add useful general-purpose formatters for Rivets.js
   rivets.formatters.eq = (a, b) ->
     a == b
 
@@ -47,7 +51,7 @@ if 'rivets' of window
   rivets.formatters.minus = (a, b) ->
     parseInt(a) - parseInt(b)
 
-  # If Shopify money formatter is available, add formatters to Rivets.js
+  # Add Shopify-specific formatters for Rivets.js.
   if 'Shopify' of window
     if 'formatMoney' of window.Shopify
       rivets.formatters.money = (value) ->
@@ -58,6 +62,7 @@ if 'rivets' of window
 
 else
 
+  # Rivets.js has not been loaded, so just declare a no-operation CartJS.Rivets module.
   CartJS.Rivets =
 
     bindElements: () ->

@@ -20,7 +20,7 @@ CartJS.Utils =
       wrapped["#{type}[#{key}]"] = if override? then override else value
     wrapped
 
-  # Perform the opposite function to wrapKeys.
+  # Perform the opposite function to wrapKeys above.
   #
   # For example, {"properties[size]": "xs"} becomes {"size": "xs"}.
   unwrapKeys: (obj, type = 'properties', override) ->
@@ -30,7 +30,10 @@ CartJS.Utils =
       unwrapped[unwrappedKey] = if override? then override else value
     unwrapped
 
-  # Extend a source object with the properties of another object (shallow copy).
+  # Extend a source object with the properties of another object.
+  #
+  # Can be used to shallow copy an object like so:
+  #   copy = extend({}, original)
   extend: (object, properties) ->
     for key, val of properties
       object[key] = val

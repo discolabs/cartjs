@@ -12,6 +12,15 @@ CartJS =
   # Our extended cart model.
   cart: null
 
+# Initialisation method. Should be called at the bottom of the page template (usually at the bottom of theme.liquid),
+# being passed a JSON representation of the current cart plus an option settings objects. For example:
+#
+#   <script type="text/javascript">
+#     CartJS.init({{ cart | json }}, {
+#       dataAPI: true
+#     });
+#   </script>
+#
 CartJS.init = (cart, settings = {}) ->
   # Configure settings from any passed settings hash.
   CartJS.configure(settings)
@@ -31,7 +40,6 @@ CartJS.init = (cart, settings = {}) ->
   # Set up Rivets.js views. Won't do anything if Rivets.js is unavailable.
   CartJS.Rivets.bindElements()
 
+# Configure CartJS with the given settings object.
 CartJS.configure = (settings = {}) ->
-  for setting, value of settings
-    CartJS.settings[setting] = value
-  return
+  CartJS.Utils.extend(CartJS.settings, settings)

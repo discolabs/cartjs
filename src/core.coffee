@@ -27,7 +27,7 @@ CartJS.Core =
   removeItem: (line) ->
     CartJS.Core.updateItem line, 0
 
-  # Update item by id
+  # Update item by ID
   updateItemById: (id, quantity = 1, properties = {}) ->
     data = CartJS.Utils.wrapKeys(properties)
     data.id = id

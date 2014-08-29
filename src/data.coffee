@@ -4,6 +4,7 @@
 
 CartJS.Data =
 
+  # Bind the document to listen for data-* API events.
   bind: () ->
     jQuery(document).on('click', '[data-cart-add]', CartJS.Data.add)
     jQuery(document).on('click', '[data-cart-remove]', CartJS.Data.remove)
@@ -11,19 +12,23 @@ CartJS.Data =
     jQuery(document).on('change', '[data-cart-toggle-attribute]', CartJS.Data.toggleAttribute)
     jQuery(document).on('submit', '[data-cart-submit]', CartJS.Data.submit)
 
+  # @TODO
   unbind: () ->
     return
 
+  # Handler for [data-cart-add] click events.
   add: (e) ->
     e.preventDefault()
     id = jQuery(e.target).attr('data-cart-add')
     CartJS.Core.addItem(id)
 
+  # Handler for [data-cart-remove] click events.
   remove: (e) ->
     e.preventDefault()
     line = jQuery(e.target).attr('data-cart-remove')
     CartJS.Core.removeItem(line)
 
+  # Handler for [data-cart-toggle] change events.
   toggle: (e) ->
     $input = jQuery(e.target)
     id = $input.attr('data-cart-toggle')
@@ -32,11 +37,13 @@ CartJS.Data =
     else
       CartJS.Core.removeAll(id)
 
+  # Handler for [data-cart-toggle-attribute] change events.
   toggleAttribute: (e) ->
     $input = jQuery(e.target)
     attribute = $input.attr('data-cart-toggle-attribute')
     CartJS.Core.setAttribute(attribute, if $input.is(':checked') then 'Yes' else '')
 
+  # Handle for [data-cart-submit] submit events.
   submit: (e) ->
     e.preventDefault()
 

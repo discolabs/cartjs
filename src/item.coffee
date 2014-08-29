@@ -8,6 +8,9 @@ class CartJS.Item
   constructor: (item) ->
     @update(item)
 
+  # Update this item in a way that doesn't destroy existing values.
+  #
+  # Implemented like this instead of a direct assignment to prevent interference with any data bindings.
   update: (item) =>
     for key, value of item
       unless key == 'properties'
