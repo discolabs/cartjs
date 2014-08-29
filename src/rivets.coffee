@@ -9,8 +9,14 @@ if 'rivets' of window
 
     views: []
 
-    bindElements: (models) ->
+    bindElements: () ->
       CartJS.Rivets.unbindElements()
+
+      # Merge a new models object with any specified in the settings.
+      models = CartJS.Utils.extend({
+        cart: CartJS.cart
+      }, CartJS.settings.rivetsModels)
+
       jQuery('[data-cart-view]').each () ->
         CartJS.Rivets.views.push(rivets.bind(this, models))
 
@@ -20,11 +26,20 @@ if 'rivets' of window
       CartJS.Rivets.views = []
 
   # Add useful formatters to Rivets.js
+  rivets.formatters.eq = (a, b) ->
+    a == b
+
   rivets.formatters.lt = (a, b) ->
     a < b
 
   rivets.formatters.gt = (a, b) ->
     a > b
+
+  rivets.formatters.not = (a) ->
+    !a
+
+  rivets.formatters.empty = (a) ->
+    !a.length
 
   rivets.formatters.plus = (a, b) ->
     parseInt(a) + parseInt(b)

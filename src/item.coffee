@@ -10,7 +10,9 @@ class CartJS.Item
 
   update: (item) =>
     for key, value of item
+      unless key == 'properties'
         @[key] = value
+    @properties = CartJS.Utils.extend {}, item.properties
 
   # Returns the properties of this item as an array of objects with name/value
   # properties. Useful when you'd like to iterate properties without knowing

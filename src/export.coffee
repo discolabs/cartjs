@@ -15,14 +15,21 @@ CartJS.factory = (exports) ->
   exports.getCart = CartJS.Core.getCart
   exports.addItem = CartJS.Core.addItem
   exports.updateItem = CartJS.Core.updateItem
+  exports.updateItemById = CartJS.Core.updateItemById
   exports.removeItem = CartJS.Core.removeItem
+  exports.removeAll = CartJS.Core.removeAll
   exports.clear = CartJS.Core.clear
   exports.getAttribute = CartJS.Core.getAttribute
   exports.setAttribute = CartJS.Core.setAttribute
   exports.getAttributes = CartJS.Core.getAttributes
   exports.setAttributes = CartJS.Core.setAttributes
+  exports.clearAttributes = CartJS.Core.clearAttributes
   exports.getNote = CartJS.Core.getNote
   exports.setNote = CartJS.Core.setNote
+
+  # Export Cart and Item classes so they can be extended.
+  exports.Cart = CartJS.Cart
+  exports.Item = CartJS.Item
 
 # Exports CartJS for CommonJS, AMD and the browser.
 if typeof exports == 'object'

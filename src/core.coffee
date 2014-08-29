@@ -27,6 +27,20 @@ CartJS.Core =
   removeItem: (line) ->
     CartJS.Core.updateItem line, 0
 
+  # Update item by id
+  updateItemById: (id, quantity = 1, properties = {}) ->
+    data = CartJS.Utils.wrapKeys(properties)
+    data.id = id
+    data.quantity = quantity
+    CartJS.Queue.add '/cart/change.js', data, CartJS.cart.update
+
+  # Remove all line items for the given variant ID.
+  removeAll: (id) ->
+    data =
+      id: id
+      quantity: 0
+    CartJS.Queue.add '/cart/change.js', data, CartJS.cart.update
+
   # Clear all items from the cart.
   clear: () ->
     CartJS.Queue.add '/cart/clear.js', {}, CartJS.cart.update
@@ -39,7 +53,7 @@ CartJS.Core =
   setAttribute: (attributeName, value) ->
     attributes = {}
     attributes[attributeName] = value
-    setAttributes(attributes)
+    CartJS.Core.setAttributes(attributes)
 
   # Get all cart attributes as a hash.
   getAttributes: () ->
@@ -49,6 +63,10 @@ CartJS.Core =
   setAttributes: (attributes = {}) ->
     CartJS.Queue.add '/cart/update.js', CartJS.Utils.wrapKeys(attributes, 'attributes'), CartJS.cart.update
 
+  # Clear all attributes.
+  clearAttributes: () ->
+    CartJS.Queue.add '/cart/update.js', CartJS.Utils.wrapKeys(CartJS.Core.getAttributes(), 'attributes', ''), CartJS.cart.update
+
   # Get the cart note.
   getNote: () ->
     CartJS.cart.note
@@ -56,5 +74,3 @@ CartJS.Core =
   # Set the cart note.
   setNote: (note) ->
     CartJS.Queue.add '/cart/update.js', { note: note }, CartJS.cart.update
-
-#716986707

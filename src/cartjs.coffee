@@ -6,6 +6,8 @@ CartJS =
   settings:
     autoCommit: true
     dataAPI: false
+    requestBodyClass: null
+    rivetsModels: {}
 
   # Our extended cart model.
   cart: null
@@ -21,10 +23,13 @@ CartJS.init = (cart, settings = {}) ->
   if CartJS.settings.dataAPI
     CartJS.Data.bind()
 
+  # Set up toggling of CSS class on body during requests if provided.
+  if CartJS.settings.requestBodyClass
+    $(document).on 'cart.requestStarted', () -> $('body').addClass(CartJS.settings.requestBodyClass)
+    $(document).on 'cart.requestComplete', () -> $('body').removeClass(CartJS.settings.requestBodyClass)
+
   # Set up Rivets.js views. Won't do anything if Rivets.js is unavailable.
-  CartJS.Rivets.bindElements {
-    cart: CartJS.cart
-  }
+  CartJS.Rivets.bindElements()
 
 CartJS.configure = (settings = {}) ->
   for setting, value of settings
