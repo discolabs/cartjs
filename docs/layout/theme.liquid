@@ -13,12 +13,12 @@
 
   <!-- SEO Tags -->
   {% if template == 'index' %}
-  <title>{{ shop.name }} • {{ page_title }}</title>
+  <title>{{ shop.name }} &mdash; {{ page_title }}</title>
   <meta name="description" content="{{ shop.description }}">
   {% elsif template == '404' %}
-  <title>Page Not Found • {{ shop.name }}</title>
+  <title>Page Not Found &mdash; {{ shop.name }}</title>
   {% else %}
-  <title>{{ page_title }} • {{ shop.name }}</title>
+  <title>{{ page_title }} &mdash; {{ shop.name }}</title>
   <meta name="description" content="{{ page_description }}" />
   {% endif %}
   <link rel="canonical" href="{{ canonical_url }}" />
