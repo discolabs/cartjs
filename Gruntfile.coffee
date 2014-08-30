@@ -61,10 +61,10 @@ module.exports = (grunt) ->
       docs:
         files: [
           src: 'dist/rivets-cart.min.js'
-          dest: 'docs/assets/rivets-cart.min.js'
+          dest: 'docs/theme/assets/rivets-cart.min.js'
         ,
           src: 'cartjs.zip'
-          dest: 'docs/assets/cartjs.zip'
+          dest: 'docs/theme/assets/cartjs.zip'
         ]
 
     less:
@@ -72,7 +72,7 @@ module.exports = (grunt) ->
         options:
           compress: true
         files:
-          'docs/assets/cartjs.min.css': 'docs/less/cartjs.less'
+          'docs/theme/assets/cartjs.min.css': 'docs/less/cartjs.less'
 
     watch:
       build:

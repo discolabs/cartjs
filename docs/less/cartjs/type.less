@@ -2,6 +2,18 @@
 // Type
 // --------------------------------------------------
 
+// Remove top margin from all headers.
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
+}
+
+// Add a fancy schmancy checklist
+.check-list {
+  list-style:none;
+  padding-left:1em
+}
+
+.check-list li:before {
+  content:"\2714";
+  padding-right:.5em
 }
