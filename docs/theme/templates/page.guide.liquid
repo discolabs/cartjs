@@ -1,77 +1,26 @@
-<div class="jumbotron">
-  <section class="container">
-    <div class="row">
+<div class="jumbotron"><section class="container"><div class="row"><article class="col-md-9"><h3 id="introduction">Introduction</h3><p>Cart.js is a Javascript library that makes it easy to add dynamic cart features to Shopify themes.</p>
+<p>It abstracts away some of the difficulties of working with Shopify&#39;s AJAX API (such as the limited nature of some of the API endpoints and the need to make API calls synchronously) and provides a simple, consistent interface to manipulating a customer&#39;s cart.</p>
+<h3 id="getting-started">Getting Started</h3><p>First, get the latest stable release of <code>cart.js</code> <a href="https://github.com/discolabs/cartjs/blob/master/dist/cart.js">here</a> (You can get a pre-minified version, <code>cart.min.js</code> from <a href="https://github.com/discolabs/cartjs/blob/master/dist/cart.min.js">here</a> if you&#39;d prefer).</p>
+<p>Add the chosen <code>.js</code> file to your theme&#39;s <code>assets</code> directory, then include the script on your page and initialise Cart.js.
+The best place to do this is at the bottom of your theme&#39;s <code>theme.liquid</code> file, so that Cart.js functionality is available across your whole site.
+Because Cart.js depends on jQuery, you should load it after you&#39;ve include the jQuery library.</p>
+<p>{% raw %}</p>
+<pre><code class="language-liquid">        ... contents of your theme&#39;s theme.liquid ...
 
-      <article class="col-md-9">
+        &lt;!-- Include jQuery from Google&#39;s CDN (your theme may already include jQuery, if so, skip this line) --&gt;
+        {{ &#39;//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js&#39; | script_tag }}
 
-        <!-- 1 INTRODUCTION -->
-        <h3 id="introduction">1 Introduction</h3>
-        <p>
-          Cart.js is a small, open-source Javascript library that makes it easy to add dynamic cart features to Shopify themes.
-        </p>
-        <p>
-          It abstracts away some of the difficulties of working with Shopify's AJAX API (such as the limited nature of some of the API endpoints and the need to make API calls synchronously) and provides a simple, consistent interface to manipulating a customer's cart.
-        </p>
-        <p>
-          It's key features are:
-        </p>
-        <ul class="check-list">
-          <li><strong>Simple, consistent Javascript API</strong> for manipulating a customer's cart;</li>
-          <li><strong>Data-API</strong> for binding HTML elements to cart actions;</li>
-          <li><strong>DOM Binding module</strong> for dynamically updating your page when your cart changes;</li>
-          <li><strong>Easily Extendable</strong> for adding custom behaviour to your store.</li>
-        </ul>
+        &lt;!-- Include Cart.js --&gt;
+        {{ &#39;cart.min.js&#39; | asset_url | script_tag }}
 
-        <hr />
+        &lt;!-- Initialise Cart.js once the page has loaded --&gt;
+        &lt;script type=&quot;text/javascript&quot;&gt;
+            jQuery(function() {
+                CartJS.init({{ cart | json }});
+            });
+        &lt;/script&gt;
 
-        <!-- 2 GETTING STARTED -->
-        <h3 id="getting-started">2 Getting Started</h3>
-        <p>
-          First, download the latest stable production release of <code>cart.min.js</code> from <a href="https://github.com/discolabs/cartjs/blob/master/dist/cart.min.js">here</a>.
-          Cart.js is also available via <a href="http://bower.io">Bower</a> and can be installed with:
-        </p>
-        <pre>
-          bower install shopify-cartjs
-        </pre>
-
-        <p>
-          Copy <code>cart.min.js</code> to your theme's <code>assets</code> directory, then include the library on your page and initialise it like this:
-        </p>
-
-<pre>
-          ... contents of your theme's theme.liquid ...
-
-          <!-- Include jQuery from Google's CDN (your theme may already include jQuery, if so, skip this line) -->
-          {{ '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js' | script_tag }}
-
-          <!-- Include Cart.js -->
-          {{ 'cart.min.js' | asset_url | script_tag }}
-
-          <!-- Initialise Cart.js once the page has loaded -->
-          <script type="text/javascript">
-              jQuery(function() {
-                  CartJS.init({{ cart | json }});
-              });
-          </script>
-
-      </body>
-  </html>
-</pre>
-
-        <hr />
-
-      </article>
-
-      <aside class="col-md-3">
-        <nav>
-          <ul class="nav nav-pills nav-stacked">
-            <li><a href="#introduction">Introduction</a></li>
-            <li><a href="#getting-started">Getting Started</a></li>
-            <li></li>
-          </ul>
-        </nav>
-      </aside>
-
-    </div>
-  </section>
-</div>
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>{% endraw %}</p>
+</article><aside class="col-md-3"><nav><ul class="nav"><li><a href="#introduction">Introduction</a></li><li><a href="#getting-started">Getting Started</a></li></ul></nav></aside></div></section></div>

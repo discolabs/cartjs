@@ -1,0 +1,14 @@
+.jumbotron
+    section.container
+        .row
+            article.col-md-9
+                for section, anchor in reference
+                    h3(id= anchor)= section.title
+                    != partial('sections/' + anchor)
+
+            aside.col-md-3
+                nav
+                    ul.nav
+                        for section, anchor in reference
+                            li
+                                a(href= '#' + anchor)= section.title

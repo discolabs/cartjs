@@ -46,6 +46,15 @@ module.exports = (grunt) ->
       build:
         src: ['dist/rivets-cart.js']
 
+    terraform:
+      docs:
+        options:
+          data: grunt.file.readJSON('docs/docs.json')
+        files:
+          'docs/theme/templates/index.liquid': 'docs/index/index.jade'
+          'docs/theme/templates/page.guide.liquid': 'docs/guide/guide.jade'
+          'docs/theme/templates/page.reference.liquid': 'docs/reference/reference.jade'
+
     compress:
       docs:
         options:
@@ -90,7 +99,8 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-less'
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-contrib-watch'
+  grunt.loadNpmTasks 'grunt-terraform'
 
   grunt.registerTask 'default', ['watch']
   grunt.registerTask 'build',   ['coffee:build', 'concat:build', 'uglify:build', 'clean:build']
-  grunt.registerTask 'docs',    ['build', 'compress:docs', 'copy:docs', 'less:docs']
+  grunt.registerTask 'docs',    ['build', 'terraform:docs', 'compress:docs', 'copy:docs', 'less:docs']
