@@ -60,6 +60,11 @@ if 'rivets' of window
       rivets.formatters.money_with_currency = (value) ->
         Shopify.formatMoney(value, CartJS.settings.money_with_currency_format)
 
+    if 'Image' of window.Shopify
+      if 'productImageSize' of window.Shopify.Image
+        rivets.formatters.productImageSize = (src, size) ->
+          Shopify.Image.getSizedImageUrl(src, size)
+
 else
 
   # Rivets.js has not been loaded, so just declare a no-operation CartJS.Rivets module.
