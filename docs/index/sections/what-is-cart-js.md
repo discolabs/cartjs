@@ -1,4 +1,4 @@
-### What is Cart.js
+### What is Cart.js?
 
 Cart.js is a very small open source Javascript library that makes the addition of powerful Ajax cart functionality to your Shopify theme a breeze.
 

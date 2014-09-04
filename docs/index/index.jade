@@ -11,3 +11,16 @@ section.jumbotron
                 != partial('sections/what-is-cart-js')
             .col-md-6
                 != partial('sections/why-should-i-use-it')
+
+section.jumbotron
+    .container
+        .row
+            .col-md-6
+                != partial('sections/okay-show-me')
+                .row.form-group
+                    !="{% for product in collections.frontpage.products %}"
+                    .col-xs-6
+                        button.btn.btn-block.btn-default(data-cart-add="{{ product.variants.first.id }}") Add a {{ product.title | escape }}
+                    !="{% endfor %}"
+            .col-md-6
+                != partial('sections/okay-show-me-table')

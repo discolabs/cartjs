@@ -45,6 +45,7 @@
     $(function() {
       CartJS.init({{ cart | json }}, {
         dataAPI: true,
+        requestBodyClass: 'cart-loading',
         money_format: '{{ shop.money_format }}',
         money_with_currency_format: '{{ shop.money_with_currency_format }}'
       });
