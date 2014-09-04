@@ -61,7 +61,7 @@ if 'rivets' of window
         Shopify.formatMoney(value, CartJS.settings.money_with_currency_format)
 
     if 'Image' of window.Shopify
-      if 'productImageSize' of window.Shopify.Image
+      if 'getSizedImageUrl' of window.Shopify.Image
         rivets.formatters.productImageSize = (src, size) ->
           Shopify.Image.getSizedImageUrl(src, size)
 

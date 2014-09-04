@@ -395,7 +395,7 @@
         };
       }
       if ('Image' in window.Shopify) {
-        if ('productImageSize' in window.Shopify.Image) {
+        if ('getSizedImageUrl' in window.Shopify.Image) {
           rivets.formatters.productImageSize = function(src, size) {
             return Shopify.Image.getSizedImageUrl(src, size);
           };
