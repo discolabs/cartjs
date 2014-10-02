@@ -1,0 +1,50 @@
+//
+// Layout
+// --------------------------------------------------
+
+code,
+kbd,
+pre,
+samp {
+  font-family: @font-family-monospace;
+}
+
+// Inline code.
+code {
+  padding: 0;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  margin: 0;
+  font-size: 85%;
+  background-color: rgba(0, 0, 0, 0.04);
+  border-radius: 3px;
+
+  &:before,
+  &:after {
+    letter-spacing: -0.2em;
+    content: "\00a0";
+  }
+}
+
+// Blocks of code
+pre {
+  display: block;
+  padding: @line-height-computed / 2;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+  margin: 0 0 @line-height-computed 0;
+
+  code {
+    padding: 0;
+    background-color: transparent;
+    border-radius: 0;
+    &:before,
+    &:after {
+      letter-spacing: 0;
+      content: "";
+    }
+  }
+}
