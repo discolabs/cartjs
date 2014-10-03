@@ -20,7 +20,8 @@ function example() {
 }
 ```
 
-But that's just the beginning.
+Neat, huh? But that's just the beginning.
+
 Cart.js bundles two powerful optional modules that make it even easier to build dynamic carts into your themes:
 
 

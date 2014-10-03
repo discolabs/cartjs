@@ -6,8 +6,28 @@
     },
     "getting-started": {
       "title": "Getting Started",
-      "sections": {}
+      "sections": {
+        "installation": {
+          "title": "Installation"
+        },
+        "setup": {
+          "title": "Setup"
+        }
+      }
     }
   },
-  "reference": {}
+  "reference": {
+    "core-api": {
+      "title": "Core API",
+      "sections": {}
+    },
+    "data-api": {
+      "title": "Data API",
+      "sections": {}
+    },
+    "dom-binding": {
+      "title": "DOM Binding",
+      "sections": {}
+    }
+  }
 }

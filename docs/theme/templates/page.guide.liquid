@@ -1,11 +1,24 @@
-<div class="jumbotron"><section class="container"><div class="row"><article class="col-md-9"><h3 id="introduction">Introduction</h3><p>Cart.js is a Javascript library that makes it easy to add dynamic cart features to Shopify themes.</p>
+<div class="jumbotron"><section class="container"><div class="row"><article class="col-md-9"><h2 id="introduction">Introduction</h2><p>Cart.js is a Javascript library that makes it easy to add dynamic cart features to Shopify themes.</p>
 <p>It abstracts away some of the difficulties of working with Shopify&#39;s AJAX API (such as the limited nature of some of the API endpoints and the need to make API calls synchronously) and provides a simple, consistent interface to manipulating a customer&#39;s cart.</p>
-<h3 id="getting-started">Getting Started</h3><p>First, get the latest stable release of <code>cart.js</code> <a href="https://github.com/discolabs/cartjs/blob/master/dist/cart.js">here</a> (You can get a pre-minified version, <code>cart.min.js</code> from <a href="https://github.com/discolabs/cartjs/blob/master/dist/cart.min.js">here</a> if you&#39;d prefer).</p>
-<p>Add the chosen <code>.js</code> file to your theme&#39;s <code>assets</code> directory, then include the script on your page and initialise Cart.js.
-The best place to do this is at the bottom of your theme&#39;s <code>theme.liquid</code> file, so that Cart.js functionality is available across your whole site.
-Because Cart.js depends on jQuery, you should load it after you&#39;ve include the jQuery library.</p>
+<h2 id="getting-started">Getting Started</h2><h3 id="getting-started-installation">Installation</h3><p>You can install Cart.js via <code>npm</code>, <code>bower</code> or simply by downloading the latest copy of the library.</p>
+<h4>NPM</h4>
+<pre><code class="language-shell">npm install shopify-cartjs</code></pre>
+<h4>Bower</h4>
+<pre><code class="language-shell">bower install shopify-cartjs</code></pre>
+<h4>Download</h4>
+<p>Download the latest stable release of Cart.js from <a href="{{ "cartjs.zip" | asset_url }}">here</a>.</p>
+<h3 id="getting-started-setup">Setup</h3><p>The Cart.js distribution comes packaged with three versions of the library:</p>
+<ul>
+<li><code>cart.js</code> is the unminified source code, containing the Core and Data API.</li>
+<li><code>cart.min.js</code> is the minified version of <code>cart.js</code>.</li>
+<li><code>rivets-cart.min.js</code> is a minified version of both Cart.js and the Rivets.js library, used for DOM binding functionality.</li>
+</ul>
+<p>Once you&#39;ve selected the version you&#39;d like to use, add the relevant file to your theme&#39;s <code>/assets</code> directory.</p>
+<p>You then just need to include the script on your page and call <code>CartJS.init()</code>.
+The best place to do this is at the bottom of your theme&#39;s <code>theme.liquid</code> file, so that Cart.js functionality is available across your whole site.</p>
+<p>Because Cart.js depends on jQuery, you should load it after you&#39;ve included the jQuery library.</p>
 <p>{% raw %}</p>
-<pre><code class="language-liquid">        ... contents of your theme&#39;s theme.liquid ...
+<pre><code class="language-html">        ... contents of your theme.liquid ...
 
         &lt;!-- Include jQuery from Google&#39;s CDN (your theme may already include jQuery, if so, skip this line) --&gt;
         {{ &#39;//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js&#39; | script_tag }}
@@ -23,4 +36,6 @@ Because Cart.js depends on jQuery, you should load it after you&#39;ve include t
     &lt;/body&gt;
 &lt;/html&gt;</code></pre>
 <p>{% endraw %}</p>
-</article><aside class="col-md-3"><nav><ul class="nav"><li><a href="#introduction">Introduction</a></li><li><a href="#getting-started">Getting Started</a></li></ul></nav></aside></div></section></div>
+<p>Note that the call to <code>CartJS.init()</code> requires that {% raw %}<code>{{ cart | json }}</code>{% endraw %} is passed as an argument.
+This tells Liquid to render the initial cart state as a JSON object and pass it to Cart.js.</p>
+</article><aside class="col-md-3"><nav><ul class="nav"><li><a href="#introduction">Introduction</a><ul class="nav"></ul></li><li><a href="#getting-started">Getting Started</a><ul class="nav"><li><a href="#getting-started-installation">Installation</a></li><li><a href="#getting-started-setup">Setup</a></li></ul></li></ul></nav></aside></div></section></div>
