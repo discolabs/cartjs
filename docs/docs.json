@@ -12,7 +12,34 @@
         },
         "setup": {
           "title": "Setup"
+        },
+        "next-steps": {
+          "title": "Next Steps"
         }
+      }
+    },
+    "core-api": {
+      "title": "Core API",
+      "sections": {
+
+      }
+    },
+    "data-api": {
+      "title": "Data API",
+      "sections": {
+
+      }
+    },
+    "events": {
+      "title": "Events",
+      "sections": {
+
+      }
+    },
+    "dom-binding": {
+      "title": "DOM Binding",
+      "sections": {
+
       }
     }
   },
@@ -23,6 +50,10 @@
     },
     "data-api": {
       "title": "Data API",
+      "sections": {}
+    },
+    "events": {
+      "title": "Events",
       "sections": {}
     },
     "dom-binding": {

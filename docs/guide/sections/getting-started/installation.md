@@ -6,13 +6,11 @@ You can install Cart.js via `npm`, `bower` or simply by downloading the latest c
 npm install shopify-cartjs
 ```
 
-
 #### Bower
 
 ```shell
 bower install shopify-cartjs
 ```
-
 
 #### Download
 
