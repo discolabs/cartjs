@@ -4,11 +4,14 @@
 # CartJS module factory.
 CartJS.factory = (exports) ->
   # Exposes the full CartJS namespace. This is mainly used for isolated testing.
-  exports._ = CartJS
+  # exports._ = CartJS
 
   # Export initialisation and configuration.
   exports.init = CartJS.init
   exports.configure = CartJS.configure
+
+  # Export objects attached to CartJS.
+  exports.cart = CartJS.cart
   exports.settings = CartJS.settings
 
   # Export core API as top-level methods.
@@ -28,8 +31,9 @@ CartJS.factory = (exports) ->
   exports.setNote = CartJS.Core.setNote
 
   # Export Cart and Item classes so they can be extended.
-  exports.Cart = CartJS.Cart
-  exports.Item = CartJS.Item
+  # (Don't export for the moment; this isn't documented yet).
+  # exports.Cart = CartJS.Cart
+  # exports.Item = CartJS.Item
 
 # Exports CartJS for CommonJS, AMD and the browser.
 if typeof exports == 'object'

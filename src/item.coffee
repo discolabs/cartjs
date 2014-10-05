@@ -3,7 +3,7 @@
 # ---------------------
 
 
-class CartJS.Item
+class Item
 
   constructor: (item) ->
     @update(item)

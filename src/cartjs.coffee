@@ -25,8 +25,8 @@ CartJS.init = (cart, settings = {}) ->
   # Configure settings from any passed settings hash.
   CartJS.configure(settings)
 
-  # Instantiate the new cart object.
-  CartJS.cart = new CartJS.Cart(cart)
+  # Update the cart model with the initial cart objects.
+  CartJS.cart.update(cart)
 
   # Set up data-cart-* API if enabled.
   if CartJS.settings.dataAPI

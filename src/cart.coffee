@@ -2,10 +2,7 @@
 # Wraps a normal cart JSON object to provide additional functionality.
 # ---------------------
 
-class CartJS.Cart
-
-  constructor: (cart) ->
-    @update(cart)
+class Cart
 
   # Update the cart object in a way that doesn't destroy existing values.
   #
@@ -14,4 +11,4 @@ class CartJS.Cart
     for key, value of cart
       unless key == 'items'
         @[key] = value
-    @items = (new CartJS.Item(item) for item in cart.items)
+    @items = (new Item(item) for item in cart.items)
