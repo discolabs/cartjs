@@ -21,7 +21,15 @@
     "core-api": {
       "title": "Core API",
       "sections": {
-
+        "configuration": {
+          "title": "Configuration"
+        },
+        "cart-state": {
+          "title": "Cart State"
+        },
+        "items": {
+          "title": "Adding, Updating and Removing Items"
+        }
       }
     },
     "data-api": {
@@ -44,6 +52,10 @@
     }
   },
   "reference": {
+    "options": {
+      "title": "Configuration Options",
+      "sections": {}
+    },
     "core-api": {
       "title": "Core API",
       "sections": {}

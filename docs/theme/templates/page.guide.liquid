@@ -1,6 +1,9 @@
 <div class="jumbotron"><section class="container"><div class="row"><article class="col-md-9"><h2 id="introduction">Introduction</h2><p>Cart.js is a Javascript library that makes it easy to add dynamic cart features to Shopify themes.</p>
 <p>It abstracts away some of the difficulties of working with Shopify&#39;s AJAX API (such as the limited nature of some of the API endpoints and the need to make API calls synchronously) and provides a simple, consistent interface to manipulating a customer&#39;s cart.</p>
-<h2 id="getting-started">Getting Started</h2><h3 id="getting-started-installation">Installation</h3><p>You can install Cart.js via <code>npm</code>, <code>bower</code> or simply by downloading the latest copy of the library.</p>
+<h2 id="getting-started">Getting Started</h2><p>Getting started with Cart.js is designed to be pretty easy.</p>
+<p>You just need to fetch a copy of the library, include it in your theme, and call a single initialisation method.
+Then you can make calls to Cart.js from within your theme code.</p>
+<h3 id="getting-started-installation">Installation</h3><p>You can install Cart.js via <code>npm</code>, <code>bower</code> or simply by downloading the latest copy of the library.</p>
 <h4>NPM</h4>
 <pre><code class="language-shell">npm install shopify-cartjs</code></pre>
 <h4>Bower</h4>
@@ -8,11 +11,21 @@
 <h4>Download</h4>
 <p>Download the latest stable release of Cart.js from <a href="{{ "cartjs.zip" | asset_url }}">here</a>.</p>
 <h3 id="getting-started-setup">Setup</h3><p>The Cart.js distribution comes packaged with three versions of the library:</p>
-<ul>
-<li><code>cart.js</code> is the unminified source code, containing the Core and Data API.</li>
-<li><code>cart.min.js</code> is the minified version of <code>cart.js</code>.</li>
-<li><code>rivets-cart.min.js</code> is a minified version of both Cart.js and the Rivets.js library, used for DOM binding functionality.</li>
-</ul>
+<div class="callout callout-success">
+    <p>
+        <code>cart.js</code> is the unminified source code, containing the Core and Data APIs.
+    </p>
+
+    <p>
+        <code>cart.min.js</code> is a minified version of the library, and also contains the Core and Data APIs.
+    </p>
+
+    <p>
+        <code>rivets-cart.min.js</code> is a minified version of Cart.js that also bundles the Rivets.js library.
+        Together, they provide support for the DOM Binding functionality.
+    </p>
+</div>
+
 <p>Once you&#39;ve selected the version you&#39;d like to use, add the relevant file to your theme&#39;s <code>/assets</code> directory.</p>
 <p>You then just need to include the script on your page and call <code>CartJS.init()</code>.
 The best place to do this is at the bottom of your theme&#39;s <code>theme.liquid</code> file, so that Cart.js functionality is available across your whole site.</p>
@@ -20,7 +33,8 @@ The best place to do this is at the bottom of your theme&#39;s <code>theme.liqui
 <p>{% raw %}</p>
 <pre><code class="language-html">        ... contents of your theme.liquid ...
 
-        &lt;!-- Include jQuery from Google&#39;s CDN (your theme may already include jQuery, if so, skip this line) --&gt;
+        &lt;!-- Include jQuery from Google&#39;s CDN. --&gt;
+        &lt;!-- Your theme may already include jQuery - if so, you can skip this line. --&gt;
         {{ &#39;//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js&#39; | script_tag }}
 
         &lt;!-- Include Cart.js --&gt;
@@ -38,4 +52,100 @@ The best place to do this is at the bottom of your theme&#39;s <code>theme.liqui
 <p>{% endraw %}</p>
 <p>Note that the call to <code>CartJS.init()</code> requires that {% raw %}<code>{{ cart | json }}</code>{% endraw %} is passed as an argument.
 This tells Liquid to render the initial cart state as a JSON object and pass it to Cart.js.</p>
-</article><aside class="col-md-3"><nav><ul class="nav"><li><a href="#introduction">Introduction</a><ul class="nav"></ul></li><li><a href="#getting-started">Getting Started</a><ul class="nav"><li><a href="#getting-started-installation">Installation</a></li><li><a href="#getting-started-setup">Setup</a></li></ul></li></ul></nav></aside></div></section></div>
+<h3 id="getting-started-next-steps">Next Steps</h3><p>Now that you gotten Cart.js set up with your theme, you&#39;re ready to start using the library.
+There are two main approaches to doing this.</p>
+<p>The first way is to use the Core API methods on the global <code>CartJS</code> object from within your Javascript code.</p>
+<p>The second is to use the in-built Data API to let Cart.js handle DOM events for you.</p>
+<p>Both of these approaches are stepped through in the following walkthroughs.
+Of course, these two approaches aren&#39;t mutually exclusive - you can always use the Data API for the majority of your cart functionality, and write more custom code using the Core API only when needed.</p>
+<p>Finally, once you&#39;ve gotten the hang of Cart.js, you might be interested in using it in conjunction with Rivets.js to create HTML templates that are automatically updated along with your cart.
+There&#39;s a separate walkthrough taking you through that aspect of the library later on.</p>
+<h2 id="core-api">Core API</h2><p>The Core API consists of methods called on the global <code>CartJS</code> object.
+You can use the Core API to do pretty much everything you&#39;d expect of a cart manipulation library - add items, update quantities and custom properties, and so on.</p>
+<p>A full list of methods can be found in the [API Reference][].</p>
+<h3 id="core-api-configuration">Configuration</h3><p>In the &quot;Setup&quot; section above, we saw that we need to call <code>CartJS.init()</code> before use, like this:</p>
+<p>{% raw %}</p>
+<pre><code class="language-html">&lt;script type=&quot;text/javascript&quot;&gt;
+    jQuery(function() {
+        CartJS.init({{ cart | json }}, {
+            &quot;dataAPI&quot;: false,
+            &quot;requestBodyClass&quot;: &quot;loading&quot;
+        });
+    });
+&lt;/script&gt;</code></pre>
+<p>{% endraw %}</p>
+<p>As you can see, the <code>init()</code> method takes two arguments.
+The first argument is required, and is provided by rendering the current Shopify cart as a JSON object through the {% raw %}<code>{{ cart | json }}</code>{% endraw %} Liquid tag.</p>
+<p>The second argument is an optional hash of configuration options.
+A full list of these options is available in the <a href="/pages/reference/#options">Option Reference</a>.</p>
+<h3 id="core-api-cart-state">Cart State</h3><p>If we want to inspect the state of our cart at any time, we can access the <code>CartJS.cart</code> object.
+You can read any of the standard cart properties (such as <code>item_count</code> or <code>requires_shipping</code>, for example), as well as a list of the current <code>items</code> in the cart.</p>
+<p>While developing with Cart.js, it&#39;s often useful to open your browser&#39;s Javascript console and inspect the cart state, or test out Cart.js methods.
+Here&#39;s an example from the developer console in Chrome:</p>
+<figure>
+    <img src="{{ 'core-api-cart-state.png' | asset_url }}" alt="Screenshot of the Chrome developer console." />
+</figure>
+
+<div class="callout callout-warning">
+    <h4>Don&#39;t write values via the cart object</h4>
+
+    <p>
+        You should only ever <em>read</em> values from <code>CartJS.cart</code>, and avoid altering the object directly.
+    </p>
+
+    <p>
+        Assigning a value with code like <code>CartJS.cart.items[0].quantity = 5;</code> will make the change locally in the browser, but won&#39;t save it to the server.
+        This means that the changes will be lost when the customer refreshes or navigates to a new page, or when Cart.js fetches an updated version of the cart from Shopify.
+    </p>
+</div>
+<h3 id="core-api-items">Adding, Updating and Removing Items</h3><h4>Adding Items</h4>
+<p>Adding items to your cart is as simple as calling <code>CartJS.addItem()</code>, and passing the ID of the variant you&#39;d like to add as the first argument.</p>
+<p>Assume we have a Shopify store that&#39;s selling widgets, and that one of those widgets has a variant with an ID of <code>12345678</code> that costs $9.99.
+Let&#39;s create a button customers can click to add a widget to their cart, and then hook it up to some Javascript code via jQuery:</p>
+<pre><code class="language-html">&lt;button id=&quot;button&quot;&gt;Add a Widget&lt;/button&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+    $(&#39;#button&#39;).click(function() {
+        CartJS.addItem(12345678);
+    });
+&lt;/script&gt;</code></pre>
+<p>Now when a customer clicks our button, Cart.js will make an Ajax request and add a single Widget to the customer&#39;s cart.</p>
+<p>When using the <code>addItem()</code> method, you can optionally specify the quantity to add and a hash of custom line item properties.
+Let&#39;s update our code to add five widgets when we click the button, and to set a custom &quot;added_by&quot; property on the resulting line item:</p>
+<pre><code class="language-html">&lt;button id=&quot;button&quot;&gt;Add Five Widgets&lt;/button&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+    $(&#39;#button&#39;).click(function() {
+        CartJS.addItem(12345678, 5, {
+            &quot;added_by&quot;: &quot;Cart.js&quot;
+        });
+    });
+&lt;/script&gt;</code></pre>
+<p>If we loaded this example, clicked &quot;Add Five Widgets&quot;, then typed <code>CartJS.cart.items</code> in to our browser&#39;s Javascript console, we&#39;d see something like this (simplified for this example):</p>
+<pre><code class="language-js">[
+    {
+        &quot;handle&quot;: &quot;widget-1&quot;,
+        &quot;id&quot; 12345678,
+        &quot;price&quot;: 999,
+        &quot;line_price&quot;: 4995,
+        &quot;properties&quot;: {
+            &quot;added_by&quot;: &quot;Cart.js&quot;
+        },
+        &quot;quantity&quot;: 5,
+        &quot;title&quot;: &quot;Widget 1&quot;,
+        &quot;variant_id&quot;: 12345678
+    }
+]</code></pre>
+<p>That&#39;s it!
+You can call <code>addItems()</code> as many times as you like in the same function, and Cart.js will queue up Ajax requests as needed.</p>
+<p>Note that Shopify will collate multiple line items for the same variant into one -- for example, if we clicked &quot;Add Five Widgets&quot; in the example above again, we&#39;d end up with one line item with <code>&quot;quantity&quot;: 10</code> instead of two line item with <code>&quot;quantity: 5&quot;</code>.
+However, this <em>doesn&#39;t</em> apply when you add the same variant with different</p>
+<h4>Updating Items</h4>
+<p>Update</p>
+<p>...</p>
+<p>One important thing to note is that the <code>updateItem()</code> method takes the <strong><em>line number</em></strong> (the &quot;index&quot;) of the item in the cart you&#39;d like to update, not the variant ID.
+This is because it&#39;s possible (and quite common) to have multiple items in the cart with the same variant ID but with different properties.</p>
+<p>If you&#39;d like to update an item using just the variant ID, you can use <code>updateItemById()</code>, which operates the same way as <code>updateItem()</code> but takes the variant ID as the first parameter.</p>
+<h2 id="data-api">Data API</h2><h2 id="events">Events</h2><p>Cart.js triggers a number of custom jQuery events on the <code>document</code>, allowing you to bind listeners using <code>.on()</code>.</p>
+<p>All events are placed in a <code>cart.</code> namespace.</p>
+<h2 id="dom-binding">DOM Binding</h2></article><aside class="col-md-3"><nav><ul class="nav"><li><a href="#introduction">Introduction</a><ul class="nav"></ul></li><li><a href="#getting-started">Getting Started</a><ul class="nav"><li><a href="#getting-started-installation">Installation</a></li><li><a href="#getting-started-setup">Setup</a></li><li><a href="#getting-started-next-steps">Next Steps</a></li></ul></li><li><a href="#core-api">Core API</a><ul class="nav"><li><a href="#core-api-configuration">Configuration</a></li><li><a href="#core-api-cart-state">Cart State</a></li><li><a href="#core-api-items">Adding, Updating and Removing Items</a></li></ul></li><li><a href="#data-api">Data API</a><ul class="nav"></ul></li><li><a href="#events">Events</a><ul class="nav"></ul></li><li><a href="#dom-binding">DOM Binding</a><ul class="nav"></ul></li></ul></nav></aside></div></section></div>

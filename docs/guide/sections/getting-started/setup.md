@@ -1,8 +1,19 @@
 The Cart.js distribution comes packaged with three versions of the library:
 
-- `cart.js` is the unminified source code, containing the Core and Data API.
-- `cart.min.js` is the minified version of `cart.js`.
-- `rivets-cart.min.js` is a minified version of both Cart.js and the Rivets.js library, used for DOM binding functionality.
+<div class="callout callout-success">
+    <p>
+        `cart.js` is the unminified source code, containing the Core and Data APIs.
+    </p>
+
+    <p>
+        `cart.min.js` is a minified version of the library, and also contains the Core and Data APIs.
+    </p>
+
+    <p>
+        `rivets-cart.min.js` is a minified version of Cart.js that also bundles the Rivets.js library.
+        Together, they provide support for the DOM Binding functionality.
+    </p>
+</div>
 
 Once you've selected the version you'd like to use, add the relevant file to your theme's `/assets` directory.
 
@@ -15,7 +26,8 @@ Because Cart.js depends on jQuery, you should load it after you've included the 
 ```html
         ... contents of your theme.liquid ...
 
-        <!-- Include jQuery from Google's CDN (your theme may already include jQuery, if so, skip this line) -->
+        <!-- Include jQuery from Google's CDN. -->
+        <!-- Your theme may already include jQuery - if so, you can skip this line. -->
         {{ '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js' | script_tag }}
 
         <!-- Include Cart.js -->

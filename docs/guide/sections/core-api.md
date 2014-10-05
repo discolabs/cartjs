@@ -1,15 +1,4 @@
-The Core API consists of methods you call on the global `CartJS` object to manipulate your cart.
+The Core API consists of methods called on the global `CartJS` object.
+You can use the Core API to do pretty much everything you'd expect of a cart manipulation library - add items, update quantities and custom properties, and so on.
 
-
-
-For example, you might use jQuery to add an event handler to a button's `click` event:
-
-```html
-<button id="button">Add a Bagel to Cart</button>
-
-<script type="text/javascript">
-    $('#button').click(function() {
-        CartJS.addItem(12345678);
-    });
-</script>
-```
+A full list of methods can be found in the [API Reference][].
