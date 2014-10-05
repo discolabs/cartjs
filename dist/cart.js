@@ -1,15 +1,80 @@
 (function() {
-  var CartJS, processing, queue,
+  var Cart, CartJS, Item, processing, queue,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
+  Cart = (function() {
+    function Cart() {
+      this.update = __bind(this.update, this);
+    }
+
+    Cart.prototype.update = function(cart) {
+      var item, key, value;
+      for (key in cart) {
+        value = cart[key];
+        if (key !== 'items') {
+          this[key] = value;
+        }
+      }
+      return this.items = (function() {
+        var _i, _len, _ref, _results;
+        _ref = cart.items;
+        _results = [];
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          item = _ref[_i];
+          _results.push(new Item(item));
+        }
+        return _results;
+      })();
+    };
+
+    return Cart;
+
+  })();
+
+  Item = (function() {
+    function Item(item) {
+      this.propertyArray = __bind(this.propertyArray, this);
+      this.update = __bind(this.update, this);
+      this.update(item);
+    }
+
+    Item.prototype.update = function(item) {
+      var key, value;
+      for (key in item) {
+        value = item[key];
+        if (key !== 'properties') {
+          this[key] = value;
+        }
+      }
+      return this.properties = CartJS.Utils.extend({}, item.properties);
+    };
+
+    Item.prototype.propertyArray = function() {
+      var name, value, _ref, _results;
+      _ref = this.properties;
+      _results = [];
+      for (name in _ref) {
+        value = _ref[name];
+        _results.push({
+          name: name,
+          value: value
+        });
+      }
+      return _results;
+    };
+
+    return Item;
+
+  })();
 
   CartJS = {
     settings: {
       autoCommit: true,
-      dataAPI: false,
+      dataAPI: true,
       requestBodyClass: null,
       rivetsModels: {}
     },
-    cart: null
+    cart: new Cart()
   };
 
   CartJS.init = function(cart, settings) {
@@ -17,7 +82,7 @@
       settings = {};
     }
     CartJS.configure(settings);
-    CartJS.cart = new CartJS.Cart(cart);
+    CartJS.cart.update(cart);
     if (CartJS.settings.dataAPI) {
       CartJS.Data.bind();
     }
@@ -124,72 +189,6 @@
       return jQuery.ajax(params);
     }
   };
-
-  CartJS.Cart = (function() {
-    function Cart(cart) {
-      this.update = __bind(this.update, this);
-      this.update(cart);
-    }
-
-    Cart.prototype.update = function(cart) {
-      var item, key, value;
-      for (key in cart) {
-        value = cart[key];
-        if (key !== 'items') {
-          this[key] = value;
-        }
-      }
-      return this.items = (function() {
-        var _i, _len, _ref, _results;
-        _ref = cart.items;
-        _results = [];
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          item = _ref[_i];
-          _results.push(new CartJS.Item(item));
-        }
-        return _results;
-      })();
-    };
-
-    return Cart;
-
-  })();
-
-  CartJS.Item = (function() {
-    function Item(item) {
-      this.propertyArray = __bind(this.propertyArray, this);
-      this.update = __bind(this.update, this);
-      this.update(item);
-    }
-
-    Item.prototype.update = function(item) {
-      var key, value;
-      for (key in item) {
-        value = item[key];
-        if (key !== 'properties') {
-          this[key] = value;
-        }
-      }
-      return this.properties = CartJS.Utils.extend({}, item.properties);
-    };
-
-    Item.prototype.propertyArray = function() {
-      var name, value, _ref, _results;
-      _ref = this.properties;
-      _results = [];
-      for (name in _ref) {
-        value = _ref[name];
-        _results.push({
-          name: name,
-          value: value
-        });
-      }
-      return _results;
-    };
-
-    return Item;
-
-  })();
 
   CartJS.Core = {
     getCart: function() {
@@ -410,9 +409,9 @@
   }
 
   CartJS.factory = function(exports) {
-    exports._ = CartJS;
     exports.init = CartJS.init;
     exports.configure = CartJS.configure;
+    exports.cart = CartJS.cart;
     exports.settings = CartJS.settings;
     exports.getCart = CartJS.Core.getCart;
     exports.addItem = CartJS.Core.addItem;
@@ -427,9 +426,7 @@
     exports.setAttributes = CartJS.Core.setAttributes;
     exports.clearAttributes = CartJS.Core.clearAttributes;
     exports.getNote = CartJS.Core.getNote;
-    exports.setNote = CartJS.Core.setNote;
-    exports.Cart = CartJS.Cart;
-    return exports.Item = CartJS.Item;
+    return exports.setNote = CartJS.Core.setNote;
   };
 
   if (typeof exports === 'object') {
