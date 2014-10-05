@@ -5,12 +5,12 @@ CartJS =
   # Default settings, publicly accessible on `module.settings`.
   settings:
     autoCommit: true
-    dataAPI: false
+    dataAPI: true
     requestBodyClass: null
     rivetsModels: {}
 
   # Our extended cart model.
-  cart: null
+  cart: new Cart()
 
 # Initialisation method. Should be called at the bottom of the page template (usually at the bottom of theme.liquid),
 # being passed a JSON representation of the current cart plus an option settings objects. For example:
