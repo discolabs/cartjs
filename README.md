@@ -59,13 +59,25 @@ This usually isn't a problem as most Shopify themes ship with jQuery.
 
 [Rivets.js] is required if you want to use the DOM Binding module.
 
-
----
-
-Built by [Gavin Ballard][] and [Disco][].
-
 [home page]: http://cart-js.myshopify.com
 [Rivets.js]: http://rivetsjs.com
 [jQuery]: http://jquery.com
-[Gavin Ballard]: http://gavinballard.com
-[Disco]: http://discolabs.com
+
+---
+
+#### About the Author
+
+[Gavin Ballard][] is a developer at [Disco][], specialising in Shopify development.
+Related projects:
+
+- [Shopify Theme Settings Grunt Plugin][]
+- [Shopify Theme Scaffold][]
+- [Bootstrap for Shopify][]
+- [Mastering Shopify Themes][]
+
+[Shopify Theme Settings Grunt Plugin]: https://github.com/discolabs/grunt-shopify-theme-settings
+[Shopify Theme Scaffold]: https://github.com/discolabs/shopify-theme-scaffold
+[Bootstrap for Shopify]: http://bootstrapforshopify.com/?utm_source=github&utm_medium=readme&utm_campaign=cartjs
+[Mastering Shopify Themes]: http://gavinballard.com/mastering-shopify-themes/?utm_source=github&utm_medium=readme&utm_campaign=cartjs
+[Gavin Ballard]: http://gavinballard.com/?utm_source=github&utm_medium=readme&utm_campaign=cartjs
+[Disco]: http://discolabs.com/?utm_source=github&utm_medium=readme&utm_campaign=cartjs
