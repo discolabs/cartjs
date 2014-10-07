@@ -114,8 +114,7 @@ Here&#39;s an example from the developer console in Chrome:</p>
         This means that the changes will be lost when the customer refreshes or navigates to a new page, or when Cart.js fetches an updated version of the cart from Shopify.
     </p>
 </div>
-<h3 id="core-api-items">Cart Items</h3><h4>Adding Items</h4>
-<p>Adding items to your cart is as simple as calling <code>CartJS.addItem()</code>, and passing the ID of the variant you&#39;d like to add as the first argument.</p>
+<h3 id="core-api-adding-items">Adding Items</h3><p>Adding items to your cart is as simple as calling <code>CartJS.addItem()</code>, and passing the ID of the variant you&#39;d like to add as the first argument.</p>
 <p>Assume we have a Shopify store that&#39;s selling widgets, and that one of those widgets has a variant with an ID of <code>12345678</code> that costs $9.99.
 Let&#39;s create a button customers can click to add a widget to their cart, and then hook it up to some Javascript code via jQuery:</p>
 <pre><code class="language-html">&lt;button id=&quot;button&quot;&gt;Add a Widget&lt;/button&gt;
@@ -165,10 +164,7 @@ You can call <code>addItems()</code> as many times as you like in the same funct
         However, this <em>doesn&#39;t</em> apply when you add the same variant with custom line item properties that differ -- if we changed the value of the <code>added_by</code> property and clicked the button, we&#39;d end up with separate line items.
     </p>
 </div>
-
-
-<h4>Updating Items</h4>
-<p>Updating the quantities or properties of line items is just as simple as adding them -- we just make a call to the <code>updateItem()</code> method.</p>
+<h3 id="core-api-updating-items">Updating Items</h3><p>Updating the quantities or properties of line items is just as simple as adding them -- we just make a call to the <code>updateItem()</code> method.</p>
 <p>Let&#39;s continue from our example above, and say we want to have a button that doubles the number of widgets in our order.</p>
 <pre><code class="language-html">&lt;button id=&quot;button-double&quot;&gt;Double my Order!&lt;/button&gt;
 
@@ -194,10 +190,7 @@ You can call <code>addItems()</code> as many times as you like in the same funct
         If you&#39;d like to update an item using just the variant ID, you can use <code>updateItemById()</code>, which operates the same way as <code>updateItem()</code> but takes the variant ID as the first parameter.
     </p>
 </div>
-
-
-<h4>Removing Items</h4>
-<p>Removing items works in a similar way to updating items -- just call the <code>removeItem()</code> method, passing the line number of the line item you&#39;d like to remove.
+<h3 id="core-api-removing-items">Removing Items</h3><p>Removing items works in a similar way to updating items -- just call the <code>removeItem()</code> method, passing the line number of the line item you&#39;d like to remove.
 As with the update method, if you&#39;d like to remove all line items with a particular variant ID, you can use <code>removeItemById()</code> instead.</p>
 <p>If you&#39;d like to empty the cart completely, just call the <code>clear()</code> method:</p>
 <pre><code class="language-html">&lt;button id=&quot;button-empty&quot;&gt;Empty Cart&lt;/button&gt;
@@ -225,6 +218,55 @@ Let&#39;s take the gift wrap example and see how we could implement it with a si
 <p>Now, any time a customer checks or un-checks the options, CartJS will make an update request to the Shopify server.</p>
 <p>Cart.js provides convenience methods for setting multiple attributes at once, clearing attributes, and setting the special-case <code>note</code> attribute.
 For a full list of supported methods, see the <a href="/pages/reference/#core-api">API Reference</a>.</p>
-<h2 id="data-api">Data API</h2><h2 id="events">Events</h2><p>Cart.js triggers a number of custom jQuery events on the <code>document</code>, allowing you to bind listeners using <code>.on()</code>.</p>
+<h2 id="data-api">Data API</h2><p>The Data API is the easiest way to start using Cart.js, and for a lot of use cases it&#39;ll be all you need.</p>
+<p>All you need to do is add the appropriate <code>data-</code> attributes to your code, and the event listeners automatically set up by Cart.js will do the rest.</p>
+<p>This guide provides a quick overview - for a full list of available markup attributes, check out the <a href="/pages/reference#data-api">Data API Reference</a>.</p>
+<h3 id="data-api-adding-items">Adding Items</h3><p>To create an element that adds an item to the cart on a <code>click</code> event, just mark up an element with a <code>data-cart-add</code> attribute, and set the value of the attribute to the ID of the variant you&#39;d like to add:</p>
+<pre><code class="language-html">&lt;button data-cart-add=&quot;12345678&quot;&gt;Add a Widget&lt;/button&gt;</code></pre>
+<p>Of course, you can always use Liquid to render these elements dynamically in your templates:</p>
+<p>{% raw %}</p>
+<pre><code class="language-html">{% for variant in product.variants %}
+    &lt;button data-cart-add=&quot;{{ variant.id }}&quot;&gt;Add a {{ variant.title }}&lt;/button&gt;
+{% endfor %}</code></pre>
+<p>{% endraw %}</p>
+<h3 id="data-api-removing-items">Removing Items</h3><p>To create an element that removes a line item from the cart on a <code>click</code> event, use <code>data-cart-remove</code> or <code>data-cart-remove-id</code>.</p>
+<p>The difference between these two is that <code>data-cart-remove</code> expects the index of the line item you&#39;d like to remove from the cart, while <code>data-cart-remove-id</code> expects a variant ID.</p>
+<p>See <a href="#core-api-updating-items">Updating Items</a> in the Core API section for an explanation of why this distinction is required.</p>
+<pre><code class="language-html">&lt;button data-cart-remove-variant=&quot;12345678&quot;&gt;Remove Widgets from Cart&lt;/button&gt;</code></pre>
+<h3 id="data-api-toggling-items">Toggling Items</h3><p>If you want to give your customers the ability to &quot;toggle&quot; items in or out of their cart, you can use a <code>data-cart-toggle</code> attribute on an element that fires a <code>change</code> event (like a checkbox or radio input).</p>
+<p>A common use case for this is having an &quot;added extra&quot; on the cart page before the customer checks out - for example, a gift card.</p>
+<p>Let&#39;s say we have a selection of gift cards a customer can choose from, and that we&#39;ve created a collection containing them:</p>
+<p>{% raw %}</p>
+<pre><code class="language-html">{% for gift_card_product in collections.gift-cards.products %}
+&lt;label&gt;
+    &lt;input type=&quot;checkbox&quot; data-cart-toggle=&quot;{{ gift_card_product.variants.first.id }}&quot; /&gt;
+    Add {{ gift_card_product.title | escape }} to my order (+{{ gift_card_product.variants.first.price | money_with_currency }})
+&lt;/label&gt;
+{% endfor %}</code></pre>
+<p>{% endraw %}</p>
+<p>This code will render a checkbox that a customer can turn on or off to add or remove the desired gift card from their card.</p>
+<h3 id="data-api-submitting-forms">Submitting Forms</h3><p>If you&#39;ve already got a working Shopify theme, you&#39;ll already have a couple of <code>&lt;form&gt;</code> elements around the place that you use to add items to the cart - for example, in your <code>product.liquid</code> template.</p>
+<p>You can convert these existing forms to use Cart.js simply by adding a <code>data-cart-submit</code> attribute to the <code>&lt;form&gt;</code> element:</p>
+<pre><code class="language-html">&lt;form action=&quot;/cart/add&quot; method=&quot;post&quot; data-cart-submit&gt;
+    &lt;select name=&quot;id&quot;&gt;
+        {% for variant in product.variants %}
+          &lt;option value=&quot;{{ variant.id }}&quot;&gt;{{ variant.title }} - {{ variant.price | money }}&lt;/option&gt;
+        {% endfor %}
+    &lt;/select&gt;
+
+    &lt;button type=&quot;submit&quot;&gt;Buy Now&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+<p>When the customer clicks &quot;Buy Now&quot;, Cart.js will intercept the form submission and convert it to an Ajax request.
+All of the usual inputs - <code>id</code> to specify the variant ID, <code>quantity</code> to specify the quantity, and <code>property[]</code> inputs - are supported.</p>
+<div class="callout callout-danger">
+    <h3>Form submission doesn&#39;t work with files</h3>
+    <p>
+        Because Ajax requests don&#39;t support <code>POST</code> requests with <code>enctype=&quot;multipart/form-data&quot;</code>, Cart.js won&#39;t be able to submit your form if it contains <code>&lt;input type=&quot;file&quot;&gt;</code> elements.
+    </p>
+    <p>
+        This is something that we hope to auto-detect in future, but for now you should avoid using <code>data-cart-submit</code> on forms that need to upload files.
+    </p>
+</div>
+<h2 id="events">Events</h2><p>Cart.js triggers a number of custom jQuery events on the <code>document</code>, allowing you to bind listeners using <code>.on()</code>.</p>
 <p>All events are placed in a <code>cart.</code> namespace.</p>
-<h2 id="dom-binding">DOM Binding</h2></article><aside class="col-md-3"><nav><ul class="nav nav-docs"><li><a href="#introduction">Introduction</a><ul class="nav"><li><a href="#introduction-what">What is Cart.js?</a></li><li><a href="#introduction-why">Why use it?</a></li></ul></li><li><a href="#getting-started">Getting Started</a><ul class="nav"><li><a href="#getting-started-installation">Installation</a></li><li><a href="#getting-started-setup">Setup</a></li><li><a href="#getting-started-next-steps">Next Steps</a></li></ul></li><li><a href="#core-api">Core API</a><ul class="nav"><li><a href="#core-api-configuration">Configuration</a></li><li><a href="#core-api-cart-state">Cart State</a></li><li><a href="#core-api-items">Cart Items</a></li><li><a href="#core-api-attributes">Cart Attributes</a></li></ul></li><li><a href="#data-api">Data API</a><ul class="nav"></ul></li><li><a href="#events">Events</a><ul class="nav"></ul></li><li><a href="#dom-binding">DOM Binding</a><ul class="nav"></ul></li></ul></nav></aside></div></section></div>
+<h2 id="dom-binding">DOM Binding</h2></article><aside class="col-md-3"><nav><ul class="nav nav-docs"><li><a href="#introduction">Introduction</a><ul class="nav"><li><a href="#introduction-what">What is Cart.js?</a></li><li><a href="#introduction-why">Why use it?</a></li></ul></li><li><a href="#getting-started">Getting Started</a><ul class="nav"><li><a href="#getting-started-installation">Installation</a></li><li><a href="#getting-started-setup">Setup</a></li><li><a href="#getting-started-next-steps">Next Steps</a></li></ul></li><li><a href="#core-api">Core API</a><ul class="nav"><li><a href="#core-api-configuration">Configuration</a></li><li><a href="#core-api-cart-state">Cart State</a></li><li><a href="#core-api-adding-items">Adding Items</a></li><li><a href="#core-api-updating-items">Updating Items</a></li><li><a href="#core-api-removing-items">Removing Items</a></li><li><a href="#core-api-attributes">Cart Attributes</a></li></ul></li><li><a href="#data-api">Data API</a><ul class="nav"><li><a href="#data-api-adding-items">Adding Items</a></li><li><a href="#data-api-removing-items">Removing Items</a></li><li><a href="#data-api-toggling-items">Toggling Items</a></li><li><a href="#data-api-submitting-forms">Submitting Forms</a></li></ul></li><li><a href="#events">Events</a><ul class="nav"></ul></li><li><a href="#dom-binding">DOM Binding</a><ul class="nav"></ul></li></ul></nav></aside></div></section></div>

@@ -34,8 +34,14 @@
         "cart-state": {
           "title": "Cart State"
         },
-        "items": {
-          "title": "Cart Items"
+        "adding-items": {
+          "title": "Adding Items"
+        },
+        "updating-items": {
+          "title": "Updating Items"
+        },
+        "removing-items": {
+          "title": "Removing Items"
         },
         "attributes": {
           "title": "Cart Attributes"
@@ -45,7 +51,18 @@
     "data-api": {
       "title": "Data API",
       "sections": {
-
+        "adding-items": {
+          "title": "Adding Items"
+        },
+        "removing-items": {
+          "title": "Removing Items"
+        },
+        "toggling-items": {
+          "title": "Toggling Items"
+        },
+        "submitting-forms": {
+          "title": "Submitting Forms"
+        }
       }
     },
     "events": {
