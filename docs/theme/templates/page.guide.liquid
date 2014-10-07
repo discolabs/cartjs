@@ -1,5 +1,12 @@
-<div class="jumbotron"><section class="container"><div class="row"><article class="col-md-9"><h2 id="introduction">Introduction</h2><p>Cart.js is a Javascript library that makes it easy to add dynamic cart features to Shopify themes.</p>
-<p>It abstracts away some of the difficulties of working with Shopify&#39;s AJAX API (such as the limited nature of some of the API endpoints and the need to make API calls synchronously) and provides a simple, consistent interface to manipulating a customer&#39;s cart.</p>
+<div class="jumbotron"><section class="container"><div class="row"><article class="col-md-9"><h2 id="introduction">Introduction</h2><h3 id="introduction-what">What is Cart.js?</h3><p>Cart.js is a very small open source Javascript library that makes the addition of powerful Ajax cart functionality to your Shopify theme a breeze.</p>
+<p>It&#39;s designed to be simple to use, while providing some really powerful and nifty features, like:</p>
+<ul class="check-list">
+    <li><strong>Simple, consistent API</strong> for cart manipulation;</li>
+    <li><strong>Data-API</strong> markup-only use without needing to write a line of Javascript;</li>
+    <li><strong>DOM Binding</strong> to dynamically render HTML templates as your cart changes.</li>
+</ul>
+<h3 id="introduction-why">Why use it?</h3><p>There are lots of things to consider when working with Shopify&#39;s Ajax API --- the need for synchronous requests, maintaining line item properties, updating your page to make sure it stays in sync with your cart.</p>
+<p>Cart.js handles all of this for you, without forcing any particular design paradigm on you.</p>
 <h2 id="getting-started">Getting Started</h2><p>Getting started with Cart.js is designed to be pretty easy.</p>
 <p>You just need to fetch a copy of the library, include it in your theme, and call a single initialisation method.
 Then you can make calls to Cart.js from within your theme code.</p>
@@ -52,17 +59,26 @@ The best place to do this is at the bottom of your theme&#39;s <code>theme.liqui
 <p>{% endraw %}</p>
 <p>Note that the call to <code>CartJS.init()</code> requires that {% raw %}<code>{{ cart | json }}</code>{% endraw %} is passed as an argument.
 This tells Liquid to render the initial cart state as a JSON object and pass it to Cart.js.</p>
-<h3 id="getting-started-next-steps">Next Steps</h3><p>Now that you gotten Cart.js set up with your theme, you&#39;re ready to start using the library.
-There are two main approaches to doing this.</p>
-<p>The first way is to use the Core API methods on the global <code>CartJS</code> object from within your Javascript code.</p>
-<p>The second is to use the in-built Data API to let Cart.js handle DOM events for you.</p>
-<p>Both of these approaches are stepped through in the following walkthroughs.
-Of course, these two approaches aren&#39;t mutually exclusive - you can always use the Data API for the majority of your cart functionality, and write more custom code using the Core API only when needed.</p>
-<p>Finally, once you&#39;ve gotten the hang of Cart.js, you might be interested in using it in conjunction with Rivets.js to create HTML templates that are automatically updated along with your cart.
-There&#39;s a separate walkthrough taking you through that aspect of the library later on.</p>
+<h3 id="getting-started-next-steps">Next Steps</h3><p>Now that you gotten Cart.js set up with your theme, you&#39;re ready to start using the library.</p>
+<p>The recommended (and easiest) way to interact with Cart.js is via the Data API.
+All this requires is adding some additional markup to your HTML and Cart.js will take care of the rest - you don&#39;t need to write any additional Javascript.</p>
+<p>If you want to do something that&#39;s not supported by the Data API, or use Cart.js from within your own custom Javascript, then you can use the Core API to call methods on the <code>CartJS</code> object directly.
+Of course, these two approaches aren&#39;t mutually exclusive - you can always use the Data API for the majority of your cart functionality, drop down to the Core API only when needed.</p>
+<div class="callout callout-success">
+    <p>
+        The Core API is covered first in the documentation below, as it provides the foundation for the Data API.
+    </p>
+
+    <p>
+        However, if you just want to get stuck in to using Cart.js, feel free to go straight to the coverage of the <a href="#data-api">Data API</a>.
+    </p>
+</div>
+
+<p>Once you&#39;ve gotten the hang of the Core and Data APIs, you might be interested in using Cart.js in conjunction with Rivets.js to create HTML templates that are automatically updated along with your cart.
+That&#39;s covered in the <a href="#dom-binding">DOM Binding</a> section later on.</p>
 <h2 id="core-api">Core API</h2><p>The Core API consists of methods called on the global <code>CartJS</code> object.
 You can use the Core API to do pretty much everything you&#39;d expect of a cart manipulation library - add items, update quantities and custom properties, and so on.</p>
-<p>A full list of methods can be found in the [API Reference][].</p>
+<p>A full list of methods can be found in the <a href="/pages/reference/#core-api">API Reference</a>.</p>
 <h3 id="core-api-configuration">Configuration</h3><p>In the &quot;Setup&quot; section above, we saw that we need to call <code>CartJS.init()</code> before use, like this:</p>
 <p>{% raw %}</p>
 <pre><code class="language-html">&lt;script type=&quot;text/javascript&quot;&gt;
@@ -98,7 +114,7 @@ Here&#39;s an example from the developer console in Chrome:</p>
         This means that the changes will be lost when the customer refreshes or navigates to a new page, or when Cart.js fetches an updated version of the cart from Shopify.
     </p>
 </div>
-<h3 id="core-api-items">Adding, Updating and Removing Items</h3><h4>Adding Items</h4>
+<h3 id="core-api-items">Cart Items</h3><h4>Adding Items</h4>
 <p>Adding items to your cart is as simple as calling <code>CartJS.addItem()</code>, and passing the ID of the variant you&#39;d like to add as the first argument.</p>
 <p>Assume we have a Shopify store that&#39;s selling widgets, and that one of those widgets has a variant with an ID of <code>12345678</code> that costs $9.99.
 Let&#39;s create a button customers can click to add a widget to their cart, and then hook it up to some Javascript code via jQuery:</p>
@@ -138,14 +154,77 @@ Let&#39;s update our code to add five widgets when we click the button, and to s
 ]</code></pre>
 <p>That&#39;s it!
 You can call <code>addItems()</code> as many times as you like in the same function, and Cart.js will queue up Ajax requests as needed.</p>
-<p>Note that Shopify will collate multiple line items for the same variant into one -- for example, if we clicked &quot;Add Five Widgets&quot; in the example above again, we&#39;d end up with one line item with <code>&quot;quantity&quot;: 10</code> instead of two line item with <code>&quot;quantity: 5&quot;</code>.
-However, this <em>doesn&#39;t</em> apply when you add the same variant with different</p>
+<div class="callout callout-warning">
+    <h4>Note on multiple line items with the same variant ID</h4>
+
+    <p>
+        Shopify will collate multiple line items for the same variant into one -- for example, if we clicked &quot;Add Five Widgets&quot; in the example above again, we&#39;d end up with one line item with <code>&quot;quantity&quot;: 10</code> instead of two line item with <code>&quot;quantity: 5&quot;</code>.
+    </p>
+
+    <p>
+        However, this <em>doesn&#39;t</em> apply when you add the same variant with custom line item properties that differ -- if we changed the value of the <code>added_by</code> property and clicked the button, we&#39;d end up with separate line items.
+    </p>
+</div>
+
+
 <h4>Updating Items</h4>
-<p>Update</p>
-<p>...</p>
-<p>One important thing to note is that the <code>updateItem()</code> method takes the <strong><em>line number</em></strong> (the &quot;index&quot;) of the item in the cart you&#39;d like to update, not the variant ID.
-This is because it&#39;s possible (and quite common) to have multiple items in the cart with the same variant ID but with different properties.</p>
-<p>If you&#39;d like to update an item using just the variant ID, you can use <code>updateItemById()</code>, which operates the same way as <code>updateItem()</code> but takes the variant ID as the first parameter.</p>
+<p>Updating the quantities or properties of line items is just as simple as adding them -- we just make a call to the <code>updateItem()</code> method.</p>
+<p>Let&#39;s continue from our example above, and say we want to have a button that doubles the number of widgets in our order.</p>
+<pre><code class="language-html">&lt;button id=&quot;button-double&quot;&gt;Double my Order!&lt;/button&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+    $(&#39;#button-double&#39;).click(function() {
+        var newQuantity = CartJS.cart.items[0].quantity * 2;
+        CartJS.updateItem(1, newQuantity);
+    });
+&lt;/script&gt;</code></pre>
+<div class="callout callout-warning">
+    <h4>Existing items referenced by index, not variant ID</h4>
+
+    <p>
+        One important thing to note is that the <code>updateItem()</code> method takes the <strong><em>line number</em></strong> (the &quot;index&quot;) of the item in the cart you&#39;d like to update, not the variant ID.
+        This is because it&#39;s possible (and quite common) to have multiple items in the cart with the same variant ID but with different properties.
+    </p>
+
+    <p>
+        Shopify uses a 1-based index for line items, so the index of the first line item in a cart is <code>1</code>, not <code>0</code> as is common in many programming languages.
+    </p>
+
+    <p>
+        If you&#39;d like to update an item using just the variant ID, you can use <code>updateItemById()</code>, which operates the same way as <code>updateItem()</code> but takes the variant ID as the first parameter.
+    </p>
+</div>
+
+
+<h4>Removing Items</h4>
+<p>Removing items works in a similar way to updating items -- just call the <code>removeItem()</code> method, passing the line number of the line item you&#39;d like to remove.
+As with the update method, if you&#39;d like to remove all line items with a particular variant ID, you can use <code>removeItemById()</code> instead.</p>
+<p>If you&#39;d like to empty the cart completely, just call the <code>clear()</code> method:</p>
+<pre><code class="language-html">&lt;button id=&quot;button-empty&quot;&gt;Empty Cart&lt;/button&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+    $(&#39;#button-empty&#39;).click(function() {
+        CartJS.clear();
+    });
+&lt;/script&gt;</code></pre>
+<h3 id="core-api-attributes">Cart Attributes</h3><p>In addition to cart items, Shopify also provides support for cart attributes, which are used to store custom information about an order.
+For example, a common use case for attributes is to store a flag indicating whether the customer would like their order gift wrapped.</p>
+<p>Cart.js provides some conveniences around manipulating these attributes.
+Let&#39;s take the gift wrap example and see how we could implement it with a simple checkbox:</p>
+<pre><code class="language-html">&lt;label&gt;
+    &lt;input id=&quot;gift-wrap-checkbox&quot; type=&quot;checkbox&quot; /&gt;
+    Please gift wrap my order
+&lt;/label&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+    // Update the &#39;Gift Wrap&#39; cart attribute based on the state of the checkbox whenever it changes.
+    $(&#39;#gift-wrap-checkbox&#39;).change(function() {
+        CartJS.setAttribute(&#39;Gift Wrap&#39;, this.checked ? &#39;Yes&#39;: &#39;No&#39; );
+    });
+&lt;/script&gt;</code></pre>
+<p>Now, any time a customer checks or un-checks the options, CartJS will make an update request to the Shopify server.</p>
+<p>Cart.js provides convenience methods for setting multiple attributes at once, clearing attributes, and setting the special-case <code>note</code> attribute.
+For a full list of supported methods, see the <a href="/pages/reference/#core-api">API Reference</a>.</p>
 <h2 id="data-api">Data API</h2><h2 id="events">Events</h2><p>Cart.js triggers a number of custom jQuery events on the <code>document</code>, allowing you to bind listeners using <code>.on()</code>.</p>
 <p>All events are placed in a <code>cart.</code> namespace.</p>
-<h2 id="dom-binding">DOM Binding</h2></article><aside class="col-md-3"><nav><ul class="nav"><li><a href="#introduction">Introduction</a><ul class="nav"></ul></li><li><a href="#getting-started">Getting Started</a><ul class="nav"><li><a href="#getting-started-installation">Installation</a></li><li><a href="#getting-started-setup">Setup</a></li><li><a href="#getting-started-next-steps">Next Steps</a></li></ul></li><li><a href="#core-api">Core API</a><ul class="nav"><li><a href="#core-api-configuration">Configuration</a></li><li><a href="#core-api-cart-state">Cart State</a></li><li><a href="#core-api-items">Adding, Updating and Removing Items</a></li></ul></li><li><a href="#data-api">Data API</a><ul class="nav"></ul></li><li><a href="#events">Events</a><ul class="nav"></ul></li><li><a href="#dom-binding">DOM Binding</a><ul class="nav"></ul></li></ul></nav></aside></div></section></div>
+<h2 id="dom-binding">DOM Binding</h2></article><aside class="col-md-3"><nav><ul class="nav nav-docs"><li><a href="#introduction">Introduction</a><ul class="nav"><li><a href="#introduction-what">What is Cart.js?</a></li><li><a href="#introduction-why">Why use it?</a></li></ul></li><li><a href="#getting-started">Getting Started</a><ul class="nav"><li><a href="#getting-started-installation">Installation</a></li><li><a href="#getting-started-setup">Setup</a></li><li><a href="#getting-started-next-steps">Next Steps</a></li></ul></li><li><a href="#core-api">Core API</a><ul class="nav"><li><a href="#core-api-configuration">Configuration</a></li><li><a href="#core-api-cart-state">Cart State</a></li><li><a href="#core-api-items">Cart Items</a></li><li><a href="#core-api-attributes">Cart Attributes</a></li></ul></li><li><a href="#data-api">Data API</a><ul class="nav"></ul></li><li><a href="#events">Events</a><ul class="nav"></ul></li><li><a href="#dom-binding">DOM Binding</a><ul class="nav"></ul></li></ul></nav></aside></div></section></div>

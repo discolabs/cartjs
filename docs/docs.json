@@ -2,7 +2,14 @@
   "guide": {
     "introduction": {
       "title": "Introduction",
-      "sections": {}
+      "sections": {
+        "what": {
+          "title": "What is Cart.js?"
+        },
+        "why": {
+          "title": "Why use it?"
+        }
+      }
     },
     "getting-started": {
       "title": "Getting Started",
@@ -28,7 +35,10 @@
           "title": "Cart State"
         },
         "items": {
-          "title": "Adding, Updating and Removing Items"
+          "title": "Cart Items"
+        },
+        "attributes": {
+          "title": "Cart Attributes"
         }
       }
     },

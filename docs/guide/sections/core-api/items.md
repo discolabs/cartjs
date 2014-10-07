@@ -54,16 +54,67 @@ If we loaded this example, clicked "Add Five Widgets", then typed `CartJS.cart.i
 That's it!
 You can call `addItems()` as many times as you like in the same function, and Cart.js will queue up Ajax requests as needed.
 
-Note that Shopify will collate multiple line items for the same variant into one -- for example, if we clicked "Add Five Widgets" in the example above again, we'd end up with one line item with `"quantity": 10` instead of two line item with `"quantity: 5"`.
-However, this *doesn't* apply when you add the same variant with different
+<div class="callout callout-warning">
+    <h4>Note on multiple line items with the same variant ID</h4>
+
+    <p>
+        Shopify will collate multiple line items for the same variant into one -- for example, if we clicked "Add Five Widgets" in the example above again, we'd end up with one line item with `"quantity": 10` instead of two line item with `"quantity: 5"`.
+    </p>
+
+    <p>
+        However, this *doesn't* apply when you add the same variant with custom line item properties that differ -- if we changed the value of the `added_by` property and clicked the button, we'd end up with separate line items.
+    </p>
+</div>
+
 
 #### Updating Items
 
-Update
+Updating the quantities or properties of line items is just as simple as adding them -- we just make a call to the `updateItem()` method.
 
-...
+Let's continue from our example above, and say we want to have a button that doubles the number of widgets in our order.
 
-One important thing to note is that the `updateItem()` method takes the ***line number*** (the "index") of the item in the cart you'd like to update, not the variant ID.
-This is because it's possible (and quite common) to have multiple items in the cart with the same variant ID but with different properties.
+```html
+<button id="button-double">Double my Order!</button>
 
-If you'd like to update an item using just the variant ID, you can use `updateItemById()`, which operates the same way as `updateItem()` but takes the variant ID as the first parameter.
+<script type="text/javascript">
+    $('#button-double').click(function() {
+        var newQuantity = CartJS.cart.items[0].quantity * 2;
+        CartJS.updateItem(1, newQuantity);
+    });
+</script>
+```
+
+<div class="callout callout-warning">
+    <h4>Existing items referenced by index, not variant ID</h4>
+
+    <p>
+        One important thing to note is that the `updateItem()` method takes the ***line number*** (the "index") of the item in the cart you'd like to update, not the variant ID.
+        This is because it's possible (and quite common) to have multiple items in the cart with the same variant ID but with different properties.
+    </p>
+
+    <p>
+        Shopify uses a 1-based index for line items, so the index of the first line item in a cart is `1`, not `0` as is common in many programming languages.
+    </p>
+
+    <p>
+        If you'd like to update an item using just the variant ID, you can use `updateItemById()`, which operates the same way as `updateItem()` but takes the variant ID as the first parameter.
+    </p>
+</div>
+
+
+#### Removing Items
+
+Removing items works in a similar way to updating items -- just call the `removeItem()` method, passing the line number of the line item you'd like to remove.
+As with the update method, if you'd like to remove all line items with a particular variant ID, you can use `removeItemById()` instead.
+
+If you'd like to empty the cart completely, just call the `clear()` method:
+
+```html
+<button id="button-empty">Empty Cart</button>
+
+<script type="text/javascript">
+    $('#button-empty').click(function() {
+        CartJS.clear();
+    });
+</script>
+```

@@ -1,0 +1,44 @@
+//
+// Navs
+// --------------------------------------------------
+
+.nav-docs {
+  text-align: right;
+
+  > li > a {
+    color: #333;
+    font-weight: 500;
+    padding: 6px;
+
+    border: 1px solid #f0f0f0;
+    background-color: #fafafa;
+
+    &:hover,
+    &:active {
+      color: #333;
+      background-color: #fafafa;
+      text-decoration: underline;
+    }
+  }
+
+  > li.active > a {
+    color: @brand-primary;
+    &:hover,
+    &:active {
+      color: @brand-primary;
+    }
+  }
+
+  > li > .nav > li > a {
+    color: #999;
+    padding: 6px;
+    font-size: @font-size-small;
+    line-height: @line-height-small;
+
+    &:hover,
+    &:active {
+      color: #333;
+      text-decoration: underline;
+    }
+  }
+}

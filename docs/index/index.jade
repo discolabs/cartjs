@@ -8,15 +8,21 @@ section.jumbotron
     .container
         .row
             .col-md-6
-                != partial('sections/what-is-cart-js')
+                h3 What is Cart.js?
+                != partial('../guide/sections/introduction/what')
             .col-md-6
-                != partial('sections/why-should-i-use-it')
+                h3 Why should I use it?
+                != partial('../guide/sections/introduction/why')
 
 section.jumbotron
     .container
         .row
             .col-md-6
-                != partial('sections/okay-show-me')
+                h3 Okay, show me what it can do!
+
+                p Sure! This site is actually hosted on Shopify, so we can see Cart.js in action right here.
+                p Why not start by clicking one of the buttons below to add a product to your cart?
+
                 .row.form-group
                     !="{% for product in collections.frontpage.products %}"
                     .col-xs-6
@@ -24,3 +30,6 @@ section.jumbotron
                     !="{% endfor %}"
             .col-md-6
                 != partial('sections/okay-show-me-table')
+
+        .row
+            .col-md-6.col-md-offset-3
