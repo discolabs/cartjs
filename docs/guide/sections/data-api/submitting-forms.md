@@ -2,6 +2,7 @@ If you've already got a working Shopify theme, you'll already have a couple of `
 
 You can convert these existing forms to use Cart.js simply by adding a `data-cart-submit` attribute to the `<form>` element:
 
+{% raw %}
 ```html
 <form action="/cart/add" method="post" data-cart-submit>
     <select name="id">
@@ -13,12 +14,13 @@ You can convert these existing forms to use Cart.js simply by adding a `data-car
     <button type="submit">Buy Now</button>
 </form>
 ```
+{% endraw %}
 
 When the customer clicks "Buy Now", Cart.js will intercept the form submission and convert it to an Ajax request.
 All of the usual inputs - `id` to specify the variant ID, `quantity` to specify the quantity, and `property[]` inputs - are supported.
 
 <div class="callout callout-danger">
-    <h3>Form submission doesn't work with files</h3>
+    <h4>Form submission doesn't work with files</h4>
     <p>
         Because Ajax requests don't support `POST` requests with `enctype="multipart/form-data"`, Cart.js won't be able to submit your form if it contains `<input type="file">` elements.
     </p>
