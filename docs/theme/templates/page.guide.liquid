@@ -247,6 +247,7 @@ For a full list of supported methods, see the <a href="/pages/reference/#core-ap
 <p>This code will render a checkbox that a customer can turn on or off to add or remove the desired gift card from their card.</p>
 <h3 id="data-api-submitting-forms">Submitting Forms</h3><p>If you&#39;ve already got a working Shopify theme, you&#39;ll already have a couple of <code>&lt;form&gt;</code> elements around the place that you use to add items to the cart - for example, in your <code>product.liquid</code> template.</p>
 <p>You can convert these existing forms to use Cart.js simply by adding a <code>data-cart-submit</code> attribute to the <code>&lt;form&gt;</code> element:</p>
+<p>{% raw %}</p>
 <pre><code class="language-html">&lt;form action=&quot;/cart/add&quot; method=&quot;post&quot; data-cart-submit&gt;
     &lt;select name=&quot;id&quot;&gt;
         {% for variant in product.variants %}
@@ -256,10 +257,11 @@ For a full list of supported methods, see the <a href="/pages/reference/#core-ap
 
     &lt;button type=&quot;submit&quot;&gt;Buy Now&lt;/button&gt;
 &lt;/form&gt;</code></pre>
+<p>{% endraw %}</p>
 <p>When the customer clicks &quot;Buy Now&quot;, Cart.js will intercept the form submission and convert it to an Ajax request.
 All of the usual inputs - <code>id</code> to specify the variant ID, <code>quantity</code> to specify the quantity, and <code>property[]</code> inputs - are supported.</p>
 <div class="callout callout-danger">
-    <h3>Form submission doesn&#39;t work with files</h3>
+    <h4>Form submission doesn&#39;t work with files</h4>
     <p>
         Because Ajax requests don&#39;t support <code>POST</code> requests with <code>enctype=&quot;multipart/form-data&quot;</code>, Cart.js won&#39;t be able to submit your form if it contains <code>&lt;input type=&quot;file&quot;&gt;</code> elements.
     </p>
@@ -267,6 +269,17 @@ All of the usual inputs - <code>id</code> to specify the variant ID, <code>quant
         This is something that we hope to auto-detect in future, but for now you should avoid using <code>data-cart-submit</code> on forms that need to upload files.
     </p>
 </div>
-<h2 id="events">Events</h2><p>Cart.js triggers a number of custom jQuery events on the <code>document</code>, allowing you to bind listeners using <code>.on()</code>.</p>
-<p>All events are placed in a <code>cart.</code> namespace.</p>
+<h2 id="events">Events</h2><p>To make it easy to respond to changes in the customer&#39;s cart, Cart.js fires a number of custom jQuery events that you can bind listeners to.</p>
+<p>All events are triggered on the <code>document</code>, are prefixed with a <code>cart</code> namespace, and pass the current cart object as the first custom event argument.</p>
+<p>For example, if we wanted to update a <code>&lt;span&gt;</code> element with the number of items in the cart after a request, we could listen for the <code>cart.requestComplete</code> event like so:</p>
+<p>{% raw %}</p>
+<pre><code class="language-html">You have &lt;span id=&quot;counter&quot;&gt;{{ cart.item_count }}&lt;/span&gt; items in your cart.
+
+&lt;script type=&quot;text/javscript&quot;&gt;
+    $(document).on(&#39;cart.requestComplete&#39;, function(event, cart) {
+        $(&#39;#counter&#39;).html(cart.item_count);
+    });
+&lt;/script&gt;</code></pre>
+<p>{% endraw %}</p>
+<p>A complete list of the events triggered by Cart.js is available in the <a href="/pages/reference#events">Event Reference</a>.</p>
 <h2 id="dom-binding">DOM Binding</h2></article><aside class="col-md-3"><nav><ul class="nav nav-docs"><li><a href="#introduction">Introduction</a><ul class="nav"><li><a href="#introduction-what">What is Cart.js?</a></li><li><a href="#introduction-why">Why use it?</a></li></ul></li><li><a href="#getting-started">Getting Started</a><ul class="nav"><li><a href="#getting-started-installation">Installation</a></li><li><a href="#getting-started-setup">Setup</a></li><li><a href="#getting-started-next-steps">Next Steps</a></li></ul></li><li><a href="#core-api">Core API</a><ul class="nav"><li><a href="#core-api-configuration">Configuration</a></li><li><a href="#core-api-cart-state">Cart State</a></li><li><a href="#core-api-adding-items">Adding Items</a></li><li><a href="#core-api-updating-items">Updating Items</a></li><li><a href="#core-api-removing-items">Removing Items</a></li><li><a href="#core-api-attributes">Cart Attributes</a></li></ul></li><li><a href="#data-api">Data API</a><ul class="nav"><li><a href="#data-api-adding-items">Adding Items</a></li><li><a href="#data-api-removing-items">Removing Items</a></li><li><a href="#data-api-toggling-items">Toggling Items</a></li><li><a href="#data-api-submitting-forms">Submitting Forms</a></li></ul></li><li><a href="#events">Events</a><ul class="nav"></ul></li><li><a href="#dom-binding">DOM Binding</a><ul class="nav"></ul></li></ul></nav></aside></div></section></div>
