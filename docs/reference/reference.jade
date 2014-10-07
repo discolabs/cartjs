@@ -3,12 +3,21 @@
         .row
             article.col-md-9
                 for section, anchor in reference
-                    h3(id= anchor)= section.title
+                    h2(id= anchor)= section.title
                     != partial('sections/' + anchor)
+
+                    for subsection, subanchor in section.sections
+                        h3(id= anchor + '-' + subanchor)= subsection.title
+                        != partial('sections/' + anchor + '/' + subanchor)
 
             aside.col-md-3
                 nav
-                    ul.nav
+                    ul.nav.nav-docs
                         for section, anchor in reference
                             li
                                 a(href= '#' + anchor)= section.title
+
+                                ul.nav
+                                    for subsection, subanchor in section.sections
+                                        li
+                                            a(href= '#' + anchor + '-' + subanchor)= subsection.nav || subsection.title
