@@ -35,7 +35,7 @@ CartJS.Core =
     CartJS.Queue.add '/cart/change.js', data, CartJS.cart.update
 
   # Remove all line items for the given variant ID.
-  removeAll: (id) ->
+  removeItemById: (id) ->
     data =
       id: id
       quantity: 0

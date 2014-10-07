@@ -237,7 +237,7 @@
       data.quantity = quantity;
       return CartJS.Queue.add('/cart/change.js', data, CartJS.cart.update);
     },
-    removeAll: function(id) {
+    removeItemById: function(id) {
       var data;
       data = {
         id: id,
