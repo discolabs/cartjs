@@ -173,14 +173,14 @@
       if (processing) {
         return;
       }
-      jQuery(document).trigger('cart.requestStarted');
+      jQuery(document).trigger('cart.requestStarted', [CartJS.cart]);
       return CartJS.Queue.process();
     },
     process: function() {
       var params;
       if (!queue.length) {
         processing = false;
-        jQuery(document).trigger('cart.requestComplete');
+        jQuery(document).trigger('cart.requestComplete', [CartJS.cart]);
         return;
       }
       processing = true;

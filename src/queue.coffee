@@ -21,14 +21,14 @@ CartJS.Queue =
     return if processing
 
     # Start processing.
-    jQuery(document).trigger('cart.requestStarted');
+    jQuery(document).trigger('cart.requestStarted', [CartJS.cart]);
     CartJS.Queue.process()
 
   # Process the next item in the queue, if there is one.
   process: () ->
     if not queue.length
       processing = false
-      jQuery(document).trigger('cart.requestComplete');
+      jQuery(document).trigger('cart.requestComplete', [CartJS.cart]);
       return
 
     processing = true
