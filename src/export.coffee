@@ -15,7 +15,7 @@ CartJS.factory = (exports) ->
   exports.settings = CartJS.settings
 
   # Export core API as top-level methods.
-  exports.getCart = CartJS.Core.getCart
+  # exports.getCart = CartJS.Core.getCart (Don't export this at the moment; probably shouldn't be public.)
   exports.addItem = CartJS.Core.addItem
   exports.updateItem = CartJS.Core.updateItem
   exports.updateItemById = CartJS.Core.updateItemById
