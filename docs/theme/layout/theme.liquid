@@ -21,7 +21,7 @@
   <title>{{ page_title }} &mdash; {{ shop.name }}</title>
   <meta name="description" content="{{ page_description }}" />
   {% endif %}
-  <link rel="canonical" href="{{ canonical_url }}" />
+  <link rel="canonical" href="{{ canonical_url | replace: 'cart-js.myshopify.com', 'cartjs.org' }}" />
 </head>
 
 <body>
