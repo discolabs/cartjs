@@ -139,7 +139,26 @@
     },
     "data-api": {
       "title": "Data API",
-      "sections": {}
+      "sections": {
+        "data-cart-add": {
+          "title": "data-cart-add"
+        },
+        "data-cart-remove": {
+          "title": "data-cart-remove"
+        },
+        "data-cart-remove-id": {
+          "title": "data-cart-remove-id"
+        },
+        "data-cart-toggle": {
+          "title": "data-cart-toggle"
+        },
+        "data-cart-toggle-attribute": {
+          "title": "data-cart-toggle-attribute"
+        },
+        "data-cart-submit": {
+          "title": "data-cart-submit"
+        }
+      }
     },
     "events": {
       "title": "Events",
