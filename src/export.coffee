@@ -4,7 +4,7 @@
 # CartJS module factory.
 CartJS.factory = (exports) ->
   # Exposes the full CartJS namespace. This is mainly used for isolated testing.
-  # exports._ = CartJS
+  # exports._ = CartJS (Don't export; only for testing.)
 
   # Export initialisation and configuration.
   exports.init = CartJS.init

@@ -69,7 +69,6 @@
 
   CartJS = {
     settings: {
-      autoCommit: true,
       dataAPI: true,
       requestBodyClass: null,
       rivetsModels: {}
@@ -420,7 +419,6 @@
     exports.configure = CartJS.configure;
     exports.cart = CartJS.cart;
     exports.settings = CartJS.settings;
-    exports.getCart = CartJS.Core.getCart;
     exports.addItem = CartJS.Core.addItem;
     exports.updateItem = CartJS.Core.updateItem;
     exports.updateItemById = CartJS.Core.updateItemById;
