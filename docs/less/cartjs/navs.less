@@ -2,43 +2,74 @@
 // Navs
 // --------------------------------------------------
 
-.nav-docs {
-  text-align: right;
+#nav.affix {
+  top: 24px;
+}
 
+.nav-docs {
+
+  // Top Navigation
   > li > a {
     color: #333;
-    font-weight: 500;
-    padding: 6px;
+    font-weight: 600;
 
-    border: 1px solid #f0f0f0;
-    background-color: #fafafa;
+    margin: 3px 0;
+    padding: 1px 1px 1px 10px;
+    border-left: 4px solid transparent;
 
     &:hover,
     &:active {
       color: #333;
-      background-color: #fafafa;
       text-decoration: underline;
     }
   }
 
   > li.active > a {
     color: @brand-primary;
+    border-color: @brand-primary;
+
     &:hover,
     &:active {
       color: @brand-primary;
     }
   }
 
-  > li > .nav > li > a {
-    color: #999;
-    padding: 6px;
-    font-size: @font-size-small;
-    line-height: @line-height-small;
+  // Hide subnavigation when top navigation not active.
+  > li > .nav {
+    display: none;
+  }
 
-    &:hover,
-    &:active {
-      color: #333;
-      text-decoration: underline;
+  // Hide non-active subnavigation.
+  > li.active > .nav {
+    display: block;
+  }
+
+  // Subnavigation
+  > li > .nav {
+
+    > li > a {
+      color: #666;
+
+      margin: 2px 0;
+      padding: 1px 1px 1px 20px;
+
+      font-size: @font-size-small;
+      line-height: @line-height-small;
+
+      &:hover,
+      &:active {
+        color: #666;
+        text-decoration: underline;
+      }
     }
+
+    > li.active > a {
+      color: @brand-primary;
+      &:hover,
+      &:active {
+        color: @brand-primary;
+      }
+    }
+
   }
 }

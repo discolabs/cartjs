@@ -24,7 +24,7 @@
   <link rel="canonical" href="{{ canonical_url | replace: 'cart-js.myshopify.com', 'cartjs.org' }}" />
 </head>
 
-<body>
+<body data-spy="scroll" data-target="#nav">
   <!-- Skip navigation (for screen read accessibility) -->
   <a href="#content" class="sr-only">Skip to main content</a>
 
@@ -34,8 +34,10 @@
   <!-- Content -->
   {{ content_for_layout }}
 
-  <!-- Site Footer -->
-  {% include 'footer' %}
+  <!-- Site Footer (only on home page) -->
+  {% if template == 'index' %}
+    {% include 'footer' %}
+  {% endif %}
 
   <!-- Site-wide Javascript -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

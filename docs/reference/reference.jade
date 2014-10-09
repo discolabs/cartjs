@@ -1,7 +1,7 @@
 .jumbotron
     section.container
         .row
-            article.col-md-9
+            article.col-md-10.reference
                 for section, anchor in reference
                     h2(id= anchor)= section.title
                     != partial('sections/' + anchor)
@@ -10,14 +10,15 @@
                         h3(id= anchor + '-' + subanchor)= subsection.title
                         != partial('sections/' + anchor + '/' + subanchor)
 
-            aside.col-md-3
-                nav
-                    ul.nav.nav-docs
-                        for section, anchor in reference
-                            li
-                                a(href= '#' + anchor)= section.title
+            aside.col-md-2.hidden-sm.hidden-xs
+                .pull-right
+                    nav#nav(data-spy="affix", data-offset-top="102")
+                        ul.nav.nav-docs
+                            for section, anchor in reference
+                                li
+                                    a(href= '#' + anchor)= section.title
 
-                                ul.nav
-                                    for subsection, subanchor in section.sections
-                                        li
-                                            a(href= '#' + anchor + '-' + subanchor)= subsection.nav || subsection.title
+                                    ul.nav
+                                        for subsection, subanchor in section.sections
+                                            li
+                                                a(href= '#' + anchor + '-' + subanchor)= subsection.nav || subsection.title
