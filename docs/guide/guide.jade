@@ -2,7 +2,7 @@
     section.container
         .row
             article.col-md-10.guide
-                for section, anchor in guide
+                for section, anchor in docs.guide
                     h2(id= anchor)= section.title
                     != partial('sections/' + anchor)
 
@@ -14,7 +14,7 @@
                 .pull-right
                     nav#nav(data-spy="affix", data-offset-top="102")
                         ul.nav.nav-docs
-                            for section, anchor in guide
+                            for section, anchor in docs.guide
                                 li
                                     a(href= '#' + anchor)= section.title
 

@@ -49,7 +49,10 @@ module.exports = (grunt) ->
     terraform:
       docs:
         options:
-          data: grunt.file.readJSON('docs/docs.json')
+          data: {
+            docs: grunt.file.readJSON('docs/docs.json'),
+            version: '<%= pkg.version %>'
+          }
         files:
           'docs/theme/templates/index.liquid': 'docs/index/index.jade'
           'docs/theme/templates/page.guide.liquid': 'docs/guide/guide.jade'
