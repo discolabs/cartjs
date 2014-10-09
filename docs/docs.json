@@ -162,7 +162,14 @@
     },
     "events": {
       "title": "Events",
-      "sections": {}
+      "sections": {
+        "request-started": {
+          "title": "cart.requestStarted"
+        },
+        "request-complete": {
+          "title": "cart.requestComplete"
+        }
+      }
     },
     "dom-binding": {
       "title": "DOM Binding",

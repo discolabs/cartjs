@@ -1,4 +1,5 @@
-This section lists all of the custom events triggered by Cart.js.
-See also the [Events][] section of the Cart.js guide.
+Events are triggered on the document and prefixed with the `cart` namespace.
 
+See the [Events][] section in the Guide for more.
 
+[Events]: /pages/guide#events

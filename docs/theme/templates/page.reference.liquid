@@ -117,11 +117,11 @@ CartJS.setNote(prompt(&quot;Please add any notes: &quot;));</code></pre>
 <h3 id="data-api-data-cart-add">data-cart-add</h3><pre><code class="language-html">&lt;button data-cart-add=&quot;12345678&quot;&gt;Add to Cart&lt;/button&gt;</code></pre>
 <p>On a <code>click</code> event, add the variant given by <code>data-cart-add</code> to the cart.</p>
 <h3 id="data-api-data-cart-remove">data-cart-remove</h3><pre><code class="language-html">&lt;button data-cart-remove=&quot;1&quot;&gt;Remove from Cart&lt;/button&gt;</code></pre>
-<p>On a <code>click</code> event, remove the line number given by <code>data-cart-remove</code> from the cart.
-Line numbers are one-indexed; that is, the first line item has a line number of <code>1</code>.</p>
+<p>On a <code>click</code> event, remove the line number given by <code>data-cart-remove</code> from the cart.</p>
+<p>Line numbers are one-indexed; that is, the first line item has a line number of <code>1</code>.</p>
 <h3 id="data-api-data-cart-remove-id">data-cart-remove-id</h3><pre><code class="language-html">&lt;button data-cart-remove-id=&quot;12345678&quot;&gt;Remove from Cart&lt;/button&gt;</code></pre>
-<p>On a <code>click</code> event, remove the variant given by <code>data-cart-remove-id</code> from the cart.
-If multiple line items exist for the specified variant, all of them will be removed.</p>
+<p>On a <code>click</code> event, remove the variant given by <code>data-cart-remove-id</code> from the cart.</p>
+<p>If multiple line items exist for the specified variant, all of them will be removed.</p>
 <h3 id="data-api-data-cart-toggle">data-cart-toggle</h3><pre><code class="language-html">&lt;label&gt;
     &lt;input type=&quot;checkbox&quot; data-cart-toggle=&quot;12345678&quot; /&gt;
     Include Gift Card
@@ -137,8 +137,18 @@ If multiple line items exist for the specified variant, all of them will be remo
 
     &lt;button type=&quot;submit&quot;&gt;Add to Cart&lt;/button&gt;
 &lt;/form&gt;</code></pre>
-<p>On a form&#39;s <code>submit</code> event, intercept the form submission and POST it via Ajax instead.
-Note that this doesn&#39;t currently work with forms containing file uploads.</p>
-<h2 id="events">Events</h2><p>This section lists all of the custom events triggered by Cart.js.
-See also the [Events][] section of the Cart.js guide.</p>
-<h2 id="dom-binding">DOM Binding</h2></article><aside class="col-md-2 hidden-sm hidden-xs"><div class="pull-right"><nav id="nav" data-spy="affix" data-offset-top="102"><ul class="nav nav-docs"><li><a href="#options">Options</a><ul class="nav"><li><a href="#options-data-api">dataAPI</a></li><li><a href="#options-request-body-class">requestBodyClass</a></li><li><a href="#options-rivets-models">rivetsModels</a></li></ul></li><li><a href="#core-api">Core API</a><ul class="nav"><li><a href="#core-api-add-item">addItem</a></li><li><a href="#core-api-update-item">updateItem</a></li><li><a href="#core-api-remove-item">removeItem</a></li><li><a href="#core-api-update-item-by-id">updateItemById</a></li><li><a href="#core-api-remove-item-by-id">removeItemById</a></li><li><a href="#core-api-clear">clear</a></li><li><a href="#core-api-get-attribute">getAttribute</a></li><li><a href="#core-api-set-attribute">setAttribute</a></li><li><a href="#core-api-get-attributes">getAttributes</a></li><li><a href="#core-api-set-attributes">setAttributes</a></li><li><a href="#core-api-clear-attributes">clearAttributes</a></li><li><a href="#core-api-get-note">getNote</a></li><li><a href="#core-api-set-note">setNote</a></li></ul></li><li><a href="#data-api">Data API</a><ul class="nav"><li><a href="#data-api-data-cart-add">data-cart-add</a></li><li><a href="#data-api-data-cart-remove">data-cart-remove</a></li><li><a href="#data-api-data-cart-remove-id">data-cart-remove-id</a></li><li><a href="#data-api-data-cart-toggle">data-cart-toggle</a></li><li><a href="#data-api-data-cart-toggle-attribute">data-cart-toggle-attribute</a></li><li><a href="#data-api-data-cart-submit">data-cart-submit</a></li></ul></li><li><a href="#events">Events</a><ul class="nav"></ul></li><li><a href="#dom-binding">DOM Binding</a><ul class="nav"></ul></li></ul></nav></div></aside></div></section></div>
+<p>On a form&#39;s <code>submit</code> event, intercept the form submission and POST it via Ajax instead.</p>
+<p>Note that this doesn&#39;t currently work with forms containing file uploads.</p>
+<h2 id="events">Events</h2><p>Events are triggered on the document and prefixed with the <code>cart</code> namespace.</p>
+<p>See the <a href="/pages/guide#events">Events</a> section in the Guide for more.</p>
+<h3 id="events-request-started">cart.requestStarted</h3><p>Triggered whenever Cart.js begins to process the request queue.</p>
+<p>Note that if you make multiple Ajax-triggered calls to Cart.js (say, two calls to <code>addItem</code> in a row), this event will still only fire once.</p>
+<pre><code class="language-js">$(document).on(&#39;cart.requestStarted&#39;, function(event, cart) {
+    // Event handling here.
+});</code></pre>
+<h3 id="events-request-complete">cart.requestComplete</h3><p>Triggered whenever Cart.js completes processing the current request queue.</p>
+<p>Note that if you make multiple Ajax-triggered calls to Cart.js (say, two calls to <code>addItem</code> in a row), this event will still only fire once at the end after processing all requests.</p>
+<pre><code class="language-js">$(document).on(&#39;cart.requestComplete&#39;, function(event, cart) {
+    // Event handling here.
+});</code></pre>
+<h2 id="dom-binding">DOM Binding</h2></article><aside class="col-md-2 hidden-sm hidden-xs"><div class="pull-right"><nav id="nav" data-spy="affix" data-offset-top="102"><ul class="nav nav-docs"><li><a href="#options">Options</a><ul class="nav"><li><a href="#options-data-api">dataAPI</a></li><li><a href="#options-request-body-class">requestBodyClass</a></li><li><a href="#options-rivets-models">rivetsModels</a></li></ul></li><li><a href="#core-api">Core API</a><ul class="nav"><li><a href="#core-api-add-item">addItem</a></li><li><a href="#core-api-update-item">updateItem</a></li><li><a href="#core-api-remove-item">removeItem</a></li><li><a href="#core-api-update-item-by-id">updateItemById</a></li><li><a href="#core-api-remove-item-by-id">removeItemById</a></li><li><a href="#core-api-clear">clear</a></li><li><a href="#core-api-get-attribute">getAttribute</a></li><li><a href="#core-api-set-attribute">setAttribute</a></li><li><a href="#core-api-get-attributes">getAttributes</a></li><li><a href="#core-api-set-attributes">setAttributes</a></li><li><a href="#core-api-clear-attributes">clearAttributes</a></li><li><a href="#core-api-get-note">getNote</a></li><li><a href="#core-api-set-note">setNote</a></li></ul></li><li><a href="#data-api">Data API</a><ul class="nav"><li><a href="#data-api-data-cart-add">data-cart-add</a></li><li><a href="#data-api-data-cart-remove">data-cart-remove</a></li><li><a href="#data-api-data-cart-remove-id">data-cart-remove-id</a></li><li><a href="#data-api-data-cart-toggle">data-cart-toggle</a></li><li><a href="#data-api-data-cart-toggle-attribute">data-cart-toggle-attribute</a></li><li><a href="#data-api-data-cart-submit">data-cart-submit</a></li></ul></li><li><a href="#events">Events</a><ul class="nav"><li><a href="#events-request-started">cart.requestStarted</a></li><li><a href="#events-request-complete">cart.requestComplete</a></li></ul></li><li><a href="#dom-binding">DOM Binding</a><ul class="nav"></ul></li></ul></nav></div></aside></div></section></div>
