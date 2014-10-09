@@ -79,8 +79,74 @@
     }
   },
   "reference": {
-    "coming-soon": {
-      "title": "Coming Soon",
+    "options": {
+      "title": "Options",
+      "sections": {
+        "data-api": {
+          "title": "dataAPI"
+        },
+        "request-body-class": {
+          "title": "requestBodyClass"
+        },
+        "rivets-models": {
+          "title": "rivetsModels"
+        }
+      }
+    },
+    "core-api": {
+      "title": "Core API",
+      "sections": {
+        "add-item": {
+          "title": "addItem"
+        },
+        "update-item": {
+          "title": "updateItem"
+        },
+        "remove-item": {
+          "title": "removeItem"
+        },
+        "update-item-by-id": {
+          "title": "updateItemById"
+        },
+        "remove-item-by-id": {
+          "title": "removeItemById"
+        },
+        "clear": {
+          "title": "clear"
+        },
+        "get-attribute": {
+          "title": "getAttribute"
+        },
+        "set-attribute": {
+          "title": "setAttribute"
+        },
+        "get-attributes": {
+          "title": "getAttributes"
+        },
+        "set-attributes": {
+          "title": "setAttributes"
+        },
+        "clear-attributes": {
+          "title": "clearAttributes"
+        },
+        "get-note": {
+          "title": "getNote"
+        },
+        "set-note": {
+          "title": "setNote"
+        }
+      }
+    },
+    "data-api": {
+      "title": "Data API",
+      "sections": {}
+    },
+    "events": {
+      "title": "Events",
+      "sections": {}
+    },
+    "dom-binding": {
+      "title": "DOM Binding",
       "sections": {}
     }
   }
