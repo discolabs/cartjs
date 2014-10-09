@@ -4,7 +4,6 @@
 CartJS =
   # Default settings, publicly accessible on `module.settings`.
   settings:
-    autoCommit: true
     dataAPI: true
     requestBodyClass: null
     rivetsModels: {}
