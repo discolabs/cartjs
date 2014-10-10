@@ -2,20 +2,27 @@
 # Data API for CartJS.
 # --------------------
 
+# Reference to the document element.
+$document = jQuery(document)
+
 CartJS.Data =
 
   # Bind the document to listen for data-* API events.
   bind: () ->
-    jQuery(document).on('click', '[data-cart-add]', CartJS.Data.add)
-    jQuery(document).on('click', '[data-cart-remove]', CartJS.Data.remove)
-    jQuery(document).on('click', '[data-cart-remove-id]', CartJS.Data.removeById)
-    jQuery(document).on('change', '[data-cart-toggle]', CartJS.Data.toggle)
-    jQuery(document).on('change', '[data-cart-toggle-attribute]', CartJS.Data.toggleAttribute)
-    jQuery(document).on('submit', '[data-cart-submit]', CartJS.Data.submit)
+    CartJS.Data.bindOrUnbind('on')
 
-  # @TODO
+  # Unbind listeners for data-* API events.
   unbind: () ->
-    return
+    CartJS.Data.bindOrUnbind('off')
+
+  # Bind or unbind listeners for Data API events.
+  bindOrUnbind: (method) ->
+    $document[method]('click', '[data-cart-add]', CartJS.Data.add)
+    $document[method]('click', '[data-cart-remove]', CartJS.Data.remove)
+    $document[method]('click', '[data-cart-remove-id]', CartJS.Data.removeById)
+    $document[method]('change', '[data-cart-toggle]', CartJS.Data.toggle)
+    $document[method]('change', '[data-cart-toggle-attribute]', CartJS.Data.toggleAttribute)
+    $document[method]('submit', '[data-cart-submit]', CartJS.Data.submit)
 
   # Handler for [data-cart-add] click events.
   add: (e) ->
