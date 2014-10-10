@@ -1,5 +1,5 @@
 (function() {
-  var Cart, CartJS, Item, processing, queue,
+  var $document, Cart, CartJS, Item, processing, queue,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   Cart = (function() {
@@ -282,38 +282,59 @@
     }
   };
 
+  $document = jQuery(document);
+
   CartJS.Data = {
     bind: function() {
-      jQuery(document).on('click', '[data-cart-add]', CartJS.Data.add);
-      jQuery(document).on('click', '[data-cart-remove]', CartJS.Data.remove);
-      jQuery(document).on('click', '[data-cart-remove-id]', CartJS.Data.removeById);
-      jQuery(document).on('change', '[data-cart-toggle]', CartJS.Data.toggle);
-      jQuery(document).on('change', '[data-cart-toggle-attribute]', CartJS.Data.toggleAttribute);
-      return jQuery(document).on('submit', '[data-cart-submit]', CartJS.Data.submit);
+      return CartJS.Data.bindOrUnbind('on');
     },
-    unbind: function() {},
+    unbind: function() {
+      return CartJS.Data.bindOrUnbind('off');
+    },
+    bindOrUnbind: function(method) {
+      $document[method]('click', '[data-cart-add]', CartJS.Data.add);
+      $document[method]('click', '[data-cart-remove]', CartJS.Data.remove);
+      $document[method]('click', '[data-cart-remove-id]', CartJS.Data.removeById);
+      $document[method]('click', '[data-cart-update]', CartJS.Data.update);
+      $document[method]('click', '[data-cart-update-id]', CartJS.Data.updateById);
+      $document[method]('change', '[data-cart-toggle]', CartJS.Data.toggle);
+      $document[method]('change', '[data-cart-toggle-attribute]', CartJS.Data.toggleAttribute);
+      return $document[method]('submit', '[data-cart-submit]', CartJS.Data.submit);
+    },
     add: function(e) {
-      var id;
+      var $element;
       e.preventDefault();
-      id = jQuery(e.target).data('cartAdd');
-      return CartJS.Core.addItem(id);
+      $element = jQuery(e.target);
+      return CartJS.Core.addItem($element.data('cartAdd'), $element.data('cartQuantity'));
     },
     remove: function(e) {
-      var line;
+      var $element;
       e.preventDefault();
-      line = jQuery(e.target).data('cartRemove');
-      return CartJS.Core.removeItem(line);
+      $element = jQuery(e.target);
+      return CartJS.Core.removeItem($element.data('cartRemove'));
     },
     removeById: function(e) {
-      var id;
+      var $element;
       e.preventDefault();
-      id = jQuery(e.target).data('cartRemoveId');
-      return CartJS.Core.removeItemById(id);
+      $element = jQuery(e.target);
+      return CartJS.Core.removeItemById($element.data('cartRemoveId'));
+    },
+    update: function(e) {
+      var $element;
+      e.preventDefault();
+      $element = jQuery(e.target);
+      return CartJS.Core.updateItem($element.data('cartUpdate'), $element.data('cartQuantity'));
+    },
+    updateById: function(e) {
+      var $element;
+      e.preventDefault();
+      $element = jQuery(e.target);
+      return CartJS.Core.updateItemById($element.data('cartUpdateId'), $element.data('cartQuantity'));
     },
     toggle: function(e) {
       var $input, id;
       $input = jQuery(e.target);
-      id = $input.attr('data-cart-toggle');
+      id = $input.data('cartToggle');
       if ($input.is(':checked')) {
         return CartJS.Core.addItem(id);
       } else {
@@ -323,7 +344,7 @@
     toggleAttribute: function(e) {
       var $input, attribute;
       $input = jQuery(e.target);
-      attribute = $input.attr('data-cart-toggle-attribute');
+      attribute = $input.data('cartToggleAttribute');
       return CartJS.Core.setAttribute(attribute, $input.is(':checked') ? 'Yes' : '');
     },
     submit: function(e) {

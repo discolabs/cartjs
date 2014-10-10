@@ -149,6 +149,12 @@
         "data-cart-remove-id": {
           "title": "data-cart-remove-id"
         },
+        "data-cart-update": {
+          "title": "data-cart-update"
+        },
+        "data-cart-update-id": {
+          "title": "data-cart-update-id"
+        },
         "data-cart-toggle": {
           "title": "data-cart-toggle"
         },
