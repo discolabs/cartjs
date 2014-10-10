@@ -27,8 +27,8 @@ CartJS.Data =
   # Handler for [data-cart-add] click events.
   add: (e) ->
     e.preventDefault()
-    id = jQuery(e.target).data('cartAdd')
-    CartJS.Core.addItem(id)
+    $target = jQuery(e.target)
+    CartJS.Core.addItem $target.data('cartAdd'), $target.data('cartQuantity')
 
   # Handler for [data-cart-remove] click events.
   remove: (e) ->
