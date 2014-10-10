@@ -20,6 +20,8 @@ CartJS.Data =
     $document[method]('click', '[data-cart-add]', CartJS.Data.add)
     $document[method]('click', '[data-cart-remove]', CartJS.Data.remove)
     $document[method]('click', '[data-cart-remove-id]', CartJS.Data.removeById)
+    $document[method]('click', '[data-cart-update]', CartJS.Data.update)
+    $document[method]('click', '[data-cart-update-id]', CartJS.Data.updateById)
     $document[method]('change', '[data-cart-toggle]', CartJS.Data.toggle)
     $document[method]('change', '[data-cart-toggle-attribute]', CartJS.Data.toggleAttribute)
     $document[method]('submit', '[data-cart-submit]', CartJS.Data.submit)
@@ -27,20 +29,32 @@ CartJS.Data =
   # Handler for [data-cart-add] click events.
   add: (e) ->
     e.preventDefault()
-    $target = jQuery(e.target)
-    CartJS.Core.addItem $target.data('cartAdd'), $target.data('cartQuantity')
+    $element = jQuery(e.target)
+    CartJS.Core.addItem $element.data('cartAdd'), $element.data('cartQuantity')
 
   # Handler for [data-cart-remove] click events.
   remove: (e) ->
     e.preventDefault()
-    line = jQuery(e.target).data('cartRemove')
-    CartJS.Core.removeItem(line)
+    $element = jQuery(e.target)
+    CartJS.Core.removeItem $element.data('cartRemove')
 
   # Handler for [data-cart-remove-id] click events.
   removeById: (e) ->
     e.preventDefault()
-    id = jQuery(e.target).data('cartRemoveId')
-    CartJS.Core.removeItemById(id)
+    $element = jQuery(e.target)
+    CartJS.Core.removeItemById $element.data('cartRemoveId')
+
+  # Handler for [data-cart-update] click events.
+  update: (e) ->
+    e.preventDefault()
+    $element = jQuery(e.target)
+    CartJS.Core.updateItem $element.data('cartUpdate'), $element.data('cartQuantity')
+
+  # Handler for [data-cart-update-id] click events.
+  updateById: (e) ->
+    e.preventDefault()
+    $element = jQuery(e.target)
+    CartJS.Core.updateItemById $element.data('cartUpdateId'), $element.data('cartQuantity')
 
   # Handler for [data-cart-toggle] change events.
   toggle: (e) ->
