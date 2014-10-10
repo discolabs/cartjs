@@ -45,7 +45,7 @@ CartJS.Data =
   # Handler for [data-cart-toggle] change events.
   toggle: (e) ->
     $input = jQuery(e.target)
-    id = $input.attr('data-cart-toggle')
+    id = $input.data('cartToggle')
     if $input.is(':checked')
       CartJS.Core.addItem(id)
     else
@@ -54,7 +54,7 @@ CartJS.Data =
   # Handler for [data-cart-toggle-attribute] change events.
   toggleAttribute: (e) ->
     $input = jQuery(e.target)
-    attribute = $input.attr('data-cart-toggle-attribute')
+    attribute = $input.data('cartToggleAttribute')
     CartJS.Core.setAttribute(attribute, if $input.is(':checked') then 'Yes' else '')
 
   # Handle for [data-cart-submit] submit events.
