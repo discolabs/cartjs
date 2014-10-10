@@ -59,7 +59,7 @@ This usually isn't a problem as most Shopify themes ship with jQuery.
 
 [Rivets.js] is required if you want to use the DOM Binding module.
 
-[home page]: http://cart-js.myshopify.com
+[home page]: http://cartjs.org?utm_source=github&utm_medium=readme&utm_campaign=cartjs
 [Rivets.js]: http://rivetsjs.com
 [jQuery]: http://jquery.com
 
