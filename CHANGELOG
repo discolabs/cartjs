@@ -1,3 +1,10 @@
+v0.2.0:
+  date: 2014-10-11
+  changes:
+    - Major improvements to docs.
+    - New Data API methods for updating and clearing items.
+    - New `data-cart-render` methods for simple DOM updating.
+    - Code cleanups, don't export some internal APIs.
 v0.1.0:
   date: 2014-10-09
   changes:

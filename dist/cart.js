@@ -321,34 +321,34 @@
       return $document[method]('cart.requestComplete', CartJS.Data.render);
     },
     add: function(e) {
-      var $element;
+      var $this;
       e.preventDefault();
-      $element = jQuery(e.target);
-      return CartJS.Core.addItem($element.data('cartAdd'), $element.data('cartQuantity'));
+      $this = jQuery(this);
+      return CartJS.Core.addItem($this.data('cartAdd'), $this.data('cartQuantity'));
     },
     remove: function(e) {
-      var $element;
+      var $this;
       e.preventDefault();
-      $element = jQuery(e.target);
-      return CartJS.Core.removeItem($element.data('cartRemove'));
+      $this = jQuery(this);
+      return CartJS.Core.removeItem($this.data('cartRemove'));
     },
     removeById: function(e) {
-      var $element;
+      var $this;
       e.preventDefault();
-      $element = jQuery(e.target);
-      return CartJS.Core.removeItemById($element.data('cartRemoveId'));
+      $this = jQuery(this);
+      return CartJS.Core.removeItemById($this.data('cartRemoveId'));
     },
     update: function(e) {
-      var $element;
+      var $this;
       e.preventDefault();
-      $element = jQuery(e.target);
-      return CartJS.Core.updateItem($element.data('cartUpdate'), $element.data('cartQuantity'));
+      $this = jQuery(this);
+      return CartJS.Core.updateItem($this.data('cartUpdate'), $this.data('cartQuantity'));
     },
     updateById: function(e) {
-      var $element;
+      var $this;
       e.preventDefault();
-      $element = jQuery(e.target);
-      return CartJS.Core.updateItemById($element.data('cartUpdateId'), $element.data('cartQuantity'));
+      $this = jQuery(this);
+      return CartJS.Core.updateItemById($this.data('cartUpdateId'), $this.data('cartQuantity'));
     },
     clear: function(e) {
       e.preventDefault();
@@ -356,7 +356,7 @@
     },
     toggle: function(e) {
       var $input, id;
-      $input = jQuery(e.target);
+      $input = jQuery(this);
       id = $input.data('cartToggle');
       if ($input.is(':checked')) {
         return CartJS.Core.addItem(id);
@@ -366,14 +366,14 @@
     },
     toggleAttribute: function(e) {
       var $input, attribute;
-      $input = jQuery(e.target);
+      $input = jQuery(this);
       attribute = $input.data('cartToggleAttribute');
       return CartJS.Core.setAttribute(attribute, $input.is(':checked') ? 'Yes' : '');
     },
     submit: function(e) {
       var dataArray, id, properties, quantity;
       e.preventDefault();
-      dataArray = jQuery(e.target).serializeArray();
+      dataArray = jQuery(this).serializeArray();
       id = void 0;
       quantity = void 0;
       properties = {};
