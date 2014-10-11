@@ -17,10 +17,11 @@ CartJS.Core =
     CartJS.Core.getCart()
 
   # Update an existing line item.
-  updateItem: (line, quantity = 1, properties = {}) ->
+  updateItem: (line, quantity, properties = {}) ->
     data = CartJS.Utils.wrapKeys(properties)
     data.line = line
-    data.quantity = quantity
+    if quantity?
+      data.quantity = quantity
     CartJS.Queue.add '/cart/change.js', data, CartJS.cart.update
 
   # Remove an existing line item.
@@ -28,10 +29,11 @@ CartJS.Core =
     CartJS.Core.updateItem line, 0
 
   # Update item by ID
-  updateItemById: (id, quantity = 1, properties = {}) ->
+  updateItemById: (id, quantity, properties = {}) ->
     data = CartJS.Utils.wrapKeys(properties)
     data.id = id
-    data.quantity = quantity
+    if quantity?
+      data.quantity = quantity
     CartJS.Queue.add '/cart/change.js', data, CartJS.cart.update
 
   # Remove all line items for the given variant ID.
