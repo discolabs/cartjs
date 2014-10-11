@@ -47,3 +47,16 @@ CartJS.Utils =
     for key of object
       newInstance[key] = clone object[key]
     return newInstance
+
+  # Format a monetary amount using Shopify's formatMoney if available.
+  #
+  # If it's not available, just return the value.
+  formatMoney: (value, format) ->
+    if window.Shopify?.formatMoney? then Shopify.formatMoney(value, format)  else value
+
+  # Return a resized image URL using Shopify's getSizedImageUrl if available.
+  #
+  # If it's not available, just return the original URL.
+  getSizedImageUrl: (src, size) ->
+    if window.Shopify?.Image?.getSizedImageUrl? then Shopify.Image.getSizedImageUrl(src, size) else src
+
