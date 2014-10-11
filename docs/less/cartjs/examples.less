@@ -28,9 +28,28 @@
   content: "Live Example (Try It!)";
 }
 
-.example + pre {
+.example-code > pre {
+  border: 1px solid #ddd;
+  border-top: none;
+  border-radius: 0;
+  margin-bottom: 0;
+}
+
+.example-footer {
+  padding: 10px 15px;
+  background-color: #fefefe;
   border: 1px solid #ddd;
   border-top: none;
   border-radius: 0 0 4px 4px;
   margin-bottom: 1em;
+
+  > a {
+    font-size: 12px;
+    font-weight: 700;
+    color: #959595;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+    text-align: center;
+  }
 }

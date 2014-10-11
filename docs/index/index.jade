@@ -14,7 +14,12 @@ section.jumbotron
                 .example.example-live
                     != partial('sections/demo-simple')
 
-                != partial('sections/demo-simple-code')
+                .example-code.collapse(id="demo-simple-code")
+                    != partial('sections/demo-simple-code')
+
+                .example-footer
+                    a(data-toggle="collapse" href="#demo-simple-code") Show markup for this example
+
 
         .row
             .col-md-8.col-md-offset-2
@@ -24,7 +29,12 @@ section.jumbotron
             .col-md-10.col-md-offset-1
                 .example.example-live
                     != partial('sections/demo-advanced')
-                != partial('sections/demo-advanced-code')
+
+                .example-code.collapse(id="demo-advanced-code")
+                    != partial('sections/demo-advanced-code')
+
+                .example-footer
+                    a(data-toggle="collapse" href="#demo-advanced-code") Show markup for this example
 
         .row
             .col-md-8.col-md-offset-2
