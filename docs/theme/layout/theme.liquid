@@ -7,6 +7,7 @@
 
   <!-- Core CSS -->
   <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,400italic,700italic" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/github.min.css">
   <link href="{{ 'cartjs.min.css' | asset_url }}" rel="stylesheet">
 
   <!-- Favicon -->
@@ -47,7 +48,11 @@
   {{ 'option_selection.js' | shopify_asset_url | script_tag }}
   <script type="text/javascript" src="{{ 'bootstrap.min.js' | asset_url }}"></script>
   <script type="text/javascript" src="{{ 'rivets-cart.min.js' | asset_url }}"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js"></script>
+
+  <!-- Initialise Javascript Libraries -->
   <script type="text/javascript">
+    // Cart.js
     $(function() {
       CartJS.init({{ cart | json }}, {
         dataAPI: true,
@@ -56,6 +61,9 @@
         moneyWithCurrencyFormat: '{{ shop.money_with_currency_format }}'
       });
     });
+
+    // Highlight.js
+    hljs.initHighlightingOnLoad();
   </script>
 </body>
 </html>
