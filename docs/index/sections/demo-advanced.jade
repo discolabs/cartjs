@@ -1,0 +1,59 @@
+.row
+    .col-md-4
+        form(data-cart-submit)
+            .form-group
+                label(for="demo-advanced-id") Select a Product
+                select.form-control.input-sm(id="demo-advanced-id" name="id")
+                    !="{% for product in collections.frontpage.products %}"
+                    option(value="{{ product.variants.first.id }}") {{ product.title }}
+                    !="{% endfor %}"
+
+            .form-group
+                label(for="demo-advanced-quantity") Choose a Quantity
+                select.form-control.input-sm(id="demo-advanced-quantity" name="quantity")
+                    option 1
+                    option 2
+                    option 3
+                    option 4
+                    option 5
+
+            .form-group
+                label(for="demo-advanced-custom-label") Add a Custom Label <small class="text-muted">Optional</small>
+                input.form-control.input-sm(type="text", name="properties[Custom Label]")
+
+            .form-group
+                button.btn.btn-default(type="submit") Add to Cart
+
+    .col-md-8
+        table.table.table-bordered.table-condensed.table-striped.table-vertical-middle(data-cart-view="data-cart-view")
+
+            thead
+                tr
+                    th Item
+                    th.text-center Price
+                    th.text-center(colspan="2") Qty
+                    th.text-right Line Price
+
+            tbody
+                tr(rv-each-item="cart.items")
+                    td
+                        strong(rv-text="item.title")
+                        ul.list-unstyled(rv-hide="item.propertyArray | empty")
+                            li(rv-each-property="item.propertyArray < properties")
+                                small.text-muted(rv-text="property.value")
+                    td.text-center(rv-text="item.price | money")
+                    td.text-center(rv-text="item.quantity")
+                    td.text-center
+                        a.close(href="#" rv-data-cart-remove="index | plus 1") &times;
+                    td.text-right(rv-text="item.line_price | money")
+
+                tr(rv-show="cart.item_count | lt 1")
+                    td.text-center(colspan="5") You don't have any items in your cart.
+
+            tfoot(rv-show="cart.item_count | gt 0")
+                tr
+                    td(colspan="4")
+                    td.text-right(rv-text="cart.total_price | money")
+
+        p.text-center
+            img.cart-visible-loading(src="{{ 'loader.gif' | asset_url }}" width="16" height="11")

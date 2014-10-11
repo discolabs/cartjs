@@ -2,11 +2,20 @@
 // Jumbotrons
 // --------------------------------------------------
 
+.jumbotron {
+  padding: @jumbotron-padding;
+}
+
 .jumbotron-primary {
   color: white;
   background-color: @brand-primary;
+  margin-bottom: 0;
 
   h3 {
-    margin: 2 * @line-height-computed 0;
+    margin: 0 0 @line-height-computed 0;
+  }
+
+  a {
+    margin: @line-height-computed 0;
   }
 }

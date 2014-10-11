@@ -1,0 +1,14 @@
+.well.well-sm.
+    <img src="{{ 'loader.gif' | asset_url }}" class="cart-visible-loading pull-right" width="16" height="11" alt="Loading..." />
+    You have
+    <strong data-cart-render="item_count"></strong>
+    items in your cart for a total of
+    <strong data-cart-render="total_price_money_with_currency"></strong>.
+
+.row
+    .col-xs-4
+        button.btn.btn-block.btn-default(data-cart-add="716934999" data-cart-quantity="1") <span class="hidden-xs">Add </span><span class="visible-xs-inline">+</span>Hat
+    .col-xs-4
+        button.btn.btn-block.btn-default(data-cart-add="716986707" data-cart-quantity="2") <span class="hidden-xs">Add 2 </span><span class="visible-xs-inline">+</span>Coats
+    .col-xs-4
+        button.btn.btn-block.btn-default(data-cart-clear="") Clear<span class="hidden-xs"> Cart</span>
