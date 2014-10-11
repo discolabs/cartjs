@@ -35,32 +35,32 @@ CartJS.Data =
   # Handler for [data-cart-add] click events.
   add: (e) ->
     e.preventDefault()
-    $element = jQuery(e.target)
-    CartJS.Core.addItem $element.data('cartAdd'), $element.data('cartQuantity')
+    $this = jQuery(this)
+    CartJS.Core.addItem $this.data('cartAdd'), $this.data('cartQuantity')
 
   # Handler for [data-cart-remove] click events.
   remove: (e) ->
     e.preventDefault()
-    $element = jQuery(e.target)
-    CartJS.Core.removeItem $element.data('cartRemove')
+    $this = jQuery(this)
+    CartJS.Core.removeItem $this.data('cartRemove')
 
   # Handler for [data-cart-remove-id] click events.
   removeById: (e) ->
     e.preventDefault()
-    $element = jQuery(e.target)
-    CartJS.Core.removeItemById $element.data('cartRemoveId')
+    $this = jQuery(this)
+    CartJS.Core.removeItemById $this.data('cartRemoveId')
 
   # Handler for [data-cart-update] click events.
   update: (e) ->
     e.preventDefault()
-    $element = jQuery(e.target)
-    CartJS.Core.updateItem $element.data('cartUpdate'), $element.data('cartQuantity')
+    $this = jQuery(this)
+    CartJS.Core.updateItem $this.data('cartUpdate'), $this.data('cartQuantity')
 
   # Handler for [data-cart-update-id] click events.
   updateById: (e) ->
     e.preventDefault()
-    $element = jQuery(e.target)
-    CartJS.Core.updateItemById $element.data('cartUpdateId'), $element.data('cartQuantity')
+    $this = jQuery(this)
+    CartJS.Core.updateItemById $this.data('cartUpdateId'), $this.data('cartQuantity')
 
   # Handler for [data-cart-clear] click events.
   clear: (e) ->
@@ -69,7 +69,7 @@ CartJS.Data =
 
   # Handler for [data-cart-toggle] change events.
   toggle: (e) ->
-    $input = jQuery(e.target)
+    $input = jQuery(this)
     id = $input.data('cartToggle')
     if $input.is(':checked')
       CartJS.Core.addItem(id)
@@ -78,7 +78,7 @@ CartJS.Data =
 
   # Handler for [data-cart-toggle-attribute] change events.
   toggleAttribute: (e) ->
-    $input = jQuery(e.target)
+    $input = jQuery(this)
     attribute = $input.data('cartToggleAttribute')
     CartJS.Core.setAttribute(attribute, if $input.is(':checked') then 'Yes' else '')
 
@@ -86,7 +86,7 @@ CartJS.Data =
   submit: (e) ->
     e.preventDefault()
 
-    dataArray = jQuery(e.target).serializeArray()
+    dataArray = jQuery(this).serializeArray()
 
     id = undefined
     quantity = undefined
