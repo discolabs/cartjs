@@ -10,6 +10,7 @@ CartJS.Data =
   # Initialise the Data API.
   init: () ->
     CartJS.Data.setEventListeners('on')
+    CartJS.Data.render(null, CartJS.cart)
 
   # Tear down the Data API.
   destroy: () ->
@@ -23,9 +24,13 @@ CartJS.Data =
     $document[method]('click', '[data-cart-remove-id]', CartJS.Data.removeById)
     $document[method]('click', '[data-cart-update]', CartJS.Data.update)
     $document[method]('click', '[data-cart-update-id]', CartJS.Data.updateById)
+    $document[method]('click', '[data-cart-clear]', CartJS.Data.clear)
     $document[method]('change', '[data-cart-toggle]', CartJS.Data.toggle)
     $document[method]('change', '[data-cart-toggle-attribute]', CartJS.Data.toggleAttribute)
     $document[method]('submit', '[data-cart-submit]', CartJS.Data.submit)
+
+    # Attach or remove event listeners for data-cart-render events.
+    $document[method]('cart.requestComplete', CartJS.Data.render);
 
   # Handler for [data-cart-add] click events.
   add: (e) ->
@@ -56,6 +61,11 @@ CartJS.Data =
     e.preventDefault()
     $element = jQuery(e.target)
     CartJS.Core.updateItemById $element.data('cartUpdateId'), $element.data('cartQuantity')
+
+  # Handler for [data-cart-clear] click events.
+  clear: (e) ->
+    e.preventDefault()
+    CartJS.Core.clear()
 
   # Handler for [data-cart-toggle] change events.
   toggle: (e) ->
@@ -90,3 +100,18 @@ CartJS.Data =
         properties[item.name] = item.value
 
     CartJS.Core.addItem(id, quantity, CartJS.Utils.unwrapKeys(properties))
+
+  # Handler for rendering simple cart properties to bound elements.
+  render: (e, cart) ->
+    # Build a hash of render context.
+    context = {
+      'item_count': cart.item_count,
+      'total_price': cart.total_price,
+      'total_price_money': CartJS.Utils.formatMoney(cart.total_price, CartJS.settings.moneyFormat),
+      'total_price_money_with_currency': CartJS.Utils.formatMoney(cart.total_price, CartJS.settings.moneyWithCurrencyFormat),
+    }
+
+    # Render the context to elements as needed.
+    jQuery('[data-cart-render]').each ()->
+      $this = jQuery(this)
+      $this.text context[$this.data('cartRender')]
