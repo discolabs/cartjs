@@ -7,6 +7,9 @@ CartJS =
     dataAPI: true
     requestBodyClass: null
     rivetsModels: {}
+    moneyFormat: null
+    moneyWithCurrencyFormat: null
+
 
   # Our extended cart model.
   cart: new Cart()

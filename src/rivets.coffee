@@ -55,10 +55,10 @@ if 'rivets' of window
   if 'Shopify' of window
     if 'formatMoney' of window.Shopify
       rivets.formatters.money = (value) ->
-        Shopify.formatMoney(value, CartJS.settings.money_format)
+        Shopify.formatMoney(value, CartJS.settings.moneyFormat)
 
       rivets.formatters.money_with_currency = (value) ->
-        Shopify.formatMoney(value, CartJS.settings.money_with_currency_format)
+        Shopify.formatMoney(value, CartJS.settings.moneyWithCurrencyFormat)
 
     if 'Image' of window.Shopify
       if 'getSizedImageUrl' of window.Shopify.Image
