@@ -30,17 +30,18 @@ CartJS.init = (cart, settings = {}) ->
   # Update the cart model with the initial cart objects.
   CartJS.cart.update(cart)
 
-  # Set up data-cart-* API if enabled.
+  # Initialise the Data API if enabled.
   if CartJS.settings.dataAPI
-    CartJS.Data.bind()
+    CartJS.Data.init()
 
   # Set up toggling of CSS class on body during requests if provided.
   if CartJS.settings.requestBodyClass
     $(document).on 'cart.requestStarted', () -> $('body').addClass(CartJS.settings.requestBodyClass)
     $(document).on 'cart.requestComplete', () -> $('body').removeClass(CartJS.settings.requestBodyClass)
 
-  # Set up Rivets.js views. Won't do anything if Rivets.js is unavailable.
-  CartJS.Rivets.bindElements()
+  # Initialise DOM Binding through Rivets module.
+  # Performs a no-op if Rivets.js isn't present.
+  CartJS.Rivets.init()
 
 # Configure CartJS with the given settings object.
 CartJS.configure = (settings = {}) ->

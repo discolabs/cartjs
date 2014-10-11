@@ -10,9 +10,18 @@ if 'rivets' of window
     # Maintain a list of all bound Rivets.js views so that we can unbind later if needed.
     views: []
 
+    # Initialise the Rivets module.
+    init: () ->
+      CartJS.Rivets.bindViews()
+
+    # Tear down the Rivets module.
+    destroy: () ->
+      CartJS.Rivets.unbindViews()
+
     # Bind all Rivets.js view elements that are currently present on the page.
-    bindElements: () ->
-      CartJS.Rivets.unbindElements()
+    bindViews: () ->
+      # Unbind any currently bound views.
+      CartJS.Rivets.unbindViews()
 
       # Merge a new models object with any specified in the settings.
       models = CartJS.Utils.extend({
@@ -24,7 +33,7 @@ if 'rivets' of window
         CartJS.Rivets.views.push(rivets.bind(this, models))
 
     # Unbind all currently bound Rivets.js views.
-    unbindElements: () ->
+    unbindViews: () ->
       for view in CartJS.Rivets.views
         view.unbind()
       CartJS.Rivets.views = []
@@ -52,24 +61,20 @@ if 'rivets' of window
     parseInt(a) - parseInt(b)
 
   # Add Shopify-specific formatters for Rivets.js.
-  if 'Shopify' of window
-    if 'formatMoney' of window.Shopify
-      rivets.formatters.money = (value) ->
-        Shopify.formatMoney(value, CartJS.settings.moneyFormat)
+  rivets.formatters.money = (value) ->
+    CartJS.Utils.formatMoney(value, CartJS.settings.moneyFormat)
 
-      rivets.formatters.money_with_currency = (value) ->
-        Shopify.formatMoney(value, CartJS.settings.moneyWithCurrencyFormat)
+  rivets.formatters.money_with_currency = (value) ->
+    CartJS.Utils.formatMoney(value, CartJS.settings.moneyWithCurrencyFormat)
 
-    if 'Image' of window.Shopify
-      if 'getSizedImageUrl' of window.Shopify.Image
-        rivets.formatters.productImageSize = (src, size) ->
-          Shopify.Image.getSizedImageUrl(src, size)
+  rivets.formatters.productImageSize = (src, size) ->
+    CartJS.Utils.getSizedImageUrl(src, size)
 
 else
 
   # Rivets.js has not been loaded, so just declare a no-operation CartJS.Rivets module.
   CartJS.Rivets =
 
-    bindElements: () ->
+    init: () ->
 
-    unbindElements: () ->
+    destroy: () ->

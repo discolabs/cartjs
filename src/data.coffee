@@ -7,16 +7,17 @@ $document = jQuery(document)
 
 CartJS.Data =
 
-  # Bind the document to listen for data-* API events.
-  bind: () ->
-    CartJS.Data.bindOrUnbind('on')
+  # Initialise the Data API.
+  init: () ->
+    CartJS.Data.setEventListeners('on')
 
-  # Unbind listeners for data-* API events.
-  unbind: () ->
-    CartJS.Data.bindOrUnbind('off')
+  # Tear down the Data API.
+  destroy: () ->
+    CartJS.Data.setEventListeners('off')
 
   # Bind or unbind listeners for Data API events.
-  bindOrUnbind: (method) ->
+  setEventListeners: (method) ->
+    # Attach or remove event listeners for data-cart-* events.
     $document[method]('click', '[data-cart-add]', CartJS.Data.add)
     $document[method]('click', '[data-cart-remove]', CartJS.Data.remove)
     $document[method]('click', '[data-cart-remove-id]', CartJS.Data.removeById)
