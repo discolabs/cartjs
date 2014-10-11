@@ -1,0 +1,36 @@
+//
+// Examples
+// --------------------------------------------------
+
+.example {
+  padding: 45px 15px 15px;
+
+  border: 1px solid #ddd;
+  border-radius: 4px 4px 0 0;
+
+  position: relative;
+  margin-top: 1.5 * @line-height-computed;
+
+  &:after {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #959595;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    content: "Example";
+  }
+}
+
+.example-live:after {
+  content: "Live Example (Try It!)";
+}
+
+.example + pre {
+  border: 1px solid #ddd;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  margin-bottom: 1.5 * @line-height-computed;
+}
