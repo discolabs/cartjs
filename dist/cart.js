@@ -71,7 +71,9 @@
     settings: {
       dataAPI: true,
       requestBodyClass: null,
-      rivetsModels: {}
+      rivetsModels: {},
+      moneyFormat: null,
+      moneyWithCurrencyFormat: null
     },
     cart: new Cart()
   };
@@ -83,7 +85,7 @@
     CartJS.configure(settings);
     CartJS.cart.update(cart);
     if (CartJS.settings.dataAPI) {
-      CartJS.Data.bind();
+      CartJS.Data.init();
     }
     if (CartJS.settings.requestBodyClass) {
       $(document).on('cart.requestStarted', function() {
@@ -93,7 +95,7 @@
         return $('body').removeClass(CartJS.settings.requestBodyClass);
       });
     }
-    return CartJS.Rivets.bindElements();
+    return CartJS.Rivets.init();
   };
 
   CartJS.configure = function(settings) {
@@ -147,6 +149,22 @@
         newInstance[key] = clone(object[key]);
       }
       return newInstance;
+    },
+    formatMoney: function(value, format) {
+      var _ref;
+      if (((_ref = window.Shopify) != null ? _ref.formatMoney : void 0) != null) {
+        return Shopify.formatMoney(value, format);
+      } else {
+        return value;
+      }
+    },
+    getSizedImageUrl: function(src, size) {
+      var _ref, _ref1;
+      if (((_ref = window.Shopify) != null ? (_ref1 = _ref.Image) != null ? _ref1.getSizedImageUrl : void 0 : void 0) != null) {
+        return Shopify.Image.getSizedImageUrl(src, size);
+      } else {
+        return src;
+      }
     }
   };
 
@@ -209,15 +227,14 @@
     },
     updateItem: function(line, quantity, properties) {
       var data;
-      if (quantity == null) {
-        quantity = 1;
-      }
       if (properties == null) {
         properties = {};
       }
       data = CartJS.Utils.wrapKeys(properties);
       data.line = line;
-      data.quantity = quantity;
+      if (quantity != null) {
+        data.quantity = quantity;
+      }
       return CartJS.Queue.add('/cart/change.js', data, CartJS.cart.update);
     },
     removeItem: function(line) {
@@ -225,15 +242,14 @@
     },
     updateItemById: function(id, quantity, properties) {
       var data;
-      if (quantity == null) {
-        quantity = 1;
-      }
       if (properties == null) {
         properties = {};
       }
       data = CartJS.Utils.wrapKeys(properties);
       data.id = id;
-      data.quantity = quantity;
+      if (quantity != null) {
+        data.quantity = quantity;
+      }
       return CartJS.Queue.add('/cart/change.js', data, CartJS.cart.update);
     },
     removeItemById: function(id) {
@@ -285,21 +301,24 @@
   $document = jQuery(document);
 
   CartJS.Data = {
-    bind: function() {
-      return CartJS.Data.bindOrUnbind('on');
+    init: function() {
+      CartJS.Data.setEventListeners('on');
+      return CartJS.Data.render(null, CartJS.cart);
     },
-    unbind: function() {
-      return CartJS.Data.bindOrUnbind('off');
+    destroy: function() {
+      return CartJS.Data.setEventListeners('off');
     },
-    bindOrUnbind: function(method) {
+    setEventListeners: function(method) {
       $document[method]('click', '[data-cart-add]', CartJS.Data.add);
       $document[method]('click', '[data-cart-remove]', CartJS.Data.remove);
       $document[method]('click', '[data-cart-remove-id]', CartJS.Data.removeById);
       $document[method]('click', '[data-cart-update]', CartJS.Data.update);
       $document[method]('click', '[data-cart-update-id]', CartJS.Data.updateById);
+      $document[method]('click', '[data-cart-clear]', CartJS.Data.clear);
       $document[method]('change', '[data-cart-toggle]', CartJS.Data.toggle);
       $document[method]('change', '[data-cart-toggle-attribute]', CartJS.Data.toggleAttribute);
-      return $document[method]('submit', '[data-cart-submit]', CartJS.Data.submit);
+      $document[method]('submit', '[data-cart-submit]', CartJS.Data.submit);
+      return $document[method]('cart.requestComplete', CartJS.Data.render);
     },
     add: function(e) {
       var $element;
@@ -330,6 +349,10 @@
       e.preventDefault();
       $element = jQuery(e.target);
       return CartJS.Core.updateItemById($element.data('cartUpdateId'), $element.data('cartQuantity'));
+    },
+    clear: function(e) {
+      e.preventDefault();
+      return CartJS.Core.clear();
     },
     toggle: function(e) {
       var $input, id;
@@ -364,15 +387,35 @@
         }
       });
       return CartJS.Core.addItem(id, quantity, CartJS.Utils.unwrapKeys(properties));
+    },
+    render: function(e, cart) {
+      var context;
+      context = {
+        'item_count': cart.item_count,
+        'total_price': cart.total_price,
+        'total_price_money': CartJS.Utils.formatMoney(cart.total_price, CartJS.settings.moneyFormat),
+        'total_price_money_with_currency': CartJS.Utils.formatMoney(cart.total_price, CartJS.settings.moneyWithCurrencyFormat)
+      };
+      return jQuery('[data-cart-render]').each(function() {
+        var $this;
+        $this = jQuery(this);
+        return $this.text(context[$this.data('cartRender')]);
+      });
     }
   };
 
   if ('rivets' in window) {
     CartJS.Rivets = {
       views: [],
-      bindElements: function() {
+      init: function() {
+        return CartJS.Rivets.bindViews();
+      },
+      destroy: function() {
+        return CartJS.Rivets.unbindViews();
+      },
+      bindViews: function() {
         var models;
-        CartJS.Rivets.unbindElements();
+        CartJS.Rivets.unbindViews();
         models = CartJS.Utils.extend({
           cart: CartJS.cart
         }, CartJS.settings.rivetsModels);
@@ -380,7 +423,7 @@
           return CartJS.Rivets.views.push(rivets.bind(this, models));
         });
       },
-      unbindElements: function() {
+      unbindViews: function() {
         var view, _i, _len, _ref;
         _ref = CartJS.Rivets.views;
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
@@ -411,27 +454,19 @@
     rivets.formatters.minus = function(a, b) {
       return parseInt(a) - parseInt(b);
     };
-    if ('Shopify' in window) {
-      if ('formatMoney' in window.Shopify) {
-        rivets.formatters.money = function(value) {
-          return Shopify.formatMoney(value, CartJS.settings.money_format);
-        };
-        rivets.formatters.money_with_currency = function(value) {
-          return Shopify.formatMoney(value, CartJS.settings.money_with_currency_format);
-        };
-      }
-      if ('Image' in window.Shopify) {
-        if ('getSizedImageUrl' in window.Shopify.Image) {
-          rivets.formatters.productImageSize = function(src, size) {
-            return Shopify.Image.getSizedImageUrl(src, size);
-          };
-        }
-      }
-    }
+    rivets.formatters.money = function(value) {
+      return CartJS.Utils.formatMoney(value, CartJS.settings.moneyFormat);
+    };
+    rivets.formatters.money_with_currency = function(value) {
+      return CartJS.Utils.formatMoney(value, CartJS.settings.moneyWithCurrencyFormat);
+    };
+    rivets.formatters.productImageSize = function(src, size) {
+      return CartJS.Utils.getSizedImageUrl(src, size);
+    };
   } else {
     CartJS.Rivets = {
-      bindElements: function() {},
-      unbindElements: function() {}
+      init: function() {},
+      destroy: function() {}
     };
   }
 
