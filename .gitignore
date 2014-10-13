@@ -1,6 +1,6 @@
 .idea
 .DS_Store
-/docs/config.yml
+/docs/theme/config.yml
 /node_modules
 /bower_components
 /cartjs.zip
