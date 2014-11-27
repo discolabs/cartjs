@@ -2,8 +2,14 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+No unreleased changes.
+
+## 0.2.1 - 2014-11-27
 ### Added
 - This new-format CHANGELOG, based on http://keepachangelog.com
+
+### Changed
+- Further improvements to documentation, including better code examples
 
 ## 0.2.0 - 2014-10-11
 ### Added
