@@ -1,0 +1,24 @@
+# Change Log
+All notable changes to this project will be documented in this file.
+
+## Unreleased
+### Added
+- This new-format CHANGELOG, based on http://keepachangelog.com
+
+## 0.2.0 - 2014-10-11
+### Added
+- New Data API methods for updating and clearing items
+- New `data-cart-render` methods for simple DOM updating
+
+### Changed
+- Major improvements to documentation
+
+### Removed
+- `getCart()` method no longer publicly exported
+
+## 0.1.0 - 2014-10-09
+### Added
+- Initial implementation; first "official" release
+- Core API
+- Data API
+- Rivets.js DOM bindings

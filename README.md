@@ -51,6 +51,8 @@ In combination with [Rivets.js][], the DOM Binding module lets you write HTML te
 
 Documentation and examples are available on the [home page][].
 
+[home page]: http://cartjs.org?utm_source=github&utm_medium=readme&utm_campaign=cartjs
+
 
 ## Dependencies
 
@@ -59,9 +61,12 @@ This usually isn't a problem as most Shopify themes ship with jQuery.
 
 [Rivets.js] is required if you want to use the DOM Binding module.
 
-[home page]: http://cartjs.org?utm_source=github&utm_medium=readme&utm_campaign=cartjs
 [Rivets.js]: http://rivetsjs.com
 [jQuery]: http://jquery.com
+
+
+## Release History
+Refer to the [change log](https://github.com/discolabs/cartjs/blob/master/CHANGELOG.md) for a full list of changes.
 
 ---
 
