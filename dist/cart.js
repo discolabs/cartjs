@@ -252,6 +252,14 @@
       }
       return CartJS.Queue.add('/cart/change.js', data, CartJS.cart.update);
     },
+    updateItemQuantitiesById: function(updates) {
+      if (updates == null) {
+        updates = {};
+      }
+      return CartJS.Queue.add('/cart/update.js', {
+        updates: updates
+      }, CartJS.cart.update);
+    },
     removeItemById: function(id) {
       var data;
       data = {
@@ -478,6 +486,7 @@
     exports.addItem = CartJS.Core.addItem;
     exports.updateItem = CartJS.Core.updateItem;
     exports.updateItemById = CartJS.Core.updateItemById;
+    exports.updateItemQuantitiesById = CartJS.Core.updateItemQuantitiesById;
     exports.removeItem = CartJS.Core.removeItem;
     exports.removeAll = CartJS.Core.removeAll;
     exports.clear = CartJS.Core.clear;

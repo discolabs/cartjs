@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 No unreleased changes.
 
+## 0.2.2 - 2014-01-25
+### Added
+- New `updateItemQuantitiesById` Core API method
+
 ## 0.2.1 - 2014-11-27
 ### Added
 - This new-format CHANGELOG, based on http://keepachangelog.com
