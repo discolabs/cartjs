@@ -36,6 +36,10 @@ CartJS.Core =
       data.quantity = quantity
     CartJS.Queue.add '/cart/change.js', data, CartJS.cart.update
 
+  # Set the quantities of a number of items in the cart with an ID/Quantity "updates" mapping.
+  updateItemQuantitiesById: (updates = {}) ->
+    CartJS.Queue.add '/cart/update.js', {updates: updates}, CartJS.cart.update
+
   # Remove all line items for the given variant ID.
   removeItemById: (id) ->
     data =

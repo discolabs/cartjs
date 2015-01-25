@@ -111,6 +111,9 @@
         "update-item-by-id": {
           "title": "updateItemById"
         },
+        "update-item-quantities-by-id": {
+          "title": "updateItemQuantitiesById"
+        },
         "remove-item-by-id": {
           "title": "removeItemById"
         },
