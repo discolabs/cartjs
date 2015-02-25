@@ -44,9 +44,9 @@
                     td.text-center(rv-text="item.price | money")
 
                     td.text-center
-                        a(href="#" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | minus 1") -
+                        a(href="#" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | minus 1") &nbsp;-&nbsp;
                         span(rv-text="item.quantity")
-                        a(href="#" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | plus 1") +
+                        a(href="#" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | plus 1") &nbsp;+&nbsp;
 
                     td.text-center
                         a.close(href="#" rv-data-cart-remove="index | plus 1") &times;

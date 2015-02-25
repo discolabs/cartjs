@@ -332,31 +332,31 @@
       var $this;
       e.preventDefault();
       $this = jQuery(this);
-      return CartJS.Core.addItem($this.data('cartAdd'), $this.data('cartQuantity'));
+      return CartJS.Core.addItem($this.attr('data-cart-add'), $this.attr('data-cart-quantity'));
     },
     remove: function(e) {
       var $this;
       e.preventDefault();
       $this = jQuery(this);
-      return CartJS.Core.removeItem($this.data('cartRemove'));
+      return CartJS.Core.removeItem($this.attr('data-cart-remove'));
     },
     removeById: function(e) {
       var $this;
       e.preventDefault();
       $this = jQuery(this);
-      return CartJS.Core.removeItemById($this.data('cartRemoveId'));
+      return CartJS.Core.removeItemById($this.attr('data-cart-remove-id'));
     },
     update: function(e) {
       var $this;
       e.preventDefault();
       $this = jQuery(this);
-      return CartJS.Core.updateItem($this.data('cartUpdate'), $this.data('cartQuantity'));
+      return CartJS.Core.updateItem($this.attr('data-cart-update'), $this.attr('data-cart-quantity'));
     },
     updateById: function(e) {
       var $this;
       e.preventDefault();
       $this = jQuery(this);
-      return CartJS.Core.updateItemById($this.data('cartUpdateId'), $this.data('cartQuantity'));
+      return CartJS.Core.updateItemById($this.attr('data-cart-update-id'), $this.attr('data-cart-quantity'));
     },
     clear: function(e) {
       e.preventDefault();
@@ -365,7 +365,7 @@
     toggle: function(e) {
       var $input, id;
       $input = jQuery(this);
-      id = $input.data('cartToggle');
+      id = $input.attr('data-cart-toggle');
       if ($input.is(':checked')) {
         return CartJS.Core.addItem(id);
       } else {
@@ -375,7 +375,7 @@
     toggleAttribute: function(e) {
       var $input, attribute;
       $input = jQuery(this);
-      attribute = $input.data('cartToggleAttribute');
+      attribute = $input.attr('data-cart-toggle-attribute');
       return CartJS.Core.setAttribute(attribute, $input.is(':checked') ? 'Yes' : '');
     },
     submit: function(e) {
@@ -407,7 +407,7 @@
       return jQuery('[data-cart-render]').each(function() {
         var $this;
         $this = jQuery(this);
-        return $this.text(context[$this.data('cartRender')]);
+        return $this.text(context[$this.attr('data-cart-render')]);
       });
     }
   };

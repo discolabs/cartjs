@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 No unreleased changes.
 
+## 0.2.3 - 2014-02-25
+### Changed
+- Fixed potential issue using .data() instead of .attr() to access `data-` attributes
+- Added quantity adjustment example to advanced code example
+
 ## 0.2.2 - 2014-01-25
 ### Added
 - New `updateItemQuantitiesById` Core API method
