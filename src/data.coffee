@@ -36,31 +36,31 @@ CartJS.Data =
   add: (e) ->
     e.preventDefault()
     $this = jQuery(this)
-    CartJS.Core.addItem $this.data('cartAdd'), $this.data('cartQuantity')
+    CartJS.Core.addItem $this.attr('data-cart-add'), $this.attr('data-cart-quantity')
 
   # Handler for [data-cart-remove] click events.
   remove: (e) ->
     e.preventDefault()
     $this = jQuery(this)
-    CartJS.Core.removeItem $this.data('cartRemove')
+    CartJS.Core.removeItem $this.attr('data-cart-remove')
 
   # Handler for [data-cart-remove-id] click events.
   removeById: (e) ->
     e.preventDefault()
     $this = jQuery(this)
-    CartJS.Core.removeItemById $this.data('cartRemoveId')
+    CartJS.Core.removeItemById $this.attr('data-cart-remove-id')
 
   # Handler for [data-cart-update] click events.
   update: (e) ->
     e.preventDefault()
     $this = jQuery(this)
-    CartJS.Core.updateItem $this.data('cartUpdate'), $this.data('cartQuantity')
+    CartJS.Core.updateItem $this.attr('data-cart-update'), $this.attr('data-cart-quantity')
 
   # Handler for [data-cart-update-id] click events.
   updateById: (e) ->
     e.preventDefault()
     $this = jQuery(this)
-    CartJS.Core.updateItemById $this.data('cartUpdateId'), $this.data('cartQuantity')
+    CartJS.Core.updateItemById $this.attr('data-cart-update-id'), $this.attr('data-cart-quantity')
 
   # Handler for [data-cart-clear] click events.
   clear: (e) ->
@@ -70,7 +70,7 @@ CartJS.Data =
   # Handler for [data-cart-toggle] change events.
   toggle: (e) ->
     $input = jQuery(this)
-    id = $input.data('cartToggle')
+    id = $input.attr('data-cart-toggle')
     if $input.is(':checked')
       CartJS.Core.addItem(id)
     else
@@ -79,7 +79,7 @@ CartJS.Data =
   # Handler for [data-cart-toggle-attribute] change events.
   toggleAttribute: (e) ->
     $input = jQuery(this)
-    attribute = $input.data('cartToggleAttribute')
+    attribute = $input.attr('data-cart-toggle-attribute')
     CartJS.Core.setAttribute(attribute, if $input.is(':checked') then 'Yes' else '')
 
   # Handle for [data-cart-submit] submit events.
@@ -114,4 +114,4 @@ CartJS.Data =
     # Render the context to elements as needed.
     jQuery('[data-cart-render]').each ()->
       $this = jQuery(this)
-      $this.text context[$this.data('cartRender')]
+      $this.text context[$this.attr('data-cart-render')]
