@@ -11,12 +11,11 @@
 <p>You just need to fetch a copy of the library, include it in your theme, and call a single initialisation method.
 Then you can make calls to Cart.js from within your theme code.</p>
 <h3 id="getting-started-installation">Installation</h3><p>You can install Cart.js via <code>npm</code>, <code>bower</code> or simply by downloading the latest copy of the library.</p>
-<h4>NPM</h4>
-<pre><code class="language-shell">npm install shopify-cartjs</code></pre>
-<h4>Bower</h4>
-<pre><code class="language-shell">bower install shopify-cartjs</code></pre>
-<h4>Download</h4>
-<p>Download the latest stable release of Cart.js from <a href="{{ "cartjs.zip" | asset_url }}">here</a>.</p>
+<h4>NPM</h4><pre><code class="language-shell">npm install shopify-cartjs
+</code></pre>
+<h4>Bower</h4><pre><code class="language-shell">bower install shopify-cartjs
+</code></pre>
+<h4>Download</h4><p>Download the latest stable release of Cart.js from <a href="{{ "cartjs.zip" | asset_url }}">here</a>.</p>
 <h3 id="getting-started-setup">Setup</h3><p>The Cart.js distribution comes packaged with three versions of the library:</p>
 <div class="callout callout-success">
     <p>
@@ -55,7 +54,8 @@ The best place to do this is at the bottom of your theme&#39;s <code>theme.liqui
         &lt;/script&gt;
 
     &lt;/body&gt;
-&lt;/html&gt;</code></pre>
+&lt;/html&gt;
+</code></pre>
 <p>{% endraw %}</p>
 <p>Note that the call to <code>CartJS.init()</code> requires that {% raw %}<code>{{ cart | json }}</code>{% endraw %} is passed as an argument.
 This tells Liquid to render the initial cart state as a JSON object and pass it to Cart.js.</p>
@@ -88,7 +88,8 @@ You can use the Core API to do pretty much everything you&#39;d expect of a cart
             &quot;requestBodyClass&quot;: &quot;loading&quot;
         });
     });
-&lt;/script&gt;</code></pre>
+&lt;/script&gt;
+</code></pre>
 <p>{% endraw %}</p>
 <p>As you can see, the <code>init()</code> method takes two arguments.
 The first argument is required, and is provided by rendering the current Shopify cart as a JSON object through the {% raw %}<code>{{ cart | json }}</code>{% endraw %} Liquid tag.</p>
@@ -123,7 +124,8 @@ Let&#39;s create a button customers can click to add a widget to their cart, and
     $(&#39;#button&#39;).click(function() {
         CartJS.addItem(12345678);
     });
-&lt;/script&gt;</code></pre>
+&lt;/script&gt;
+</code></pre>
 <p>Now when a customer clicks our button, Cart.js will make an Ajax request and add a single Widget to the customer&#39;s cart.</p>
 <p>When using the <code>addItem()</code> method, you can optionally specify the quantity to add and a hash of custom line item properties.
 Let&#39;s update our code to add five widgets when we click the button, and to set a custom &quot;added_by&quot; property on the resulting line item:</p>
@@ -135,7 +137,8 @@ Let&#39;s update our code to add five widgets when we click the button, and to s
             &quot;added_by&quot;: &quot;Cart.js&quot;
         });
     });
-&lt;/script&gt;</code></pre>
+&lt;/script&gt;
+</code></pre>
 <p>If we loaded this example, clicked &quot;Add Five Widgets&quot;, then typed <code>CartJS.cart.items</code> in to our browser&#39;s Javascript console, we&#39;d see something like this (simplified for this example):</p>
 <pre><code class="language-js">[
     {
@@ -150,7 +153,8 @@ Let&#39;s update our code to add five widgets when we click the button, and to s
         &quot;title&quot;: &quot;Widget 1&quot;,
         &quot;variant_id&quot;: 12345678
     }
-]</code></pre>
+]
+</code></pre>
 <p>That&#39;s it!
 You can call <code>addItems()</code> as many times as you like in the same function, and Cart.js will queue up Ajax requests as needed.</p>
 <div class="callout callout-warning">
@@ -173,7 +177,8 @@ You can call <code>addItems()</code> as many times as you like in the same funct
         var newQuantity = CartJS.cart.items[0].quantity * 2;
         CartJS.updateItem(1, newQuantity);
     });
-&lt;/script&gt;</code></pre>
+&lt;/script&gt;
+</code></pre>
 <div class="callout callout-warning">
     <h4>Existing items referenced by index, not variant ID</h4>
 
@@ -199,7 +204,8 @@ As with the update method, if you&#39;d like to remove all line items with a par
     $(&#39;#button-empty&#39;).click(function() {
         CartJS.clear();
     });
-&lt;/script&gt;</code></pre>
+&lt;/script&gt;
+</code></pre>
 <h3 id="core-api-attributes">Cart Attributes</h3><p>In addition to cart items, Shopify also provides support for cart attributes, which are used to store custom information about an order.
 For example, a common use case for attributes is to store a flag indicating whether the customer would like their order gift wrapped.</p>
 <p>Cart.js provides some conveniences around manipulating these attributes.
@@ -214,7 +220,8 @@ Let&#39;s take the gift wrap example and see how we could implement it with a si
     $(&#39;#gift-wrap-checkbox&#39;).change(function() {
         CartJS.setAttribute(&#39;Gift Wrap&#39;, this.checked ? &#39;Yes&#39;: &#39;No&#39; );
     });
-&lt;/script&gt;</code></pre>
+&lt;/script&gt;
+</code></pre>
 <p>Now, any time a customer checks or un-checks the options, CartJS will make an update request to the Shopify server.</p>
 <p>Cart.js provides convenience methods for setting multiple attributes at once, clearing attributes, and setting the special-case <code>note</code> attribute.
 For a full list of supported methods, see the <a href="/pages/reference/#core-api">API Reference</a>.</p>
@@ -222,17 +229,20 @@ For a full list of supported methods, see the <a href="/pages/reference/#core-ap
 <p>All you need to do is add the appropriate <code>data-</code> attributes to your code, and the event listeners automatically set up by Cart.js will do the rest.</p>
 <p>This guide provides a quick overview - for a full list of available markup attributes, check out the <a href="/pages/reference#data-api">Data API Reference</a>.</p>
 <h3 id="data-api-adding-items">Adding Items</h3><p>To create an element that adds an item to the cart on a <code>click</code> event, just mark up an element with a <code>data-cart-add</code> attribute, and set the value of the attribute to the ID of the variant you&#39;d like to add:</p>
-<pre><code class="language-html">&lt;button data-cart-add=&quot;12345678&quot;&gt;Add a Widget&lt;/button&gt;</code></pre>
+<pre><code class="language-html">&lt;button data-cart-add=&quot;12345678&quot;&gt;Add a Widget&lt;/button&gt;
+</code></pre>
 <p>Of course, you can always use Liquid to render these elements dynamically in your templates:</p>
 <p>{% raw %}</p>
 <pre><code class="language-html">{% for variant in product.variants %}
     &lt;button data-cart-add=&quot;{{ variant.id }}&quot;&gt;Add a {{ variant.title }}&lt;/button&gt;
-{% endfor %}</code></pre>
+{% endfor %}
+</code></pre>
 <p>{% endraw %}</p>
 <h3 id="data-api-removing-items">Removing Items</h3><p>To create an element that removes a line item from the cart on a <code>click</code> event, use <code>data-cart-remove</code> or <code>data-cart-remove-id</code>.</p>
 <p>The difference between these two is that <code>data-cart-remove</code> expects the index of the line item you&#39;d like to remove from the cart, while <code>data-cart-remove-id</code> expects a variant ID.</p>
 <p>See <a href="#core-api-updating-items">Updating Items</a> in the Core API section for an explanation of why this distinction is required.</p>
-<pre><code class="language-html">&lt;button data-cart-remove-variant=&quot;12345678&quot;&gt;Remove Widgets from Cart&lt;/button&gt;</code></pre>
+<pre><code class="language-html">&lt;button data-cart-remove-variant=&quot;12345678&quot;&gt;Remove Widgets from Cart&lt;/button&gt;
+</code></pre>
 <h3 id="data-api-toggling-items">Toggling Items</h3><p>If you want to give your customers the ability to &quot;toggle&quot; items in or out of their cart, you can use a <code>data-cart-toggle</code> attribute on an element that fires a <code>change</code> event (like a checkbox or radio input).</p>
 <p>A common use case for this is having an &quot;added extra&quot; on the cart page before the customer checks out - for example, a gift card.</p>
 <p>Let&#39;s say we have a selection of gift cards a customer can choose from, and that we&#39;ve created a collection containing them:</p>
@@ -242,7 +252,8 @@ For a full list of supported methods, see the <a href="/pages/reference/#core-ap
     &lt;input type=&quot;checkbox&quot; data-cart-toggle=&quot;{{ gift_card_product.variants.first.id }}&quot; /&gt;
     Add {{ gift_card_product.title | escape }} to my order (+{{ gift_card_product.variants.first.price | money_with_currency }})
 &lt;/label&gt;
-{% endfor %}</code></pre>
+{% endfor %}
+</code></pre>
 <p>{% endraw %}</p>
 <p>This code will render a checkbox that a customer can turn on or off to add or remove the desired gift card from their card.</p>
 <h3 id="data-api-submitting-forms">Submitting Forms</h3><p>If you&#39;ve already got a working Shopify theme, you&#39;ll already have a couple of <code>&lt;form&gt;</code> elements around the place that you use to add items to the cart - for example, in your <code>product.liquid</code> template.</p>
@@ -256,7 +267,8 @@ For a full list of supported methods, see the <a href="/pages/reference/#core-ap
     &lt;/select&gt;
 
     &lt;button type=&quot;submit&quot;&gt;Buy Now&lt;/button&gt;
-&lt;/form&gt;</code></pre>
+&lt;/form&gt;
+</code></pre>
 <p>{% endraw %}</p>
 <p>When the customer clicks &quot;Buy Now&quot;, Cart.js will intercept the form submission and convert it to an Ajax request.
 All of the usual inputs - <code>id</code> to specify the variant ID, <code>quantity</code> to specify the quantity, and <code>property[]</code> inputs - are supported.</p>
@@ -279,7 +291,8 @@ All of the usual inputs - <code>id</code> to specify the variant ID, <code>quant
     $(document).on(&#39;cart.requestComplete&#39;, function(event, cart) {
         $(&#39;#counter&#39;).html(cart.item_count);
     });
-&lt;/script&gt;</code></pre>
+&lt;/script&gt;
+</code></pre>
 <p>{% endraw %}</p>
 <p>A complete list of the events triggered by Cart.js is available in the <a href="/pages/reference#events">Event Reference</a>.</p>
 <h2 id="dom-binding">DOM Binding</h2><p>Full documentation for the DOM Binding module is coming soon.</p>

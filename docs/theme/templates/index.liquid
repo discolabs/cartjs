@@ -1,5 +1,4 @@
-<section class="jumbotron jumbotron-primary"><div class="container text-center"><h3>A Javascript library to power your Shopify theme's cart.</h3><a href="{{ 'cartjs.zip' | asset_url }}" class="btn btn-lg btn-outline-inverse">Download Cart.js v0.2.2</a></div></section><section class="jumbotron"><div class="container"><div class="row"><div class="col-md-8 col-md-offset-2"><h2>What is Cart.js?</h2>
-<p>Cart.js is a very small open source Javascript library that makes the addition of powerful Ajax cart functionality to your Shopify theme a breeze.</p>
+<section class="jumbotron jumbotron-primary"><div class="container text-center"><h3>A Javascript library to power your Shopify theme's cart.</h3><a href="{{ 'cartjs.zip' | asset_url }}" class="btn btn-lg btn-outline-inverse">Download Cart.js v0.2.2</a></div></section><section class="jumbotron"><div class="container"><div class="row"><div class="col-md-8 col-md-offset-2"><h2>What is Cart.js?</h2><p>Cart.js is a very small open source Javascript library that makes the addition of powerful Ajax cart functionality to your Shopify theme a breeze.</p>
 <p>It&#39;s designed to be simple to use, while providing some really powerful and nifty features, like:</p>
 <ul class="check-list">
     <li><strong>Simple, consistent API</strong> for cart manipulation;</li>
@@ -24,13 +23,13 @@ items in your cart for a total of
 
 &lt;button data-cart-add=&quot;716934999&quot; data-cart-quantity=&quot;1&quot;&gt;Add Hat&lt;/button&gt;
 &lt;button data-cart-add=&quot;716986707&quot; data-cart-quantity=&quot;2&quot;&gt;Add 2 Coats&lt;/button&gt;
-&lt;button data-cart-clear&gt;Clear&lt;/button&gt;</code></pre>
-</div><div class="example-footer"><a data-toggle="collapse" href="#demo-simple-code">Show markup for this example</a></div></div></div><div class="row"><div class="col-md-8 col-md-offset-2"><h2>Can it do more?</h2>
-<p>Yes!
+&lt;button data-cart-clear&gt;Clear&lt;/button&gt;
+</code></pre>
+</div><div class="example-footer"><a data-toggle="collapse" href="#demo-simple-code">Show markup for this example</a></div></div></div><div class="row"><div class="col-md-8 col-md-offset-2"><h2>Can it do more?</h2><p>Yes!
 There&#39;s a whole lot more to Cart.js, from converting your existing product forms to Ajax with a single attribute to fully dynamic HTML template support.</p>
 <p>And if you ever want to write your own Javascript directly, you can hook in to our custom events and API.</p>
 <p>You can start learning about Cart.js with the <a href="/pages/guide">guide</a>, or check out the full <a href="/pages/reference">reference</a>.</p>
-</div></div><div class="row"><div class="col-md-10 col-md-offset-1"><div class="example example-live"><div class="row"><div class="col-md-4"><form data-cart-submit="data-cart-submit"><div class="form-group"><label for="demo-advanced-id">Select a Product</label><select id="demo-advanced-id" name="id" class="form-control input-sm">{% for product in collections.frontpage.products %}<option value="{{ product.variants.first.id }}">{{ product.title }}</option>{% endfor %}</select></div><div class="form-group"><label for="demo-advanced-quantity">Choose a Quantity</label><select id="demo-advanced-quantity" name="quantity" class="form-control input-sm"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div><div class="form-group"><label for="demo-advanced-custom-label">Add a Custom Label <small class="text-muted">(Optional)</small></label><input type="text" name="properties[Custom Label]" class="form-control input-sm"/></div><div class="form-group"><button type="submit" class="btn btn-default">Add to Cart</button></div></form></div><div class="col-md-8"><table data-cart-view="data-cart-view" class="table table-bordered table-condensed table-striped table-vertical-middle"><thead><tr><th>Item</th><th class="text-center">Price</th><th colspan="2" class="text-center">Qty</th><th class="text-right">Line Price</th></tr></thead><tbody><tr rv-each-item="cart.items"><td><strong rv-text="item.title"></strong><ul rv-hide="item.propertyArray | empty" class="list-unstyled"><li rv-each-property="item.propertyArray &lt; properties"><small rv-text="property.value" class="text-muted"></small></li></ul></td><td rv-text="item.price | money" class="text-center"></td><td rv-text="item.quantity" class="text-center"></td><td class="text-center"><a href="#" rv-data-cart-remove="index | plus 1" class="close">&times;</a></td><td rv-text="item.line_price | money" class="text-right"></td></tr><tr rv-show="cart.item_count | lt 1"><td colspan="5" class="text-center">You don't have any items in your cart.</td></tr></tbody><tfoot rv-show="cart.item_count | gt 0"><tr><td colspan="4"></td><td rv-text="cart.total_price | money" class="text-right"></td></tr></tfoot></table><p class="text-center"><img src="{{ 'loader.gif' | asset_url }}" width="16" height="11" class="cart-visible-loading"/></p></div></div></div><div id="demo-advanced-code" class="example-code collapse"><pre><code class="language-html">&lt;!-- Add to cart form, using Data API --&gt;
+</div></div><div class="row"><div class="col-md-10 col-md-offset-1"><div class="example example-live"><div class="row"><div class="col-md-4"><form data-cart-submit="data-cart-submit"><div class="form-group"><label for="demo-advanced-id">Select a Product</label><select id="demo-advanced-id" name="id" class="form-control input-sm">{% for product in collections.frontpage.products %}<option value="{{ product.variants.first.id }}">{{ product.title }}</option>{% endfor %}</select></div><div class="form-group"><label for="demo-advanced-quantity">Choose a Quantity</label><select id="demo-advanced-quantity" name="quantity" class="form-control input-sm"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div><div class="form-group"><label for="demo-advanced-custom-label">Add a Custom Label <small class="text-muted">(Optional)</small></label><input type="text" name="properties[Custom Label]" class="form-control input-sm"/></div><div class="form-group"><button type="submit" class="btn btn-default">Add to Cart</button></div></form></div><div class="col-md-8"><table data-cart-view="data-cart-view" class="table table-bordered table-condensed table-striped table-vertical-middle"><thead><tr><th>Item</th><th class="text-center">Price</th><th colspan="2" class="text-center">Qty</th><th class="text-right">Line Price</th></tr></thead><tbody><tr rv-each-item="cart.items"><td><strong rv-text="item.title"></strong><ul rv-hide="item.propertyArray | empty" class="list-unstyled"><li rv-each-property="item.propertyArray &lt; properties"><small rv-text="property.value" class="text-muted"></small></li></ul></td><td rv-text="item.price | money" class="text-center"></td><td class="text-center"><a href="#" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | minus 1">-</a><span rv-text="item.quantity"></span><a href="#" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | plus 1">+</a></td><td class="text-center"><a href="#" rv-data-cart-remove="index | plus 1" class="close">&times;</a></td><td rv-text="item.line_price | money" class="text-right"></td></tr><tr rv-show="cart.item_count | lt 1"><td colspan="5" class="text-center">You don't have any items in your cart.</td></tr></tbody><tfoot rv-show="cart.item_count | gt 0"><tr><td colspan="4"></td><td rv-text="cart.total_price | money" class="text-right"></td></tr></tfoot></table><p class="text-center"><img src="{{ 'loader.gif' | asset_url }}" width="16" height="11" class="cart-visible-loading"/></p></div></div></div><div id="demo-advanced-code" class="example-code collapse"><pre><code class="language-html">&lt;!-- Add to cart form, using Data API --&gt;
 &lt;form data-cart-submit=&quot;data-cart-submit&quot;&gt;
     &lt;label&gt;Select a Product&lt;/label&gt;
     &lt;select name=&quot;id&quot;&gt;
@@ -48,7 +47,7 @@ There&#39;s a whole lot more to Cart.js, from converting your existing product f
     &lt;/select&gt;
 
     &lt;label&gt;Add a Custom Label &lt;small&gt;Optional&lt;/small&gt;&lt;/label&gt;
-    &lt;input type=&quot;text&quot; name=&quot;properties[Custom Label]&quot;&quot; /&gt;
+    &lt;input type=&quot;text&quot; name=&quot;properties[Custom Label]&quot; /&gt;
 
     &lt;button type=&quot;submit&quot;&gt;Add to Cart&lt;/button&gt;
 &lt;/form&gt;
@@ -72,7 +71,11 @@ There&#39;s a whole lot more to Cart.js, from converting your existing product f
                 &lt;/ul&gt;
             &lt;/td&gt;
             &lt;td rv-text=&quot;item.price | money&quot;&gt;&lt;/td&gt;
-            &lt;td rv-text=&quot;item.quantity&quot;&gt;&lt;/td&gt;
+            &lt;td&gt;
+                &lt;a href=&quot;#&quot; rv-data-cart-update=&quot;index | plus 1&quot; rv-data-cart-quantity=&quot;item.quantity | minus 1&quot;&gt;-&lt;/a&gt;
+                &lt;span rv-text=&quot;item.quantity&quot;&gt;&lt;/span&gt;
+                &lt;a href=&quot;#&quot; rv-data-cart-update=&quot;index | plus 1&quot; rv-data-cart-quantity=&quot;item.quantity | plus 1&quot;&gt;+&lt;/a&gt;
+            &lt;/td&gt;
             &lt;td&gt;
                 &lt;a href=&quot;#&quot; rv-data-cart-remove=&quot;index | plus 1&quot;&gt;&amp;times;&lt;/a&gt;
             &lt;/td&gt;
@@ -90,23 +93,19 @@ There&#39;s a whole lot more to Cart.js, from converting your existing product f
     &lt;/tfoot&gt;
 &lt;/table&gt;
 
-&lt;img src=&quot;loader.gif&quot; width=&quot;16&quot; height=&quot;11&quot; class=&quot;cart-visible-loading&quot;/&gt;</code></pre>
-</div><div class="example-footer"><a data-toggle="collapse" href="#demo-advanced-code">Show markup for this example</a></div></div></div><div class="row"><div class="col-md-8 col-md-offset-2"><h2>Further Questions</h2>
-<h3>Is it stable?</h3>
-<p>Cart.js is still in beta, although it&#39;s been in development on and off for over 6 months and the API is pretty stable.
+&lt;img src=&quot;loader.gif&quot; width=&quot;16&quot; height=&quot;11&quot; class=&quot;cart-visible-loading&quot;/&gt;
+</code></pre>
+</div><div class="example-footer"><a data-toggle="collapse" href="#demo-advanced-code">Show markup for this example</a></div></div></div><div class="row"><div class="col-md-8 col-md-offset-2"><h2>Further Questions</h2><h3>Is it stable?</h3><p>Cart.js is still in beta, although it&#39;s been in development on and off for over 6 months and the API is pretty stable.
 I&#39;m hoping to get feedback from the developer community on bugs and feature as soon as possible to start moving towards a 1.0 release.</p>
 <p>Cart.js is running in production right now on Shopify sites that do 7 figures of revenue annually, so I have a high degree of confidence in it!
 If you&#39;re interested in using Cart.js, I&#39;ll be happy to answer any questions you have or help you get up and running.</p>
-<h3>What&#39;s the browser support like?</h3>
-<p>Pretty good!
+<h3>What&#39;s the browser support like?</h3><p>Pretty good!
 Because Cart.js uses jQuery for Ajax requests and DOM manipulation, the only limiting factor is the version of jQuery you decide to use.
 This means that themes using a <code>1.x</code> version of jQuery with Cart.js will be able to support IE6+, Chrome, Firefox, Safari 5.1+ and up.</p>
 <p>If you&#39;re using the DOM Bindings, there are some <a href="http://rivetsjs.com/docs/guide/#adapters-default">caveats</a> with Rivets.js and Internet Explorer 6-8 that may affect you.
 As DOM binding is pretty handy and Shopify themes often need wide browser support, I&#39;m working on this to ensure IE6+ support across the board.</p>
-<h3>I have a bug report / feature request.</h3>
-<p>Please add it to the <a href="https://github.com/discolabs/cartjs/issues">issues tracker</a> on GitHub.</p>
-<h3>Can I contribute?</h3>
-<p>Absolutely!
+<h3>I have a bug report / feature request.</h3><p>Please add it to the <a href="https://github.com/discolabs/cartjs/issues">issues tracker</a> on GitHub.</p>
+<h3>Can I contribute?</h3><p>Absolutely!
 Just head to the <a href="https://github.com/discolabs/cartjs">GitHub</a> page, fork the repository and manage development through issues and pull requests.</p>
 <p>If you&#39;re keen to help but don&#39;t know where to start, contact me <a href="http://twitter.com/gavinballard">on Twitter</a>.</p>
 <hr>

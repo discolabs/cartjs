@@ -41,7 +41,11 @@
                 </ul>
             </td>
             <td rv-text="item.price | money"></td>
-            <td rv-text="item.quantity"></td>
+            <td>
+                <a href="#" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | minus 1">-</a>
+                <span rv-text="item.quantity"></span>
+                <a href="#" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | plus 1">+</a>
+            </td>
             <td>
                 <a href="#" rv-data-cart-remove="index | plus 1">&times;</a>
             </td>
