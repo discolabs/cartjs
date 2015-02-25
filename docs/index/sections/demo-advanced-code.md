@@ -17,7 +17,7 @@
     </select>
 
     <label>Add a Custom Label <small>Optional</small></label>
-    <input type="text" name="properties[Custom Label]"" />
+    <input type="text" name="properties[Custom Label]" />
 
     <button type="submit">Add to Cart</button>
 </form>
