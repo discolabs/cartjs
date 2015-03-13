@@ -1,4 +1,4 @@
-`CartJS.setAttributes(attributes = {})`
+`CartJS.setAttributes(attributes = {}, options = {})`
 
 Set multiple cart attributes at once by passing an `attributes` hash.
 
@@ -9,3 +9,5 @@ CartJS.setAttributes({
     "Gift Note": "Happy Birthday!"
 });
 ```
+
+See [addItem](#core-api-add-item) for details on the `options` hash.

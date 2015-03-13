@@ -1,4 +1,4 @@
-`CartJS.setAttribute(attributeName, value)`
+`CartJS.setAttribute(attributeName, value, options = {})`
 
 Set the attribute specified by `attributeName` to the specified `value`.
 
@@ -8,3 +8,5 @@ if(hasGiftableItem) {
     CartJS.setAttribute('Has Gift Note', true);
 }
 ```
+
+See [addItem](#core-api-add-item) for details on the `options` hash.
