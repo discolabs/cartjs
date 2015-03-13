@@ -8,14 +8,23 @@ processing = false
 CartJS.Queue =
 
   # Add a new request to the queue. Starts processing the queue if we're not already doing so.
-  add: (url, data, callback, type = 'POST', dataType = 'json') ->
-    queue.push({
-      url: url,
-      data: data,
-      success: callback,
-      type: type,
-      dataType: dataType
-    })
+  add: (url, data, options = {}) ->
+    # Set up request from arguments and options.
+    request =
+      url: url
+      data: data
+      type: options.type || 'POST'
+      dataType: options.dataType || 'json'
+      success: CartJS.Utils.ensureArray(options.success)
+      error: CartJS.Utils.ensureArray(options.error)
+      complete: CartJS.Utils.ensureArray(options.complete)
+
+    # Add the cart update method as a success callback if required.
+    if options.updateCart
+      request.success.push(CartJS.cart.update)
+
+    # Add request to the queue.
+    queue.push(request)
 
     # Don't need to start processing if we're already doing it.
     return if processing

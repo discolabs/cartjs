@@ -48,6 +48,16 @@ CartJS.Utils =
       newInstance[key] = clone object[key]
     return newInstance
 
+  # Return true if the given value is an array.
+  isArray: Array.isArray || (value) ->
+    {}.toString.call(value) is '[object Array]'
+
+  # Ensure that the given value is returned as an array, either with entries intact or as a blank value.
+  ensureArray: (value) ->
+    if CartJS.Utils.isArray(value)
+      return value
+    if value? then [value] else []
+
   # Format a monetary amount using Shopify's formatMoney if available.
   #
   # If it's not available, just return the value.
