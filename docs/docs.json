@@ -42,6 +42,9 @@
         },
         "attributes": {
           "title": "Cart Attributes"
+        },
+        "callbacks": {
+          "title": "Callbacks"
         }
       }
     },

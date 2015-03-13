@@ -56,10 +56,10 @@ You can call `addItems()` as many times as you like in the same function, and Ca
     <h4>Note on multiple line items with the same variant ID</h4>
 
     <p>
-        Shopify will collate multiple line items for the same variant into one -- for example, if we clicked "Add Five Widgets" in the example above again, we'd end up with one line item with `"quantity": 10` instead of two line item with `"quantity: 5"`.
+        Shopify will collate multiple line items for the same variant into one &mdash; for example, if we clicked "Add Five Widgets" in the example above again, we'd end up with one line item with `"quantity": 10` instead of two line item with `"quantity: 5"`.
     </p>
 
     <p>
-        However, this *doesn't* apply when you add the same variant with custom line item properties that differ -- if we changed the value of the `added_by` property and clicked the button, we'd end up with separate line items.
+        However, this *doesn't* apply when you add the same variant with custom line item properties that differ &mdash; if we changed the value of the `added_by` property and clicked the button, we'd end up with separate line items.
     </p>
 </div>
