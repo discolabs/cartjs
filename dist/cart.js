@@ -150,6 +150,19 @@
       }
       return newInstance;
     },
+    isArray: Array.isArray || function(value) {
+      return {}.toString.call(value) === '[object Array]';
+    },
+    ensureArray: function(value) {
+      if (CartJS.Utils.isArray(value)) {
+        return value;
+      }
+      if (value != null) {
+        return [value];
+      } else {
+        return [];
+      }
+    },
     formatMoney: function(value, format) {
       var _ref;
       if (((_ref = window.Shopify) != null ? _ref.formatMoney : void 0) != null) {
@@ -173,20 +186,24 @@
   processing = false;
 
   CartJS.Queue = {
-    add: function(url, data, callback, type, dataType) {
-      if (type == null) {
-        type = 'POST';
+    add: function(url, data, options) {
+      var request;
+      if (options == null) {
+        options = {};
       }
-      if (dataType == null) {
-        dataType = 'json';
-      }
-      queue.push({
+      request = {
         url: url,
         data: data,
-        success: callback,
-        type: type,
-        dataType: dataType
-      });
+        type: options.type || 'POST',
+        dataType: options.dataType || 'json',
+        success: CartJS.Utils.ensureArray(options.success),
+        error: CartJS.Utils.ensureArray(options.error),
+        complete: CartJS.Utils.ensureArray(options.complete)
+      };
+      if (options.updateCart) {
+        request.success.push(CartJS.cart.update);
+      }
+      queue.push(request);
       if (processing) {
         return;
       }
@@ -208,10 +225,15 @@
   };
 
   CartJS.Core = {
-    getCart: function() {
-      return CartJS.Queue.add('/cart.js', {}, CartJS.cart.update, 'GET');
+    getCart: function(options) {
+      if (options == null) {
+        options = {};
+      }
+      options.type = 'GET';
+      options.updateCart = true;
+      return CartJS.Queue.add('/cart.js', {}, options);
     },
-    addItem: function(id, quantity, properties) {
+    addItem: function(id, quantity, properties, options) {
       var data;
       if (quantity == null) {
         quantity = 1;
@@ -219,57 +241,83 @@
       if (properties == null) {
         properties = {};
       }
+      if (options == null) {
+        options = {};
+      }
       data = CartJS.Utils.wrapKeys(properties);
       data.id = id;
       data.quantity = quantity;
-      CartJS.Queue.add('/cart/add.js', data);
+      CartJS.Queue.add('/cart/add.js', data, options);
       return CartJS.Core.getCart();
     },
-    updateItem: function(line, quantity, properties) {
+    updateItem: function(line, quantity, properties, options) {
       var data;
       if (properties == null) {
         properties = {};
+      }
+      if (options == null) {
+        options = {};
       }
       data = CartJS.Utils.wrapKeys(properties);
       data.line = line;
       if (quantity != null) {
         data.quantity = quantity;
       }
-      return CartJS.Queue.add('/cart/change.js', data, CartJS.cart.update);
+      options.updateCart = true;
+      return CartJS.Queue.add('/cart/change.js', data, options);
     },
-    removeItem: function(line) {
-      return CartJS.Core.updateItem(line, 0);
+    removeItem: function(line, options) {
+      if (options == null) {
+        options = {};
+      }
+      return CartJS.Core.updateItem(line, 0, {}, options);
     },
-    updateItemById: function(id, quantity, properties) {
+    updateItemById: function(id, quantity, properties, options) {
       var data;
       if (properties == null) {
         properties = {};
+      }
+      if (options == null) {
+        options = {};
       }
       data = CartJS.Utils.wrapKeys(properties);
       data.id = id;
       if (quantity != null) {
         data.quantity = quantity;
       }
-      return CartJS.Queue.add('/cart/change.js', data, CartJS.cart.update);
+      options.updateCart = true;
+      return CartJS.Queue.add('/cart/change.js', data, options);
     },
-    updateItemQuantitiesById: function(updates) {
+    updateItemQuantitiesById: function(updates, options) {
       if (updates == null) {
         updates = {};
       }
+      if (options == null) {
+        options = {};
+      }
+      options.updateCart = true;
       return CartJS.Queue.add('/cart/update.js', {
         updates: updates
-      }, CartJS.cart.update);
+      }, options);
     },
-    removeItemById: function(id) {
+    removeItemById: function(id, options) {
       var data;
+      if (options == null) {
+        options = {};
+      }
       data = {
         id: id,
         quantity: 0
       };
-      return CartJS.Queue.add('/cart/change.js', data, CartJS.cart.update);
+      options.updateCart = true;
+      return CartJS.Queue.add('/cart/change.js', data, options);
     },
-    clear: function() {
-      return CartJS.Queue.add('/cart/clear.js', {}, CartJS.cart.update);
+    clear: function(options) {
+      if (options == null) {
+        options = {};
+      }
+      options.updateCart = true;
+      return CartJS.Queue.add('/cart/clear.js', {}, options);
     },
     getAttribute: function(attributeName, defaultValue) {
       if (attributeName in CartJS.cart.attributes) {
@@ -278,31 +326,46 @@
         return defaultValue;
       }
     },
-    setAttribute: function(attributeName, value) {
+    setAttribute: function(attributeName, value, options) {
       var attributes;
+      if (options == null) {
+        options = {};
+      }
       attributes = {};
       attributes[attributeName] = value;
-      return CartJS.Core.setAttributes(attributes);
+      return CartJS.Core.setAttributes(attributes, options);
     },
     getAttributes: function() {
       return CartJS.cart.attributes;
     },
-    setAttributes: function(attributes) {
+    setAttributes: function(attributes, options) {
       if (attributes == null) {
         attributes = {};
       }
-      return CartJS.Queue.add('/cart/update.js', CartJS.Utils.wrapKeys(attributes, 'attributes'), CartJS.cart.update);
+      if (options == null) {
+        options = {};
+      }
+      options.updateCart = true;
+      return CartJS.Queue.add('/cart/update.js', CartJS.Utils.wrapKeys(attributes, 'attributes'), options);
     },
-    clearAttributes: function() {
-      return CartJS.Queue.add('/cart/update.js', CartJS.Utils.wrapKeys(CartJS.Core.getAttributes(), 'attributes', ''), CartJS.cart.update);
+    clearAttributes: function(options) {
+      if (options == null) {
+        options = {};
+      }
+      options.updateCart = true;
+      return CartJS.Queue.add('/cart/update.js', CartJS.Utils.wrapKeys(CartJS.Core.getAttributes(), 'attributes', ''), options);
     },
     getNote: function() {
       return CartJS.cart.note;
     },
-    setNote: function(note) {
+    setNote: function(note, options) {
+      if (options == null) {
+        options = {};
+      }
+      options.updateCart = true;
       return CartJS.Queue.add('/cart/update.js', {
         note: note
-      }, CartJS.cart.update);
+      }, options);
     }
   };
 

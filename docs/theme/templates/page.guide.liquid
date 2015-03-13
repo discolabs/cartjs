@@ -161,11 +161,11 @@ You can call <code>addItems()</code> as many times as you like in the same funct
     <h4>Note on multiple line items with the same variant ID</h4>
 
     <p>
-        Shopify will collate multiple line items for the same variant into one -- for example, if we clicked &quot;Add Five Widgets&quot; in the example above again, we&#39;d end up with one line item with <code>&quot;quantity&quot;: 10</code> instead of two line item with <code>&quot;quantity: 5&quot;</code>.
+        Shopify will collate multiple line items for the same variant into one &mdash; for example, if we clicked &quot;Add Five Widgets&quot; in the example above again, we&#39;d end up with one line item with <code>&quot;quantity&quot;: 10</code> instead of two line item with <code>&quot;quantity: 5&quot;</code>.
     </p>
 
     <p>
-        However, this <em>doesn&#39;t</em> apply when you add the same variant with custom line item properties that differ -- if we changed the value of the <code>added_by</code> property and clicked the button, we&#39;d end up with separate line items.
+        However, this <em>doesn&#39;t</em> apply when you add the same variant with custom line item properties that differ &mdash; if we changed the value of the <code>added_by</code> property and clicked the button, we&#39;d end up with separate line items.
     </p>
 </div>
 <h3 id="core-api-updating-items">Updating Items</h3><p>Updating the quantities or properties of line items is just as simple as adding them -- we just make a call to the <code>updateItem()</code> method.</p>
@@ -225,6 +225,37 @@ Let&#39;s take the gift wrap example and see how we could implement it with a si
 <p>Now, any time a customer checks or un-checks the options, CartJS will make an update request to the Shopify server.</p>
 <p>Cart.js provides convenience methods for setting multiple attributes at once, clearing attributes, and setting the special-case <code>note</code> attribute.
 For a full list of supported methods, see the <a href="/pages/reference/#core-api">API Reference</a>.</p>
+<h3 id="core-api-callbacks">Callbacks</h3><p>All Core API methods that result in an Ajax request being made to the server allow you to specify one or more callback functions, just like a regular jQuery <code>$.ajax()</code> request.
+Callbacks are specified through an <code>options</code> hash, passed as the final optional argument to the core methods.</p>
+<p>To take a common example, we&#39;ll often want to provide callback methods to handle possible results when we try to add an item to our cart.
+We want to inform the user of the success or failure of their action, and potentially take some other action.</p>
+<pre><code class="language-html">&lt;button id=&quot;button&quot;&gt;Add to Cart&lt;/button&gt;
+
+&lt;div id=&quot;message&quot;&gt;&lt;/div&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+    $(&#39;#button&#39;).click(function() {
+
+        // Call the addItem() method.
+        // Note the empty object as the third argument, representing no line item properties.  
+        CartJS.addItem(12345678, 1, {}, {
+
+            // Define a success callback to display a success message.
+            &quot;success&quot;: function(data, textStatus, jqXHR) {
+                $(&#39;#message&#39;).addClass(&#39;message-success&#39;);
+                $(&#39;#message&#39;).html(&#39;Successfully added to cart.&#39;);
+            },
+
+            // Define an error callback to display an error message.
+            &quot;error&quot;: function(jqXHR, textStatus, errorThrown) {
+                $(&#39;#message&#39;).addClass(&#39;message-error&#39;);
+                $(&#39;#message&#39;).html(&#39;There was a problem adding to the cart!&#39;);
+            }
+
+        });
+    });
+&lt;/script&gt;
+</code></pre>
 <h2 id="data-api">Data API</h2><p>The Data API is the easiest way to start using Cart.js, and for a lot of use cases it&#39;ll be all you need.</p>
 <p>All you need to do is add the appropriate <code>data-</code> attributes to your code, and the event listeners automatically set up by Cart.js will do the rest.</p>
 <p>This guide provides a quick overview - for a full list of available markup attributes, check out the <a href="/pages/reference#data-api">Data API Reference</a>.</p>
@@ -297,4 +328,4 @@ All of the usual inputs - <code>id</code> to specify the variant ID, <code>quant
 <p>A complete list of the events triggered by Cart.js is available in the <a href="/pages/reference#events">Event Reference</a>.</p>
 <h2 id="dom-binding">DOM Binding</h2><p>Full documentation for the DOM Binding module is coming soon.</p>
 <p>In the meantime, you can check out the example on the <a href="/">front page</a> in combination with the <a href="http://rivetsjs.com/">Rivets.js documentation</a> to get an idea of how things work.</p>
-</article><aside class="col-md-2 hidden-sm hidden-xs"><div class="aside"><nav id="nav" data-spy="affix" data-offset-top="102"><ul class="nav nav-docs"><li><a href="#introduction">Introduction</a><ul class="nav"><li><a href="#introduction-what">What is Cart.js?</a></li></ul></li><li><a href="#getting-started">Getting Started</a><ul class="nav"><li><a href="#getting-started-installation">Installation</a></li><li><a href="#getting-started-setup">Setup</a></li><li><a href="#getting-started-next-steps">Next Steps</a></li></ul></li><li><a href="#core-api">Core API</a><ul class="nav"><li><a href="#core-api-configuration">Configuration</a></li><li><a href="#core-api-cart-state">Cart State</a></li><li><a href="#core-api-adding-items">Adding Items</a></li><li><a href="#core-api-updating-items">Updating Items</a></li><li><a href="#core-api-removing-items">Removing Items</a></li><li><a href="#core-api-attributes">Cart Attributes</a></li></ul></li><li><a href="#data-api">Data API</a><ul class="nav"><li><a href="#data-api-adding-items">Adding Items</a></li><li><a href="#data-api-removing-items">Removing Items</a></li><li><a href="#data-api-toggling-items">Toggling Items</a></li><li><a href="#data-api-submitting-forms">Submitting Forms</a></li></ul></li><li><a href="#events">Events</a><ul class="nav"></ul></li><li><a href="#dom-binding">DOM Binding</a><ul class="nav"></ul></li></ul></nav></div></aside></div></section></div>
+</article><aside class="col-md-2 hidden-sm hidden-xs"><div class="aside"><nav id="nav" data-spy="affix" data-offset-top="102"><ul class="nav nav-docs"><li><a href="#introduction">Introduction</a><ul class="nav"><li><a href="#introduction-what">What is Cart.js?</a></li></ul></li><li><a href="#getting-started">Getting Started</a><ul class="nav"><li><a href="#getting-started-installation">Installation</a></li><li><a href="#getting-started-setup">Setup</a></li><li><a href="#getting-started-next-steps">Next Steps</a></li></ul></li><li><a href="#core-api">Core API</a><ul class="nav"><li><a href="#core-api-configuration">Configuration</a></li><li><a href="#core-api-cart-state">Cart State</a></li><li><a href="#core-api-adding-items">Adding Items</a></li><li><a href="#core-api-updating-items">Updating Items</a></li><li><a href="#core-api-removing-items">Removing Items</a></li><li><a href="#core-api-attributes">Cart Attributes</a></li><li><a href="#core-api-callbacks">Callbacks</a></li></ul></li><li><a href="#data-api">Data API</a><ul class="nav"><li><a href="#data-api-adding-items">Adding Items</a></li><li><a href="#data-api-removing-items">Removing Items</a></li><li><a href="#data-api-toggling-items">Toggling Items</a></li><li><a href="#data-api-submitting-forms">Submitting Forms</a></li></ul></li><li><a href="#events">Events</a><ul class="nav"></ul></li><li><a href="#dom-binding">DOM Binding</a><ul class="nav"></ul></li></ul></nav></div></aside></div></section></div>

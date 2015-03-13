@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 No unreleased changes.
 
+## 0.2.4 - 2014-03-13
+### Added
+- Ability to specify callbacks through an `options` hash argument in Core API
+
 ## 0.2.3 - 2014-02-25
 ### Changed
 - Fixed potential issue using .data() instead of .attr() to access `data-` attributes

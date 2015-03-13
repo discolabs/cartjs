@@ -69,16 +69,31 @@
 </code></pre>
 <p>{% endraw %}</p>
 <h2 id="core-api">Core API</h2><p>Core API methods are available on the global <code>CartJS</code> object.
-They can be called from anywhere - an event handler, your startup code, event in an <code>onclick=&quot;&quot;</code> attribute if you&#39;re feeling old school.</p>
+They can be called from anywhere - an event handler, your startup code, even in an <code>onclick=&quot;&quot;</code> attribute if you&#39;re feeling old school.</p>
 <p>See the <a href="/pages/guide#core-api">Core API</a> section in the Guide for more.</p>
-<h3 id="core-api-add-item">addItem</h3><p><code>CartJS.addItem(id, quantity = 1, properties = {})</code></p>
+<h3 id="core-api-add-item">addItem</h3><p><code>CartJS.addItem(id, quantity = 1, properties = {}, options = {})</code></p>
 <p>Add the variant with the given <code>id</code> to the cart, optionally specifying a <code>quantity</code> (default <code>1</code>) and a hash of custom line item <code>properties</code>.</p>
 <pre><code class="language-js">// Add five items with the variant id 12345678 to the cart, with a custom size property.
 CartJS.addItem(12345678, 5, {
     &quot;size&quot;: &quot;XL&quot;
 });
 </code></pre>
-<h3 id="core-api-update-item">updateItem</h3><p><code>CartJS.updateItem(line_number, quantity, properties = {})</code></p>
+<p>The final optional <code>options</code> hash allows you to specify callback functions to trigger after the item has been added.
+Available callbacks mirror those provided by jQuery&#39;s <code>$.ajax()</code> callbacks (<code>success</code>, <code>error</code> and <code>complete</code>), and are passed the same arguments.</p>
+<pre><code class="language-js">// Do the same as above, but handle the result of the call with either a success or error message.
+CartJS.addItem(12345678, 5, {
+    &quot;size&quot;: &quot;XL&quot;
+}, {
+    &quot;success&quot;: function(data, textStatus, jqXHR) {
+        alert(&#39;Added!&#39;);
+    },
+    &quot;error&quot;: function(jqXHR, textStatus, errorThrown) {
+        alert(&#39;Error: &#39; + errorThrown + &#39;!&#39;);
+    }
+});
+</code></pre>
+<p>As with jQuery callbacks, you can optionally provide an array of callback functions to execute.</p>
+<h3 id="core-api-update-item">updateItem</h3><p><code>CartJS.updateItem(line_number, quantity, properties = {}, options = {})</code></p>
 <p>Update the quantity and properties of the line item with the specified <code>line_number</code> in the cart.
 Line numbers are one-indexed; that is, the first line item has a <code>line_number</code> of <code>1</code>.</p>
 <p>Setting <code>quantity</code> to <code>0</code> will remove the item from the cart.
@@ -86,13 +101,15 @@ Leaving <code>quantity</code> as <code>undefined</code> will leave the quantity 
 <pre><code class="language-js">// Let&#39;s have 6 of the first item in the cart.
 CartJS.updateItem(1, 6);
 </code></pre>
-<h3 id="core-api-remove-item">removeItem</h3><p><code>CartJS.removeItem(line_number)</code></p>
+<p>See <a href="#core-api-add-item">addItem</a> for details on the <code>options</code> hash.</p>
+<h3 id="core-api-remove-item">removeItem</h3><p><code>CartJS.removeItem(line_number, options = {})</code></p>
 <p>Remove the line item with the specified <code>line_number</code> from the cart.
 Line numbers are one-indexed; that is, the first line item has a <code>line_number</code> of <code>1</code>.</p>
 <pre><code class="language-js">// Remove the first line item from the cart.
 CartJS.removeItem(1);
 </code></pre>
-<h3 id="core-api-update-item-by-id">updateItemById</h3><p><code>CartJS.updateItemById(id, quantity, properties = {})</code></p>
+<p>See <a href="#core-api-add-item">addItem</a> for details on the <code>options</code> hash.</p>
+<h3 id="core-api-update-item-by-id">updateItemById</h3><p><code>CartJS.updateItemById(id, quantity, properties = {}, options = {})</code></p>
 <p>Update the quantity and properties of the line item with the specified variant <code>id</code> in the cart.
 If multiple line items exist for the specified variant, all of them will be updated.</p>
 <p>Setting <code>quantity</code> to <code>0</code> will remove all items with the specified variant <code>id</code> from the cart.
@@ -100,25 +117,29 @@ Leaving <code>quantity</code> as <code>undefined</code> will leave the quantity 
 <pre><code class="language-js">// Make sure we have six pairs of blue socks (variant #12345678).
 CartJS.updateItemById(12345678, 6);
 </code></pre>
-<h3 id="core-api-update-item-quantities-by-id">updateItemQuantitiesById</h3><p><code>CartJS.updateItemQuantitiesById(updates = {})</code></p>
+<p>See <a href="#core-api-add-item">addItem</a> for details on the <code>options</code> hash.</p>
+<h3 id="core-api-update-item-quantities-by-id">updateItemQuantitiesById</h3><p><code>CartJS.updateItemQuantitiesById(updates = {}, options = {})</code></p>
 <p>Update the quantities of many line items in the cart at once, using a mapping of variant IDs
 to the desired quantity. Line items with variants IDs omitted from the <code>updates</code> hash will
 not have their quantities changed.</p>
 <pre><code class="language-js">// Make sure we have 6x blue socks (variant #12345678) and 0x red socks (variant #12345680).
 CartJS.updateItemQuantitiesById({12345678: 6, 12345680: 0});
 </code></pre>
-<h3 id="core-api-remove-item-by-id">removeItemById</h3><p><code>CartJS.removeItemById(id)</code></p>
+<p>See <a href="#core-api-add-item">addItem</a> for details on the <code>options</code> hash.</p>
+<h3 id="core-api-remove-item-by-id">removeItemById</h3><p><code>CartJS.removeItemById(id, options = {})</code></p>
 <p>Remove the line item with the specified variant <code>id</code> from the cart.
 If multiple line items exist for the specified variant, all of them will be removed.</p>
 <pre><code class="language-js">// Get rid of all blue socks (variant #12345678) from our order.
 CartJS.removeItemById(12345678);
 </code></pre>
-<h3 id="core-api-clear">clear</h3><p><code>CartJS.clear()</code></p>
+<p>See <a href="#core-api-add-item">addItem</a> for details on the <code>options</code> hash.</p>
+<h3 id="core-api-clear">clear</h3><p><code>CartJS.clear(options = {})</code></p>
 <p>Clear the cart of all line items.
 Does not clear cart attributes or the cart note.</p>
 <pre><code class="language-js">// Clear all items from the cart.
 CartJS.clear();
 </code></pre>
+<p>See <a href="#core-api-add-item">addItem</a> for details on the <code>options</code> hash.</p>
 <h3 id="core-api-get-attribute">getAttribute</h3><p><code>CartJS.getAttribute(attributeName, defaultValue = undefined)</code></p>
 <p>Get the cart attribute specified by <code>attributeName</code>.
 If the specified attribute isn&#39;t set, <code>defaultValue</code> will be returned (defaults to <code>undefined</code>).</p>
@@ -128,20 +149,21 @@ if(hasGiftNote) {
     var giftMessage = prompt(&#39;Please enter your gift note:&#39;);
 }
 </code></pre>
-<h3 id="core-api-set-attribute">setAttribute</h3><p><code>CartJS.setAttribute(attributeName, value)</code></p>
+<h3 id="core-api-set-attribute">setAttribute</h3><p><code>CartJS.setAttribute(attributeName, value, options = {})</code></p>
 <p>Set the attribute specified by <code>attributeName</code> to the specified <code>value</code>.</p>
 <pre><code class="language-js">// If there&#39;s a giftable item in our order, flag that we need a gift note.
 if(hasGiftableItem) {
     CartJS.setAttribute(&#39;Has Gift Note&#39;, true);
 }
 </code></pre>
+<p>See <a href="#core-api-add-item">addItem</a> for details on the <code>options</code> hash.</p>
 <h3 id="core-api-get-attributes">getAttributes</h3><p><code>CartJS.getAttributes()</code></p>
 <p>Get all currently set cart attributes, returned as an object.</p>
 <pre><code class="language-js">// Print out current cart attributes.
 console.log(CartJS.getAttributes());
 // -&gt; Object {&quot;Has Gift Note&quot;: &quot;false&quot;}
 </code></pre>
-<h3 id="core-api-set-attributes">setAttributes</h3><p><code>CartJS.setAttributes(attributes = {})</code></p>
+<h3 id="core-api-set-attributes">setAttributes</h3><p><code>CartJS.setAttributes(attributes = {}, options = {})</code></p>
 <p>Set multiple cart attributes at once by passing an <code>attributes</code> hash.</p>
 <pre><code class="language-js">// Flag that the cart has a gift note, and set the content of that note.
 CartJS.setAttributes({
@@ -149,22 +171,25 @@ CartJS.setAttributes({
     &quot;Gift Note&quot;: &quot;Happy Birthday!&quot;
 });
 </code></pre>
-<h3 id="core-api-clear-attributes">clearAttributes</h3><p><code>CartJS.clearAttributes()</code></p>
+<p>See <a href="#core-api-add-item">addItem</a> for details on the <code>options</code> hash.</p>
+<h3 id="core-api-clear-attributes">clearAttributes</h3><p><code>CartJS.clearAttributes(options = {})</code></p>
 <p>Clear all cart attributes.
 Does not clear cart line items or the cart note.</p>
 <pre><code class="language-js">// Clear all attributes from the cart.
 CartJS.clearAttributes();
 </code></pre>
+<p>See <a href="#core-api-add-item">addItem</a> for details on the <code>options</code> hash.</p>
 <h3 id="core-api-get-note">getNote</h3><p><code>CartJS.getNote()</code></p>
 <p>Returns the current cart note.</p>
 <pre><code class="language-js">// Let the customer know what the current cart note is.
 alert(&#39;Your cart note is currently: &#39; + CartJS.getNote());
 </code></pre>
-<h3 id="core-api-set-note">setNote</h3><p><code>CartJS.setNote(note)</code></p>
+<h3 id="core-api-set-note">setNote</h3><p><code>CartJS.setNote(note, options = {})</code></p>
 <p>Set the cart note.</p>
 <pre><code class="language-js">// Get any notes from the customer.
 CartJS.setNote(prompt(&quot;Please add any notes: &quot;));
 </code></pre>
+<p>See <a href="#core-api-add-item">addItem</a> for details on the <code>options</code> hash.</p>
 <h2 id="data-api">Data API</h2><p>Data API markup should be added to your HTML to hook in to Cart.js without the need to write Javascript.</p>
 <p>See the <a href="/pages/guide#data-api">Data API</a> section in the Guide for more.</p>
 <h3 id="data-api-data-cart-add">data-cart-add</h3><pre><code class="language-html">&lt;button data-cart-add=&quot;12345678&quot; data-cart-quantity=&quot;1&quot;&gt;Add to Cart&lt;/button&gt;
