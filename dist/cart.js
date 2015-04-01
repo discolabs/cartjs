@@ -525,6 +525,12 @@
     rivets.formatters.minus = function(a, b) {
       return parseInt(a) - parseInt(b);
     };
+    rivets.formatters.prepend = function(a, b) {
+      return b + a;
+    };
+    rivets.formatters.append = function(a, b) {
+      return a + b;
+    };
     rivets.formatters.money = function(value) {
       return CartJS.Utils.formatMoney(value, CartJS.settings.moneyFormat);
     };

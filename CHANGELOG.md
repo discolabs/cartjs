@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 No unreleased changes.
 
+## 0.2.5 - 2014-04-01
+### Added
+- Add `prepend` and `append` formatters to Rivets
+
 ## 0.2.4 - 2014-03-13
 ### Added
 - Ability to specify callbacks through an `options` hash argument in Core API
