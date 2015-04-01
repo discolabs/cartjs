@@ -60,6 +60,12 @@ if 'rivets' of window
   rivets.formatters.minus = (a, b) ->
     parseInt(a) - parseInt(b)
 
+  rivets.formatters.prepend = (a, b) ->
+    b + a
+
+  rivets.formatters.append = (a, b) ->
+    a + b
+
   # Add Shopify-specific formatters for Rivets.js.
   rivets.formatters.money = (value) ->
     CartJS.Utils.formatMoney(value, CartJS.settings.moneyFormat)
