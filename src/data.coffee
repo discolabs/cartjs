@@ -74,7 +74,7 @@ CartJS.Data =
     if $input.is(':checked')
       CartJS.Core.addItem(id)
     else
-      CartJS.Core.removeAll(id)
+      CartJS.Core.removeItemById(id)
 
   # Handler for [data-cart-toggle-attribute] change events.
   toggleAttribute: (e) ->

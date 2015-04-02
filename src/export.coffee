@@ -21,7 +21,6 @@ CartJS.factory = (exports) ->
   exports.updateItemById = CartJS.Core.updateItemById
   exports.updateItemQuantitiesById = CartJS.Core.updateItemQuantitiesById
   exports.removeItem = CartJS.Core.removeItem
-  exports.removeAll = CartJS.Core.removeAll
   exports.clear = CartJS.Core.clear
   exports.getAttribute = CartJS.Core.getAttribute
   exports.setAttribute = CartJS.Core.setAttribute
