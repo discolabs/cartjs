@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 No unreleased changes.
 
+## 0.2.6 - 2014-04-02
+### Changed
+- Fixed incorrect method call when un-checking a checkbox using `data-cart-toggle`
+
 ## 0.2.5 - 2014-04-01
 ### Added
 - Add `prepend` and `append` formatters to Rivets

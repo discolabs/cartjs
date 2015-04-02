@@ -432,7 +432,7 @@
       if ($input.is(':checked')) {
         return CartJS.Core.addItem(id);
       } else {
-        return CartJS.Core.removeAll(id);
+        return CartJS.Core.removeItemById(id);
       }
     },
     toggleAttribute: function(e) {
@@ -557,7 +557,6 @@
     exports.updateItemById = CartJS.Core.updateItemById;
     exports.updateItemQuantitiesById = CartJS.Core.updateItemQuantitiesById;
     exports.removeItem = CartJS.Core.removeItem;
-    exports.removeAll = CartJS.Core.removeAll;
     exports.clear = CartJS.Core.clear;
     exports.getAttribute = CartJS.Core.getAttribute;
     exports.setAttribute = CartJS.Core.setAttribute;
