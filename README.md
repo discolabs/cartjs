@@ -59,7 +59,7 @@ Documentation and examples are available on the [home page][].
 Cart.js currently depends on [jQuery][] for its AJAX helpers, custom event bindings and utility methods.
 This usually isn't a problem as most Shopify themes ship with jQuery.
 
-[Rivets.js] is required if you want to use the DOM Binding module.
+[Rivets.js] is required if you want to use the DOM Binding module. The distribution of Cart.js includes a minified asset (`rivets-cart.min.js`) which contains both the Cart.js library and a bundled version of Rivets.js.
 
 [Rivets.js]: http://rivetsjs.com
 [jQuery]: http://jquery.com
