@@ -9,8 +9,8 @@ You can use Liquid to render the appropriate format from the shop's settings, fo
 <script type="text/javascript">
     $(function() {
         CartJS.init({{ cart | json }}, {
-            "moneyFormat": {{ shop.money_format }},
-            "moneyWithCurrencyFormat": {{ shop.money_with_currency_format }}
+            "moneyFormat": "{{ shop.money_format }}",
+            "moneyWithCurrencyFormat": "{{ shop.money_with_currency_format }}"
         });
     });
 </script>
