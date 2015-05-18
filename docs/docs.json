@@ -85,6 +85,9 @@
         "data-api": {
           "title": "dataAPI"
         },
+        "debug": {
+          "title": "debug"
+        },
         "request-body-class": {
           "title": "requestBodyClass"
         },
