@@ -69,6 +69,7 @@
 
   CartJS = {
     settings: {
+      debug: false,
       dataAPI: true,
       requestBodyClass: null,
       rivetsModels: {},
@@ -83,11 +84,14 @@
       settings = {};
     }
     CartJS.configure(settings);
+    CartJS.Utils.log('Initialising CartJS.');
     CartJS.cart.update(cart);
     if (CartJS.settings.dataAPI) {
+      CartJS.Utils.log('"dataAPI" setting is true, initialising Data API.');
       CartJS.Data.init();
     }
     if (CartJS.settings.requestBodyClass) {
+      CartJS.Utils.log('"requestBodyClass" set, adding event listeners.');
       $(document).on('cart.requestStarted', function() {
         return $('body').addClass(CartJS.settings.requestBodyClass);
       });
@@ -106,6 +110,19 @@
   };
 
   CartJS.Utils = {
+    log: function() {
+      return CartJS.Utils.console(console.log, arguments);
+    },
+    error: function() {
+      return CartJS.Utils.console(console.error, arguments);
+    },
+    console: function(method, args) {
+      if (CartJS.settings.debug && (typeof console !== "undefined" && console !== null)) {
+        args = Array.prototype.slice.call(args);
+        args.unshift('[CartJS]:');
+        return method.apply(console, args);
+      }
+    },
     wrapKeys: function(obj, type, override) {
       var key, value, wrapped;
       if (type == null) {
@@ -486,6 +503,7 @@
       },
       bindViews: function() {
         var models;
+        CartJS.Utils.log('Rivets.js is present, binding views.');
         CartJS.Rivets.unbindViews();
         models = CartJS.Utils.extend({
           cart: CartJS.cart

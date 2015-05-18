@@ -4,24 +4,28 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 No unreleased changes.
 
-## 0.2.6 - 2014-04-02
+## 0.2.7 - 2015-05-18
+### Added
+- Add `debug` setting for outputting of useful information to the console
+
+## 0.2.6 - 2015-04-02
 ### Changed
 - Fixed incorrect method call when un-checking a checkbox using `data-cart-toggle`
 
-## 0.2.5 - 2014-04-01
+## 0.2.5 - 2015-04-01
 ### Added
 - Add `prepend` and `append` formatters to Rivets
 
-## 0.2.4 - 2014-03-13
+## 0.2.4 - 2015-03-13
 ### Added
 - Ability to specify callbacks through an `options` hash argument in Core API
 
-## 0.2.3 - 2014-02-25
+## 0.2.3 - 2015-02-25
 ### Changed
 - Fixed potential issue using .data() instead of .attr() to access `data-` attributes
 - Added quantity adjustment example to advanced code example
 
-## 0.2.2 - 2014-01-25
+## 0.2.2 - 2015-01-25
 ### Added
 - New `updateItemQuantitiesById` Core API method
 
