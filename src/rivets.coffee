@@ -20,6 +20,8 @@ if 'rivets' of window
 
     # Bind all Rivets.js view elements that are currently present on the page.
     bindViews: () ->
+      CartJS.Utils.log('Rivets.js is present, binding views.')
+
       # Unbind any currently bound views.
       CartJS.Rivets.unbindViews()
 

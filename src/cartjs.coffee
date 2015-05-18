@@ -4,6 +4,7 @@
 CartJS =
   # Default settings, publicly accessible on `module.settings`.
   settings:
+    debug: false
     dataAPI: true
     requestBodyClass: null
     rivetsModels: {}
@@ -27,15 +28,20 @@ CartJS.init = (cart, settings = {}) ->
   # Configure settings from any passed settings hash.
   CartJS.configure(settings)
 
+  # Note that we are initialising the library.
+  CartJS.Utils.log('Initialising CartJS.')
+
   # Update the cart model with the initial cart objects.
   CartJS.cart.update(cart)
 
   # Initialise the Data API if enabled.
   if CartJS.settings.dataAPI
+    CartJS.Utils.log('"dataAPI" setting is true, initialising Data API.')
     CartJS.Data.init()
 
   # Set up toggling of CSS class on body during requests if provided.
   if CartJS.settings.requestBodyClass
+    CartJS.Utils.log('"requestBodyClass" set, adding event listeners.')
     $(document).on 'cart.requestStarted', () -> $('body').addClass(CartJS.settings.requestBodyClass)
     $(document).on 'cart.requestComplete', () -> $('body').removeClass(CartJS.settings.requestBodyClass)
 

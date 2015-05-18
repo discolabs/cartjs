@@ -4,6 +4,21 @@
 
 CartJS.Utils =
 
+  # Log an informational message to the console iff debug mode is on and a console is available.
+  log: () ->
+    CartJS.Utils.console(console.log, arguments)
+
+  # Log an error message to the console iff debug mode is on and a console is available.
+  error: () ->
+    CartJS.Utils.console(console.error, arguments)
+
+  # General wrapper method for outputting to console.
+  console: (method, args) ->
+    if CartJS.settings.debug and console?
+      args = Array.prototype.slice.call(args)
+      args.unshift '[CartJS]:'
+      method.apply(console, args)
+
   # Returns the given object with each key wrapped with the text specified by
   # the 'type' parameter and square brackets, suitable for passing as a POST
   # variable to Shopify. 'type' defaults to 'properties'.
