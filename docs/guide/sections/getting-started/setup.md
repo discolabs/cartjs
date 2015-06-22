@@ -47,3 +47,18 @@ Because Cart.js depends on jQuery, you should load it after you've included the 
 
 Note that the call to `CartJS.init()` requires that {% raw %}`{{ cart | json }}`{% endraw %} is passed as an argument.
 This tells Liquid to render the initial cart state as a JSON object and pass it to Cart.js.
+
+<div class="callout callout-warning">
+    <h4>Dependency when formatting monetary values</h4>
+
+    <p>
+        If you're using any of the money-formatting features of Cart.js (such as the `| money` filter in the DOM Binding
+        module or the `data-cart-render` attributes of the Data API), you'll need to make sure that Shopify's currency
+        Javascript library is loaded.
+    </p>
+    
+    <p>
+        Do this simply by ensuring that the `option_selection.js` library is loaded on all of your theme's pages, using
+        a line something like `{% raw %}{{ 'option_selection.js' | shopify_asset_url | script_tag }}{% endraw %}` in your `theme.liquid`.
+    </p>
+</div>
