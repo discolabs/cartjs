@@ -68,6 +68,11 @@
 
     // Highlight.js
     hljs.initHighlightingOnLoad();
+
+    // Re-render CartJS data- elements when the currency changes.
+    jQuery(document).on('currency.changed', function(e, oldCurrency, newCurrency) {
+      CartJS.render(e, CartJS.cart);
+    });
   </script>
 </body>
 </html>
