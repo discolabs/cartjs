@@ -77,6 +77,9 @@ module.exports = (grunt) ->
         ,
           src: 'cartjs.zip'
           dest: 'docs/theme/assets/cartjs.zip'
+        ,
+          src: 'node_modules/shopify.i18n.js/dist/shopify.i18n.min.js'
+          dest: 'docs/theme/assets/shopify.i18n.min.js'
         ]
 
     less:

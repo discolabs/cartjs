@@ -8,6 +8,7 @@ CartJS =
     dataAPI: true
     requestBodyClass: null
     rivetsModels: {}
+    currency: null
     moneyFormat: null
     moneyWithCurrencyFormat: null
 

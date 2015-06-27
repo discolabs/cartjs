@@ -76,8 +76,21 @@ CartJS.Utils =
   # Format a monetary amount using Shopify's formatMoney if available.
   #
   # If it's not available, just return the value.
-  formatMoney: (value, format) ->
-    if window.Shopify?.formatMoney? then Shopify.formatMoney(value, format)  else value
+  formatMoney: (value, format, formatName, currency = CartJS.settings.currency) ->
+
+    console.log('formatMoney', value, format, formatName, currency);
+
+    # If we've specified a currency other than the default one, convert the value and format.
+    if currency != CartJS.settings.currency
+      # Convert value.
+      value = value * 1
+
+      # Fetch the appropriate format.
+      if (window.Currency?.moneyFormats?) and (currency of window.Currency.moneyFormats)
+        format = window.Currency.moneyFormats[currency][formatName]
+
+    # Render the formatted amount using the Shopify formatter if available, else just the value.
+    if window.Shopify?.formatMoney? then Shopify.formatMoney(value, format) else value
 
   # Return a resized image URL using Shopify's getSizedImageUrl if available.
   #

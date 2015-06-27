@@ -30,6 +30,10 @@ if 'rivets' of window
         cart: CartJS.cart
       }, CartJS.settings.rivetsModels)
 
+      # If Shopify's Currency global object is available, add it to the data model.
+      if window.Currency?
+        models.Currency = window.Currency
+
       # Iterate through and bind all elements marked as Rivets.js views via the [data-cart-view] attribute.
       jQuery('[data-cart-view]').each () ->
         CartJS.Rivets.views.push(rivets.bind(this, models))
@@ -69,11 +73,11 @@ if 'rivets' of window
     a + b
 
   # Add Shopify-specific formatters for Rivets.js.
-  rivets.formatters.money = (value) ->
-    CartJS.Utils.formatMoney(value, CartJS.settings.moneyFormat)
+  rivets.formatters.money = (value, currency) ->
+    CartJS.Utils.formatMoney(value, CartJS.settings.moneyFormat, 'money_format', currency)
 
-  rivets.formatters.money_with_currency = (value) ->
-    CartJS.Utils.formatMoney(value, CartJS.settings.moneyWithCurrencyFormat)
+  rivets.formatters.money_with_currency = (value, currency) ->
+    CartJS.Utils.formatMoney(value, CartJS.settings.moneyWithCurrencyFormat, 'money_with_currency_format', currency)
 
   rivets.formatters.productImageSize = (src, size) ->
     CartJS.Utils.getSizedImageUrl(src, size)
