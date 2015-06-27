@@ -30,6 +30,9 @@ CartJS.factory = (exports) ->
   exports.getNote = CartJS.Core.getNote
   exports.setNote = CartJS.Core.setNote
 
+  # Export the render() method for the Data API so that it can be manually triggered if needed.
+  exports.render = CartJS.Data.render
+
   # Export Cart and Item classes so they can be extended.
   # (Don't export for the moment; this isn't documented yet).
   # exports.Cart = CartJS.Cart
