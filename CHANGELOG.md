@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+- No unreleased changes
+
+## 0.3.0 - 2015-06-27
+### Added
+- Support for dynamically rendering currency changes through money filters
+
 ### Changed
 - Upgraded Rivets.js library to v0.8.1
 

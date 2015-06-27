@@ -73,6 +73,7 @@
       dataAPI: true,
       requestBodyClass: null,
       rivetsModels: {},
+      currency: null,
       moneyFormat: null,
       moneyWithCurrencyFormat: null
     },
@@ -180,9 +181,21 @@
         return [];
       }
     },
-    formatMoney: function(value, format) {
-      var _ref;
-      if (((_ref = window.Shopify) != null ? _ref.formatMoney : void 0) != null) {
+    formatMoney: function(value, format, formatName, currency) {
+      var _ref, _ref1;
+      if (currency == null) {
+        currency = '';
+      }
+      if (!currency) {
+        currency = CartJS.settings.currency;
+      }
+      if ((window.Currency != null) && currency !== CartJS.settings.currency) {
+        value = Currency.convert(value, CartJS.settings.currency, currency);
+        if ((((_ref = window.Currency) != null ? _ref.moneyFormats : void 0) != null) && (currency in window.Currency.moneyFormats)) {
+          format = window.Currency.moneyFormats[currency][formatName];
+        }
+      }
+      if (((_ref1 = window.Shopify) != null ? _ref1.formatMoney : void 0) != null) {
         return Shopify.formatMoney(value, format);
       } else {
         return value;
@@ -481,13 +494,13 @@
       context = {
         'item_count': cart.item_count,
         'total_price': cart.total_price,
-        'total_price_money': CartJS.Utils.formatMoney(cart.total_price, CartJS.settings.moneyFormat),
-        'total_price_money_with_currency': CartJS.Utils.formatMoney(cart.total_price, CartJS.settings.moneyWithCurrencyFormat)
+        'total_price_money': CartJS.Utils.formatMoney(cart.total_price, CartJS.settings.moneyFormat, 'money_format', Currency.currentCurrency),
+        'total_price_money_with_currency': CartJS.Utils.formatMoney(cart.total_price, CartJS.settings.moneyWithCurrencyFormat, 'money_with_currency_format', Currency.currentCurrency)
       };
       return jQuery('[data-cart-render]').each(function() {
         var $this;
         $this = jQuery(this);
-        return $this.text(context[$this.attr('data-cart-render')]);
+        return $this.html(context[$this.attr('data-cart-render')]);
       });
     }
   };
@@ -508,6 +521,9 @@
         models = CartJS.Utils.extend({
           cart: CartJS.cart
         }, CartJS.settings.rivetsModels);
+        if (window.Currency != null) {
+          models.Currency = window.Currency;
+        }
         return jQuery('[data-cart-view]').each(function() {
           return CartJS.Rivets.views.push(rivets.bind(this, models));
         });
@@ -549,11 +565,11 @@
     rivets.formatters.append = function(a, b) {
       return a + b;
     };
-    rivets.formatters.money = function(value) {
-      return CartJS.Utils.formatMoney(value, CartJS.settings.moneyFormat);
+    rivets.formatters.money = function(value, currency) {
+      return CartJS.Utils.formatMoney(value, CartJS.settings.moneyFormat, 'money_format', currency);
     };
-    rivets.formatters.money_with_currency = function(value) {
-      return CartJS.Utils.formatMoney(value, CartJS.settings.moneyWithCurrencyFormat);
+    rivets.formatters.money_with_currency = function(value, currency) {
+      return CartJS.Utils.formatMoney(value, CartJS.settings.moneyWithCurrencyFormat, 'money_with_currency_format', currency);
     };
     rivets.formatters.productImageSize = function(src, size) {
       return CartJS.Utils.getSizedImageUrl(src, size);
@@ -582,7 +598,8 @@
     exports.setAttributes = CartJS.Core.setAttributes;
     exports.clearAttributes = CartJS.Core.clearAttributes;
     exports.getNote = CartJS.Core.getNote;
-    return exports.setNote = CartJS.Core.setNote;
+    exports.setNote = CartJS.Core.setNote;
+    return exports.render = CartJS.Data.render;
   };
 
   if (typeof exports === 'object') {
