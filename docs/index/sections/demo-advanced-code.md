@@ -40,7 +40,7 @@
                     <li rv-each-property="item.propertyArray < properties" rv-text="property.value"></li>
                 </ul>
             </td>
-            <td rv-text="item.price | money"></td>
+            <td rv-html="item.price | money Currency.currentCurrency"></td>
             <td>
                 <a href="#" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | minus 1">-</a>
                 <span rv-text="item.quantity"></span>
@@ -49,7 +49,7 @@
             <td>
                 <a href="#" rv-data-cart-remove="index | plus 1">&times;</a>
             </td>
-            <td rv-text="item.line_price | money"></td>
+            <td rv-html="item.line_price | money Currency.currentCurrency"></td>
         </tr>
         <tr rv-show="cart.item_count | lt 1">
             <td colspan="5">You don't have any items in your cart.</td>
@@ -58,7 +58,7 @@
     <tfoot rv-show="cart.item_count | gt 0">
         <tr>
             <td colspan="4"></td>
-            <td rv-text="cart.total_price | money"></td>
+            <td rv-html="cart.total_price | money Currency.currentCurrency"></td>
         </tr>
     </tfoot>
 </table>

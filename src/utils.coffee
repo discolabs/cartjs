@@ -77,13 +77,10 @@ CartJS.Utils =
   #
   # If it's not available, just return the value.
   formatMoney: (value, format, formatName, currency = CartJS.settings.currency) ->
-
-    console.log('formatMoney', value, format, formatName, currency);
-
     # If we've specified a currency other than the default one, convert the value and format.
-    if currency != CartJS.settings.currency
+    if window.Currency? and currency != CartJS.settings.currency
       # Convert value.
-      value = value * 1
+      value = Currency.convert(value, CartJS.settings.currency, currency)
 
       # Fetch the appropriate format.
       if (window.Currency?.moneyFormats?) and (currency of window.Currency.moneyFormats)
@@ -97,4 +94,3 @@ CartJS.Utils =
   # If it's not available, just return the original URL.
   getSizedImageUrl: (src, size) ->
     if window.Shopify?.Image?.getSizedImageUrl? then Shopify.Image.getSizedImageUrl(src, size) else src
-
