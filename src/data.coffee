@@ -107,11 +107,11 @@ CartJS.Data =
     context = {
       'item_count': cart.item_count,
       'total_price': cart.total_price,
-      'total_price_money': CartJS.Utils.formatMoney(cart.total_price, CartJS.settings.moneyFormat),
-      'total_price_money_with_currency': CartJS.Utils.formatMoney(cart.total_price, CartJS.settings.moneyWithCurrencyFormat),
+      'total_price_money': CartJS.Utils.formatMoney(cart.total_price, CartJS.settings.moneyFormat, 'money_format', Currency.currentCurrency),
+      'total_price_money_with_currency': CartJS.Utils.formatMoney(cart.total_price, CartJS.settings.moneyWithCurrencyFormat, 'money_with_currency_format', Currency.currentCurrency),
     }
 
     # Render the context to elements as needed.
     jQuery('[data-cart-render]').each ()->
       $this = jQuery(this)
-      $this.text context[$this.attr('data-cart-render')]
+      $this.html context[$this.attr('data-cart-render')]

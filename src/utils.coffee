@@ -76,7 +76,10 @@ CartJS.Utils =
   # Format a monetary amount using Shopify's formatMoney if available.
   #
   # If it's not available, just return the value.
-  formatMoney: (value, format, formatName, currency = CartJS.settings.currency) ->
+  formatMoney: (value, format, formatName, currency = '') ->
+    if not currency
+      currency = CartJS.settings.currency
+
     # If we've specified a currency other than the default one, convert the value and format.
     if window.Currency? and currency != CartJS.settings.currency
       # Convert value.
