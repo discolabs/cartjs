@@ -2,7 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
-No unreleased changes.
+### Changed
+- Upgraded Rivets.js library to v0.8.1
 
 ## 0.2.7 - 2015-05-18
 ### Added
