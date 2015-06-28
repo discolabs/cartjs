@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 - No unreleased changes
 
+## 0.3.1 - 2015-06-28
+### Changed
+- Fix for undefined Currency issue if not using Currency plugin.
+
 ## 0.3.0 - 2015-06-27
 ### Added
 - Support for dynamically rendering currency changes through money filters

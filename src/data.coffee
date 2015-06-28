@@ -107,8 +107,8 @@ CartJS.Data =
     context = {
       'item_count': cart.item_count,
       'total_price': cart.total_price,
-      'total_price_money': CartJS.Utils.formatMoney(cart.total_price, CartJS.settings.moneyFormat, 'money_format', Currency.currentCurrency),
-      'total_price_money_with_currency': CartJS.Utils.formatMoney(cart.total_price, CartJS.settings.moneyWithCurrencyFormat, 'money_with_currency_format', Currency.currentCurrency),
+      'total_price_money': CartJS.Utils.formatMoney(cart.total_price, CartJS.settings.moneyFormat, 'money_format', if Currency?.currentCurrency? then Currency.currentCurrency),
+      'total_price_money_with_currency': CartJS.Utils.formatMoney(cart.total_price, CartJS.settings.moneyWithCurrencyFormat, 'money_with_currency_format', if Currency?.currentCurrency? then Currency.currentCurrency),
     }
 
     # Render the context to elements as needed.
