@@ -31,7 +31,18 @@ module.exports = (grunt) ->
         options:
           banner: '<%= meta.banner %>'
         files:
-          'dist/rivets-cart.js': ['node_modules/rivets/node_modules/sightglass/index.js', 'node_modules/rivets/dist/rivets.js', 'dist/cart.js']
+          'dist/rivets-cart.js': [
+            'node_modules/rivets/node_modules/sightglass/index.js',
+            'node_modules/rivets/dist/rivets.js',
+            'dist/cart.js'
+          ]
+          'dist/rivets-cart-ie8.js': [
+            'node_modules/es5-shim/es5-shim.js',
+            'lib/es5-sham.js',
+            'node_modules/rivets/node_modules/sightglass/index.js',
+            'node_modules/rivets/dist/rivets.js',
+            'dist/cart.js'
+          ]
 
     uglify:
       build:
@@ -41,10 +52,11 @@ module.exports = (grunt) ->
         files:
           'dist/cart.min.js': 'dist/cart.js'
           'dist/rivets-cart.min.js': 'dist/rivets-cart.js'
+          'dist/rivets-cart-ie8.min.js': 'dist/rivets-cart-ie8.js'
 
     clean:
       build:
-        src: ['dist/rivets-cart.js']
+        src: ['dist/rivets-cart.js', 'dist/rivets-cart-ie8.js']
 
     terraform:
       docs:
@@ -74,6 +86,9 @@ module.exports = (grunt) ->
         files: [
           src: 'dist/rivets-cart.min.js'
           dest: 'docs/theme/assets/rivets-cart.min.js'
+        ,
+          src: 'dist/rivets-cart-ie8.min.js'
+          dest: 'docs/theme/assets/rivets-cart-ie8.min.js'
         ,
           src: 'cartjs.zip'
           dest: 'docs/theme/assets/cartjs.zip'
