@@ -7,16 +7,27 @@ if 'rivets' of window
   # Rivets.js has been loaded, so declare the CartJS.Rivets module.
   CartJS.Rivets =
 
+    # Maintain a reference to the base model object so that we can reference it later.
+    model: null
+
     # Maintain a list of all bound Rivets.js views so that we can unbind later if needed.
-    views: []
+    boundViews: []
 
     # Initialise the Rivets module.
     init: () ->
       CartJS.Rivets.bindViews()
 
+      # If the IE8 compatibility module is present, initialise it.
+      if CartJS.IE8?
+        CartJS.IE8.init()
+
     # Tear down the Rivets module.
     destroy: () ->
       CartJS.Rivets.unbindViews()
+
+      # If the IE8 compatibility module is present, tear it down.
+      if CartJS.IE8?
+        CartJS.IE8.destroy()
 
     # Bind all Rivets.js view elements that are currently present on the page.
     bindViews: () ->
@@ -26,23 +37,25 @@ if 'rivets' of window
       CartJS.Rivets.unbindViews()
 
       # Merge a new models object with any specified in the settings.
-      models = CartJS.Utils.extend({
+      CartJS.Rivets.model = CartJS.Utils.extend({
         cart: CartJS.cart
       }, CartJS.settings.rivetsModels)
 
       # If Shopify's Currency global object is available, add it to the data model.
+      # Done so that we can observer Currency.currentCurrency for changes.
       if window.Currency?
-        models.Currency = window.Currency
+        CartJS.Rivets.model.Currency = window.Currency
 
       # Iterate through and bind all elements marked as Rivets.js views via the [data-cart-view] attribute.
       jQuery('[data-cart-view]').each () ->
-        CartJS.Rivets.views.push(rivets.bind(this, models))
+        view = rivets.bind(jQuery(this), CartJS.Rivets.model)
+        CartJS.Rivets.boundViews.push(view)
 
     # Unbind all currently bound Rivets.js views.
     unbindViews: () ->
-      for view in CartJS.Rivets.views
+      for view in CartJS.Rivets.boundViews
         view.unbind()
-      CartJS.Rivets.views = []
+      CartJS.Rivets.boundViews = []
 
   # Add useful general-purpose formatters for Rivets.js
   rivets.formatters.eq = (a, b) ->

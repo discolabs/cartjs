@@ -49,7 +49,12 @@
   <script type="text/javascript" src="{{ 'bootstrap.min.js' | asset_url }}"></script>
   {{ '/services/javascripts/currencies.js' | script_tag }}
   <script type="text/javascript" src="{{ 'shopify.i18n.min.js' | asset_url }}"></script>
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="{{ 'rivets-cart-ie8.min.js' | asset_url }}"></script>
+  <![endif]-->
+  <!--[if gt IE 8]> <!-- -->
   <script type="text/javascript" src="{{ 'rivets-cart.min.js' | asset_url }}"></script>
+  <!-- <![endif]-->
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js"></script>
 
   <!-- Initialise Javascript Libraries -->

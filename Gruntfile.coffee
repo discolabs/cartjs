@@ -25,6 +25,18 @@ module.exports = (grunt) ->
             'src/rivets.coffee'
             'src/export.coffee'
           ]
+          'dist/cart-ie8.js': [
+            'src/cart.coffee'
+            'src/item.coffee'
+            'src/cartjs.coffee'
+            'src/utils.coffee'
+            'src/queue.coffee'
+            'src/core.coffee'
+            'src/data.coffee'
+            'src/rivets.coffee'
+            'src/ie8.coffee'
+            'src/export.coffee'
+          ]
 
     concat:
       build:
@@ -41,7 +53,7 @@ module.exports = (grunt) ->
             'lib/es5-sham.js',
             'node_modules/rivets/node_modules/sightglass/index.js',
             'node_modules/rivets/dist/rivets.js',
-            'dist/cart.js'
+            'dist/cart-ie8.js',
           ]
 
     uglify:
@@ -56,7 +68,7 @@ module.exports = (grunt) ->
 
     clean:
       build:
-        src: ['dist/rivets-cart.js', 'dist/rivets-cart-ie8.js']
+        src: ['dist/rivets-cart.js', 'dist/rivets-cart-ie8.js', 'dist/cart-ie8.js']
 
     terraform:
       docs:
