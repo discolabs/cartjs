@@ -2,7 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
-- No unreleased changes
+### Changed
+- Fix for missing `removeItemById` public method 
 
 ## 0.3.1 - 2015-06-28
 ### Changed
