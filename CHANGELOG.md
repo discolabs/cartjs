@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+### Added
+- Made `getCart` a public method to allow force cart refreshes 
+
 ### Changed
 - Fix for missing `removeItemById` public method 
 
