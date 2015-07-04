@@ -93,7 +93,7 @@ module.exports = (grunt) ->
           src: 'dist/rivets-cart.min.js'
           dest: 'docs/theme/assets/rivets-cart.min.js'
         ,
-          src: 'dist/rivets-cart-ie8.min.js'
+          src: 'dist/rivets-cart-compatibility.min.js'
           dest: 'docs/theme/assets/rivets-cart-compatibility.min.js'
         ,
           src: 'cartjs.zip'
