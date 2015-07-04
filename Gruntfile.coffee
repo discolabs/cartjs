@@ -1,4 +1,19 @@
 module.exports = (grunt) ->
+
+  # Define a list of the core source files to use for compilation.
+  sources = [
+    'src/cart.coffee'
+    'src/item.coffee'
+    'src/cartjs.coffee'
+    'src/utils.coffee'
+    'src/queue.coffee'
+    'src/core.coffee'
+    'src/data.coffee'
+    'src/rivets.coffee'
+    'src/export.coffee'
+  ]
+
+  # Initialise
   grunt.initConfig
     pkg: grunt.file.readJSON('package.json')
 
@@ -14,29 +29,8 @@ module.exports = (grunt) ->
         options:
           join: true
         files:
-          'dist/cart.js': [
-            'src/cart.coffee'
-            'src/item.coffee'
-            'src/cartjs.coffee'
-            'src/utils.coffee'
-            'src/queue.coffee'
-            'src/core.coffee'
-            'src/data.coffee'
-            'src/rivets.coffee'
-            'src/export.coffee'
-          ]
-          'dist/cart-ie8.js': [
-            'src/cart.coffee'
-            'src/item.coffee'
-            'src/cartjs.coffee'
-            'src/utils.coffee'
-            'src/queue.coffee'
-            'src/core.coffee'
-            'src/data.coffee'
-            'src/rivets.coffee'
-            'src/ie8.coffee'
-            'src/export.coffee'
-          ]
+          'dist/cart.js': sources
+          'dist/cart-compatibility.js': sources.concat ['src/compatibility.coffee']
 
     concat:
       build:
@@ -48,12 +42,12 @@ module.exports = (grunt) ->
             'node_modules/rivets/dist/rivets.js',
             'dist/cart.js'
           ]
-          'dist/rivets-cart-ie8.js': [
+          'dist/rivets-cart-compatibility.js': [
             'node_modules/es5-shim/es5-shim.js',
             'lib/es5-sham.js',
             'node_modules/rivets/node_modules/sightglass/index.js',
             'node_modules/rivets/dist/rivets.js',
-            'dist/cart-ie8.js',
+            'dist/cart-compatibility.js',
           ]
 
     uglify:
@@ -64,11 +58,11 @@ module.exports = (grunt) ->
         files:
           'dist/cart.min.js': 'dist/cart.js'
           'dist/rivets-cart.min.js': 'dist/rivets-cart.js'
-          'dist/rivets-cart-ie8.min.js': 'dist/rivets-cart-ie8.js'
+          'dist/rivets-cart-compatibility.min.js': 'dist/rivets-cart-compatibility.js'
 
     clean:
       build:
-        src: ['dist/rivets-cart.js', 'dist/rivets-cart-ie8.js', 'dist/cart-ie8.js']
+        src: ['dist/rivets-cart.js', 'dist/rivets-cart-compatibility.js', 'dist/cart-compatibility.js']
 
     terraform:
       docs:
@@ -100,7 +94,7 @@ module.exports = (grunt) ->
           dest: 'docs/theme/assets/rivets-cart.min.js'
         ,
           src: 'dist/rivets-cart-ie8.min.js'
-          dest: 'docs/theme/assets/rivets-cart-ie8.min.js'
+          dest: 'docs/theme/assets/rivets-cart-compatibility.min.js'
         ,
           src: 'cartjs.zip'
           dest: 'docs/theme/assets/cartjs.zip'
