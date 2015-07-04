@@ -16,7 +16,7 @@ Then you can make calls to Cart.js from within your theme code.</p>
 <h4>Bower</h4><pre><code class="language-shell">bower install shopify-cartjs
 </code></pre>
 <h4>Download</h4><p>Download the latest stable release of Cart.js from <a href="{{ "cartjs.zip" | asset_url }}">here</a>.</p>
-<h3 id="getting-started-setup">Setup</h3><p>The Cart.js distribution comes packaged with three versions of the library:</p>
+<h3 id="getting-started-setup">Setup</h3><p>The Cart.js distribution comes packaged with fours versions of the library:</p>
 <div class="callout callout-success">
     <p>
         <code>cart.js</code> is the unminified source code, containing the Core and Data APIs.
@@ -29,6 +29,12 @@ Then you can make calls to Cart.js from within your theme code.</p>
     <p>
         <code>rivets-cart.min.js</code> is a minified version of Cart.js that also bundles the Rivets.js library.
         Together, they provide support for the DOM Binding functionality.
+    </p>
+
+    <p>
+        <code>rivets-cart-compatibility.min.js</code> is a version of the Cart.js and Rivets.js bundle that provides
+         support for older browsers (Internet Explorer 8 and below).
+         See <a href="#getting-started-browser-support">Browser Support</a>.
     </p>
 </div>
 
@@ -90,6 +96,57 @@ Of course, these two approaches aren&#39;t mutually exclusive - you can always u
 
 <p>Once you&#39;ve gotten the hang of the Core and Data APIs, you might be interested in using Cart.js in conjunction with Rivets.js to create HTML templates that are automatically updated along with your cart.
 That&#39;s covered in the <a href="#dom-binding">DOM Binding</a> section later on.</p>
+<h3 id="getting-started-browser-support">Browser Support</h3><p>If you&#39;re using only the Core and Data functionality of Cart.js (that is,
+you&#39;re using the <code>cart.js</code> or <code>cart.min.js</code> library in your theme), then the
+range of browsers your theme will support is limited purely by the version of
+jQuery you&#39;re using. That means that using a <code>1.x</code> version of jQuery will allow
+you to support IE6+, Chrome, Firefox, Safari 5.1+ and up.</p>
+<p>If you&#39;re using the DOM Binding functionality (that is, you&#39;re using the
+<code>rivets-cart.min.js</code> library in your theme), then you may see problems on
+browsers that don&#39;t support the ES5 Javascript standard (namely, Internet 
+Explorer 8 and below). If you need to support these browsers, then Cart.js
+providers an alternate version of the library that bundles Rivets, Cart.js
+and a number of shims and polyfills to make things work (named
+<code>rivets-cart-compatibility.min.js</code>).</p>
+<p>Because the shims and polyfills are redundant on most browsers, you should make
+sure that you&#39;re only serving this alternate version to the browsers that need
+it. The following shows how to serve the compatible version of the library to
+IE8 and below, while providing the standard version to all other browsers:</p>
+<p>{% raw %}</p>
+<pre><code class="language-html">  &lt;!-- Include Cart.js, conditionally loading Compatible version on older browsers --&gt;
+  &lt;!--[if lt IE 9]&gt;
+  {{ &#39;rivets-cart-compatibility.min.js&#39; | asset_url | script_tag }}
+  &lt;![endif]--&gt;
+  &lt;!--[if gt IE 8]&gt; &lt;!-- --&gt;
+  {{ &#39;rivets-cart.min.js&#39; | asset_url | script_tag }}
+  &lt;!-- &lt;![endif]--&gt;
+</code></pre>
+<p>{% endraw %}</p>
+<p>If you&#39;re already using Modernizr or a similar feature-detection library,
+you may wish to use that to detect whether the user&#39;s browser supports ES5 and
+load the appropriate script file, instead of using the conditional comment
+approach outlined above. </p>
+<div class="callout callout-success">
+    <h4>What&#39;s the issue with older browsers?</h4>
+
+    <p>
+        Non-ES5 browsers (namely, IE8) don&#39;t support EcmaScript 5&#39;s
+        <code>Object.defineProperty()</code> method, which Rivets.js uses to observe
+        changes on data models and trigger DOM updates.
+    </p>
+
+    <p>
+        The compatible version of Cart.js provides a workaround for this, by
+        bundling a number of ES5 shims and polyfills into the library, as well
+        as forcibly binding and re-binding Rivets views whenever a charge to
+        the cart occurs.
+    </p>
+
+    <p>
+        As a result of this workaround, if the cart model is being updated
+        outside of Cart.js&#39;s regular methods, a <code>CartJS.getCart()</code> call should
+        be made to force a re-render on non-ES5 browsers.
+    </p><br></div>
 <h2 id="core-api">Core API</h2><p>The Core API consists of methods called on the global <code>CartJS</code> object.
 You can use the Core API to do pretty much everything you&#39;d expect of a cart manipulation library - add items, update quantities and custom properties, and so on.</p>
 <p>A full list of methods can be found in the <a href="/pages/reference/#core-api">API Reference</a>.</p>
@@ -342,4 +399,4 @@ All of the usual inputs - <code>id</code> to specify the variant ID, <code>quant
 <p>A complete list of the events triggered by Cart.js is available in the <a href="/pages/reference#events">Event Reference</a>.</p>
 <h2 id="dom-binding">DOM Binding</h2><p>Full documentation for the DOM Binding module is coming soon.</p>
 <p>In the meantime, you can check out the example on the <a href="/">front page</a> in combination with the <a href="http://rivetsjs.com/">Rivets.js documentation</a> to get an idea of how things work.</p>
-</article><aside class="col-md-2 hidden-sm hidden-xs"><div class="aside"><nav id="nav" data-spy="affix" data-offset-top="102"><ul class="nav nav-docs"><li><a href="#introduction">Introduction</a><ul class="nav"><li><a href="#introduction-what">What is Cart.js?</a></li></ul></li><li><a href="#getting-started">Getting Started</a><ul class="nav"><li><a href="#getting-started-installation">Installation</a></li><li><a href="#getting-started-setup">Setup</a></li><li><a href="#getting-started-next-steps">Next Steps</a></li></ul></li><li><a href="#core-api">Core API</a><ul class="nav"><li><a href="#core-api-configuration">Configuration</a></li><li><a href="#core-api-cart-state">Cart State</a></li><li><a href="#core-api-adding-items">Adding Items</a></li><li><a href="#core-api-updating-items">Updating Items</a></li><li><a href="#core-api-removing-items">Removing Items</a></li><li><a href="#core-api-attributes">Cart Attributes</a></li><li><a href="#core-api-callbacks">Callbacks</a></li></ul></li><li><a href="#data-api">Data API</a><ul class="nav"><li><a href="#data-api-adding-items">Adding Items</a></li><li><a href="#data-api-removing-items">Removing Items</a></li><li><a href="#data-api-toggling-items">Toggling Items</a></li><li><a href="#data-api-submitting-forms">Submitting Forms</a></li></ul></li><li><a href="#events">Events</a><ul class="nav"></ul></li><li><a href="#dom-binding">DOM Binding</a><ul class="nav"></ul></li></ul></nav></div></aside></div></section></div>
+</article><aside class="col-md-2 hidden-sm hidden-xs"><div class="aside"><nav id="nav" data-spy="affix" data-offset-top="102"><ul class="nav nav-docs"><li><a href="#introduction">Introduction</a><ul class="nav"><li><a href="#introduction-what">What is Cart.js?</a></li></ul></li><li><a href="#getting-started">Getting Started</a><ul class="nav"><li><a href="#getting-started-installation">Installation</a></li><li><a href="#getting-started-setup">Setup</a></li><li><a href="#getting-started-next-steps">Next Steps</a></li><li><a href="#getting-started-browser-support">Browser Support</a></li></ul></li><li><a href="#core-api">Core API</a><ul class="nav"><li><a href="#core-api-configuration">Configuration</a></li><li><a href="#core-api-cart-state">Cart State</a></li><li><a href="#core-api-adding-items">Adding Items</a></li><li><a href="#core-api-updating-items">Updating Items</a></li><li><a href="#core-api-removing-items">Removing Items</a></li><li><a href="#core-api-attributes">Cart Attributes</a></li><li><a href="#core-api-callbacks">Callbacks</a></li></ul></li><li><a href="#data-api">Data API</a><ul class="nav"><li><a href="#data-api-adding-items">Adding Items</a></li><li><a href="#data-api-removing-items">Removing Items</a></li><li><a href="#data-api-toggling-items">Toggling Items</a></li><li><a href="#data-api-submitting-forms">Submitting Forms</a></li></ul></li><li><a href="#events">Events</a><ul class="nav"></ul></li><li><a href="#dom-binding">DOM Binding</a><ul class="nav"></ul></li></ul></nav></div></aside></div></section></div>

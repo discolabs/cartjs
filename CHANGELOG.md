@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 No unreleased changes.
 
+## 0.3.3 - 2015-07-04
+### Added
+- Compatible version of `rivets-cart.min.js` for non-ES5 browser support
+
 ## 0.3.2 - 2015-07-03
 ### Added
 - Made `getCart` a public method to allow force cart refreshes 

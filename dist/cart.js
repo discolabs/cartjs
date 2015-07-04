@@ -507,35 +507,43 @@
 
   if ('rivets' in window) {
     CartJS.Rivets = {
-      views: [],
+      model: null,
+      boundViews: [],
       init: function() {
-        return CartJS.Rivets.bindViews();
+        CartJS.Rivets.bindViews();
+        if (CartJS.IE8 != null) {
+          return CartJS.IE8.init();
+        }
       },
       destroy: function() {
-        return CartJS.Rivets.unbindViews();
+        CartJS.Rivets.unbindViews();
+        if (CartJS.IE8 != null) {
+          return CartJS.IE8.destroy();
+        }
       },
       bindViews: function() {
-        var models;
         CartJS.Utils.log('Rivets.js is present, binding views.');
         CartJS.Rivets.unbindViews();
-        models = CartJS.Utils.extend({
+        CartJS.Rivets.model = CartJS.Utils.extend({
           cart: CartJS.cart
         }, CartJS.settings.rivetsModels);
         if (window.Currency != null) {
-          models.Currency = window.Currency;
+          CartJS.Rivets.model.Currency = window.Currency;
         }
         return jQuery('[data-cart-view]').each(function() {
-          return CartJS.Rivets.views.push(rivets.bind(this, models));
+          var view;
+          view = rivets.bind(jQuery(this), CartJS.Rivets.model);
+          return CartJS.Rivets.boundViews.push(view);
         });
       },
       unbindViews: function() {
         var view, _i, _len, _ref;
-        _ref = CartJS.Rivets.views;
+        _ref = CartJS.Rivets.boundViews;
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           view = _ref[_i];
           view.unbind();
         }
-        return CartJS.Rivets.views = [];
+        return CartJS.Rivets.boundViews = [];
       }
     };
     rivets.formatters.eq = function(a, b) {
