@@ -19,6 +19,9 @@
         },
         "next-steps": {
           "title": "Next Steps"
+        },
+        "browser-support": {
+          "title": "Browser Support"
         }
       }
     },
