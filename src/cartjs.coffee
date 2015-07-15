@@ -53,3 +53,10 @@ CartJS.init = (cart, settings = {}) ->
 # Configure CartJS with the given settings object.
 CartJS.configure = (settings = {}) ->
   CartJS.Utils.extend(CartJS.settings, settings)
+
+# Add a stubbed out console.log method for browsers that don't implement it.
+# Omitting this method can lead to Javascript failures in some browsers.
+# See: http://stackoverflow.com/questions/7742781/why-javascript-only-works-after-opening-developer-tools-in-ie-once
+unless window.console?
+  window.console = {}
+  window.console.log = () ->

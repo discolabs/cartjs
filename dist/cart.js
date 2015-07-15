@@ -110,6 +110,11 @@
     return CartJS.Utils.extend(CartJS.settings, settings);
   };
 
+  if (window.console == null) {
+    window.console = {};
+    window.console.log = function() {};
+  }
+
   CartJS.Utils = {
     log: function() {
       return CartJS.Utils.console(console.log, arguments);
