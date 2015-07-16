@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 No unreleased changes.
 
+## 0.3.4 - 2015-07-16
+### Added
+- Minor `console.log` compatibility fix for IE8 and IE9 browser support
+
 ## 0.3.3 - 2015-07-04
 ### Added
 - Compatible version of `rivets-cart.min.js` for non-ES5 browser support
