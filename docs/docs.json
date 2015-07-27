@@ -196,5 +196,15 @@
       "title": "DOM Binding",
       "sections": {}
     }
+  },
+  "builtwith": {
+    "mast-brothers": {
+      "title": "Mast Brothers Chocolate Makers",
+      "url": "http://mastbrothers.com/"
+    },
+    "go-defense": {
+      "title": "GoDefense",
+      "url": "http://godefense.fr/"
+    }
   }
 }

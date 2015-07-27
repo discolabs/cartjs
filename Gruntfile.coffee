@@ -75,6 +75,7 @@ module.exports = (grunt) ->
           'docs/theme/templates/index.liquid': 'docs/index/index.jade'
           'docs/theme/templates/page.guide.liquid': 'docs/guide/guide.jade'
           'docs/theme/templates/page.reference.liquid': 'docs/reference/reference.jade'
+          'docs/theme/templates/page.built-with.liquid': 'docs/built-with/built-with.jade'
 
     compress:
       docs:
