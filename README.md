@@ -51,7 +51,11 @@ In combination with [Rivets.js][], the DOM Binding module lets you write HTML te
 
 Documentation and examples are available on the [home page][].
 
+You can check out a list of who's using Cart.js in production on the
+[Built with Cart.js][] page.
+
 [home page]: http://cartjs.org?utm_source=github&utm_medium=readme&utm_campaign=cartjs
+[Built with Cart.js]: http://cartjs.org/pages/built-with-cart-js
 
 
 ## Dependencies
