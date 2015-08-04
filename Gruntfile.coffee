@@ -62,7 +62,7 @@ module.exports = (grunt) ->
 
     clean:
       build:
-        src: ['dist/rivets-cart.js', 'dist/rivets-cart-compatibility.js', 'dist/cart-compatibility.js']
+        src: ['dist/rivets-cart-compatibility.js', 'dist/cart-compatibility.js']
 
     terraform:
       docs:
