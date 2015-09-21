@@ -39,8 +39,7 @@
                     td
                         strong(rv-text="item.title")
                         ul.list-unstyled(rv-hide="item.propertyArray | empty")
-                            li(rv-each-property="item.propertyArray < properties")
-                                small.text-muted(rv-text="property.value")
+                            li(rv-each-property="item.propertyArray < properties") {property.name}: {property.value}
                     td.text-center(rv-html="item.price | money Currency.currentCurrency")
 
                     td.text-center
