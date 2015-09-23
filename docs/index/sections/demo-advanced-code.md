@@ -37,7 +37,9 @@
             <td>
                 <strong rv-text="item.title"></strong>
                 <ul rv-hide="item.propertyArray | empty">
-                    <li rv-each-property="item.propertyArray < properties" rv-text="property.value"></li>
+                    <li rv-each-property="item.propertyArray < properties">
+                        <small class="text-muted">{property.name}: {property.value}</small>
+                    </li>
                 </ul>
             </td>
             <td rv-html="item.price | money Currency.currentCurrency"></td>
