@@ -92,6 +92,9 @@ if 'rivets' of window
   rivets.formatters.money_with_currency = (value, currency) ->
     CartJS.Utils.formatMoney(value, CartJS.settings.moneyWithCurrencyFormat, 'money_with_currency_format', currency)
 
+  rivets.formatters.moneyWithCurrency = (value, currency) ->
+    CartJS.Utils.formatMoney(value, CartJS.settings.moneyWithCurrencyFormat, 'money_with_currency_format', currency)
+
   rivets.formatters.productImageSize = (src, size) ->
     CartJS.Utils.getSizedImageUrl(src, size)
 
