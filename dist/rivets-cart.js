@@ -1,5 +1,5 @@
 // Cart.js
-// version: 0.3.5
+// version: 0.3.6
 // author: Gavin Ballard
 // license: MIT
 (function() {
@@ -1678,7 +1678,9 @@
       rivetsModels: {},
       currency: null,
       moneyFormat: null,
-      moneyWithCurrencyFormat: null
+      moneyWithCurrencyFormat: null,
+      weightUnit: 'g',
+      weightPrecision: 0
     },
     cart: new Cart()
   };
@@ -2187,9 +2189,27 @@
     rivets.formatters.money_with_currency = function(value, currency) {
       return CartJS.Utils.formatMoney(value, CartJS.settings.moneyWithCurrencyFormat, 'money_with_currency_format', currency);
     };
-    rivets.formatters.productImageSize = function(src, size) {
+    rivets.formatters.weight = function(grams) {
+      switch (CartJS.settings.weightUnit) {
+        case 'kg':
+          return (grams / 1000).toFixed(CartJS.settings.weightPrecision);
+        case 'oz':
+          return (grams * 0.035274).toFixed(CartJS.settings.weightPrecision);
+        case 'lb':
+          return (grams * 0.00220462).toFixed(CartJS.settings.weightPrecision);
+        default:
+          return grams.toFixed(CartJS.settings.weightPrecision);
+      }
+    };
+    rivets.formatters.weight_with_unit = function(grams) {
+      return rivets.formatters.weight(grams) + CartJS.settings.weightUnit;
+    };
+    rivets.formatters.product_image_size = function(src, size) {
       return CartJS.Utils.getSizedImageUrl(src, size);
     };
+    rivets.formatters.moneyWithCurrency = rivets.formatters.money_with_currency;
+    rivets.formatters.weightWithUnit = rivets.formatters.weight_with_unit;
+    rivets.formatters.productImageSize = rivets.formatters.product_image_size;
   } else {
     CartJS.Rivets = {
       init: function() {},
