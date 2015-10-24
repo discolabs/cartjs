@@ -92,6 +92,12 @@ if 'rivets' of window
   rivets.formatters.money_with_currency = (value, currency) ->
     CartJS.Utils.formatMoney(value, CartJS.settings.moneyWithCurrencyFormat, 'money_with_currency_format', currency)
 
+  rivets.formatters.weight_with_unit = (value) ->
+    value / 1000 + ' ' + CartJS.settings.weightUnit;
+
+  rivets.formatters.weightWithUnit = (value) ->
+    value / 1000 + ' ' + CartJS.settings.weightUnit;
+
   rivets.formatters.productImageSize = (src, size) ->
     CartJS.Utils.getSizedImageUrl(src, size)
 
