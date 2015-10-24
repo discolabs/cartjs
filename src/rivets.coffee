@@ -92,14 +92,23 @@ if 'rivets' of window
   rivets.formatters.money_with_currency = (value, currency) ->
     CartJS.Utils.formatMoney(value, CartJS.settings.moneyWithCurrencyFormat, 'money_with_currency_format', currency)
 
-  rivets.formatters.weight_with_unit = (value) ->
-    value / 1000 + ' ' + CartJS.settings.weightUnit;
+  rivets.formatters.weight = (grams) ->
+    switch CartJS.settings.weightUnit
+      when 'kg' then (grams / 1000).toFixed(CartJS.settings.weightPrecision)
+      when 'oz' then (grams * 0.035274).toFixed(CartJS.settings.weightPrecision)
+      when 'lb' then (grams * 0.00220462).toFixed(CartJS.settings.weightPrecision)
+      else grams.toFixed(CartJS.settings.weightPrecision)
 
-  rivets.formatters.weightWithUnit = (value) ->
-    value / 1000 + ' ' + CartJS.settings.weightUnit;
+  rivets.formatters.weight_with_unit = (grams) ->
+    rivets.formatters.weight(grams) + CartJS.settings.weightUnit
 
-  rivets.formatters.productImageSize = (src, size) ->
+  rivets.formatters.product_image_size = (src, size) ->
     CartJS.Utils.getSizedImageUrl(src, size)
+
+  # Add camelCase aliases for underscore formatters.
+  rivets.formatters.moneyWithCurrency = rivets.formatters.money_with_currency
+  rivets.formatters.weightWithUnit = rivets.formatters.weight_with_unit
+  rivets.formatters.productImageSize = rivets.formatters.product_image_size
 
 else
 

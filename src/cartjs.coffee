@@ -11,7 +11,8 @@ CartJS =
     currency: null
     moneyFormat: null
     moneyWithCurrencyFormat: null
-    weightUnit: 'kg'
+    weightUnit: 'g'
+    weightPrecision: 0
 
 
   # Our extended cart model.
