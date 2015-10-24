@@ -59,7 +59,7 @@
     </tbody>
     <tfoot rv-show="cart.item_count | gt 0">
         <tr>
-            <td colspan="4"></td>
+            <td colspan="4" rv-html="cart.total_weight | weight_with_unit"></td>
             <td rv-html="cart.total_price | money Currency.currentCurrency"></td>
         </tr>
     </tfoot>

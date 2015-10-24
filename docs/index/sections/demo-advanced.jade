@@ -57,7 +57,7 @@
 
             tfoot(rv-show="cart.item_count | gt 0")
                 tr
-                    td(colspan="4")
+                    td.text-muted.small(colspan="4" rv-html="cart.total_weight | weight_with_unit")
                     td.text-right(rv-html="cart.total_price | money Currency.currentCurrency")
 
         p.text-center

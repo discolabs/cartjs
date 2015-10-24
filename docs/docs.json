@@ -100,6 +100,12 @@
         "money-with-currency-format": {
           "title": "moneyWithCurrencyFormat"
         },
+        "weight-unit": {
+          "title": "weightUnit"
+        },
+        "weight-precision": {
+          "title": "weightPrecision"
+        },
         "rivets-models": {
           "title": "rivetsModels"
         }
