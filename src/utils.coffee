@@ -96,4 +96,5 @@ CartJS.Utils =
   #
   # If it's not available, just return the original URL.
   getSizedImageUrl: (src, size) ->
+    if src === null then 'https://cdn.shopify.com/s/images/admin/no-image-' + size + '.gif'
     if window.Shopify?.Image?.getSizedImageUrl? then Shopify.Image.getSizedImageUrl(src, size) else src
