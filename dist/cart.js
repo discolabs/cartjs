@@ -211,9 +211,17 @@
     getSizedImageUrl: function(src, size) {
       var _ref, _ref1;
       if (((_ref = window.Shopify) != null ? (_ref1 = _ref.Image) != null ? _ref1.getSizedImageUrl : void 0 : void 0) != null) {
-        return Shopify.Image.getSizedImageUrl(src, size);
+        if (src) {
+          return Shopify.Image.getSizedImageUrl(src, size);
+        } else {
+          return Shopify.Image.getSizedImageUrl('https://cdn.shopify.com/s/images/admin/no-image-.gif', size).replace('-_', '-');
+        }
       } else {
-        return src;
+        if (src) {
+          return src;
+        } else {
+          return 'https://cdn.shopify.com/s/images/admin/no-image-large.gif';
+        }
       }
     }
   };

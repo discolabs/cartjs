@@ -4,10 +4,14 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 No unreleased changes.
 
+## 0.3.7 - 2015-10-26
+### Changed
+- `getImageSizedUrl` filter now handles empty product images.
+
 ## 0.3.6 - 2015-10-24
 ### Added
 - New weight formatters `weight` and `weight_with_unit`, with corresponding
- settings `weightUnit` and `weightPrecision`.
+  settings `weightUnit` and `weightPrecision`.
 
 ## 0.3.5 - 2015-08-04
 ### Added
