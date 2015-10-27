@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 No unreleased changes.
 
+## 0.3.8 - 2015-10-27
+### Added
+- `cart.ready` event, fired after initialisation finishes.
+
 ## 0.3.7 - 2015-10-26
 ### Changed
 - `getImageSizedUrl` filter now handles empty product images.

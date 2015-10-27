@@ -102,7 +102,8 @@
         return $('body').removeClass(CartJS.settings.requestBodyClass);
       });
     }
-    return CartJS.Rivets.init();
+    CartJS.Rivets.init();
+    return jQuery(document).trigger('cart.ready', [CartJS.cart]);
   };
 
   CartJS.configure = function(settings) {
