@@ -51,6 +51,7 @@ CartJS.init = (cart, settings = {}) ->
   # Initialise DOM Binding through Rivets module.
   # Performs a no-op if Rivets.js isn't present.
   CartJS.Rivets.init()
+  $(document).trigger('cart.ready', [CartJS.cart]);
 
 # Configure CartJS with the given settings object.
 CartJS.configure = (settings = {}) ->
