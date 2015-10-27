@@ -190,6 +190,9 @@
     "events": {
       "title": "Events",
       "sections": {
+        "ready": {
+          "title": "cart.ready"
+        },
         "request-started": {
           "title": "cart.requestStarted"
         },
