@@ -207,6 +207,10 @@
     }
   },
   "builtwith": {
+    "budweiser" : {
+      "title": "Budweiser Goal Lab",
+      "url": "http://shop.budweiser.ca/"
+    },
     "kagami-theme": {
       "title": "Kagami Shopify Theme",
       "url": "https://themes.shopify.com/themes/kagami/"
