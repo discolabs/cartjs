@@ -45,8 +45,8 @@ CartJS.init = (cart, settings = {}) ->
   # Set up toggling of CSS class on body during requests if provided.
   if CartJS.settings.requestBodyClass
     CartJS.Utils.log('"requestBodyClass" set, adding event listeners.')
-    $(document).on 'cart.requestStarted', () -> $('body').addClass(CartJS.settings.requestBodyClass)
-    $(document).on 'cart.requestComplete', () -> $('body').removeClass(CartJS.settings.requestBodyClass)
+    jQuery(document).on 'cart.requestStarted', () -> jQuery('body').addClass(CartJS.settings.requestBodyClass)
+    jQuery(document).on 'cart.requestComplete', () -> jQuery('body').removeClass(CartJS.settings.requestBodyClass)
 
   # Initialise DOM Binding through Rivets module.
   # Performs a no-op if Rivets.js isn't present.
