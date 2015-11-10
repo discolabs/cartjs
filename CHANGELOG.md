@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 ### Added
-- **PR #50** Added two new Rivets formatters: `includes` and `match`  
+- Two new Rivets formatters: `includes` and `match`  
 
 ## 0.3.8 - 2015-10-27
 ### Added
