@@ -61,6 +61,9 @@ if 'rivets' of window
   rivets.formatters.eq = (a, b) ->
     a == b
 
+  rivets.formatters.unless = (a, b) ->
+    a != b
+
   rivets.formatters.lt = (a, b) ->
     a < b
 
