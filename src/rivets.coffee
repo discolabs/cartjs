@@ -61,6 +61,12 @@ if 'rivets' of window
   rivets.formatters.eq = (a, b) ->
     a == b
 
+  rivets.formatters.includes = (a, b) ->
+    a.indexOf(b) >= 0
+
+  rivets.formatters.match = (a, regexp, flags) ->
+    a.match(new RegExp(regexp, flags))
+
   rivets.formatters.lt = (a, b) ->
     a < b
 

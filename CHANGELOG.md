@@ -2,7 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
-No unreleased changes.
+### Added
+- Two new Rivets formatters: `includes` and `match`  
 
 ## 0.3.8 - 2015-10-27
 ### Added
