@@ -1,5 +1,5 @@
 // Cart.js
-// version: 0.3.8
+// version: 0.3.9
 // author: Gavin Ballard
 // license: MIT
 (function() {
@@ -1698,11 +1698,11 @@
     }
     if (CartJS.settings.requestBodyClass) {
       CartJS.Utils.log('"requestBodyClass" set, adding event listeners.');
-      $(document).on('cart.requestStarted', function() {
-        return $('body').addClass(CartJS.settings.requestBodyClass);
+      jQuery(document).on('cart.requestStarted', function() {
+        return jQuery('body').addClass(CartJS.settings.requestBodyClass);
       });
-      $(document).on('cart.requestComplete', function() {
-        return $('body').removeClass(CartJS.settings.requestBodyClass);
+      jQuery(document).on('cart.requestComplete', function() {
+        return jQuery('body').removeClass(CartJS.settings.requestBodyClass);
       });
     }
     CartJS.Rivets.init();
@@ -2167,6 +2167,12 @@
     };
     rivets.formatters.eq = function(a, b) {
       return a === b;
+    };
+    rivets.formatters.includes = function(a, b) {
+      return a.indexOf(b) >= 0;
+    };
+    rivets.formatters.match = function(a, regexp, flags) {
+      return a.match(new RegExp(regexp, flags));
     };
     rivets.formatters.lt = function(a, b) {
       return a < b;
