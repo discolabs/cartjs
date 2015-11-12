@@ -26,9 +26,8 @@ Cart.js will be able to support IE6+, Chrome, Firefox, Safari 5.1+ and up.
 
 If you're using the DOM binding functionality, there are some potential issues
 with older browser that don't support the ES5 Javascript standard (in practice,
-this means Internet Explorer 8 and below). If you need to support these older
-browsers, you're able to serve them a "compatibile" version of Cart.js which
-provides full functionality. See [Browser Support][] in the Guide for details.
+this means Internet Explorer 8 and below). See [Browser Support][] in the Guide
+for more detail.
 
 ### I have a bug report / feature request.
 Please add it to the [issues tracker][] on GitHub.

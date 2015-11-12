@@ -12,13 +12,7 @@ The Cart.js distribution comes packaged with fours versions of the library:
     <p>
         `rivets-cart.min.js` is a minified version of Cart.js that also bundles the Rivets.js library.
         Together, they provide support for the DOM Binding functionality.
-    </p>
-    
-    <p>
-        `rivets-cart-compatibility.min.js` is a version of the Cart.js and Rivets.js bundle that provides
-         support for older browsers (Internet Explorer 8 and below).
-         See <a href="#getting-started-browser-support">Browser Support</a>.
-    </p>
+    </p>   
 </div>
 
 Once you've selected the version you'd like to use, add the relevant file to your theme's `/assets` directory.

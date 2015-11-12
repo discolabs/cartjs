@@ -2,6 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+### Removed
+- IE8 Compatibility mode
 
 ## 0.3.9 - 2015-11-11
 ### Added
