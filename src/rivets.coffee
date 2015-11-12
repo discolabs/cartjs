@@ -17,17 +17,9 @@ if 'rivets' of window
     init: () ->
       CartJS.Rivets.bindViews()
 
-      # If the IE8 compatibility module is present, initialise it.
-      if CartJS.IE8?
-        CartJS.IE8.init()
-
     # Tear down the Rivets module.
     destroy: () ->
       CartJS.Rivets.unbindViews()
-
-      # If the IE8 compatibility module is present, tear it down.
-      if CartJS.IE8?
-        CartJS.IE8.destroy()
 
     # Bind all Rivets.js view elements that are currently present on the page.
     bindViews: () ->
