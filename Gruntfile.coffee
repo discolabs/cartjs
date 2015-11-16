@@ -1,18 +1,5 @@
 module.exports = (grunt) ->
 
-  # Define a list of the core source files to use for compilation.
-  sources = [
-    'src/cart.coffee'
-    'src/item.coffee'
-    'src/cartjs.coffee'
-    'src/utils.coffee'
-    'src/queue.coffee'
-    'src/core.coffee'
-    'src/data.coffee'
-    'src/rivets.coffee'
-    'src/export.coffee'
-  ]
-
   # Initialise
   grunt.initConfig
     pkg: grunt.file.readJSON('package.json')
@@ -29,8 +16,17 @@ module.exports = (grunt) ->
         options:
           join: true
         files:
-          'dist/cart.js': sources
-          'dist/cart-compatibility.js': sources.concat ['src/compatibility.coffee']
+          'dist/cart.js': [
+            'src/cart.coffee'
+            'src/item.coffee'
+            'src/cartjs.coffee'
+            'src/utils.coffee'
+            'src/queue.coffee'
+            'src/core.coffee'
+            'src/data.coffee'
+            'src/rivets.coffee'
+            'src/export.coffee'
+          ]
 
     concat:
       build:
@@ -42,13 +38,6 @@ module.exports = (grunt) ->
             'node_modules/rivets/dist/rivets.js',
             'dist/cart.js'
           ]
-          'dist/rivets-cart-compatibility.js': [
-            'node_modules/es5-shim/es5-shim.js',
-            'lib/es5-sham.js',
-            'node_modules/rivets/node_modules/sightglass/index.js',
-            'node_modules/rivets/dist/rivets.js',
-            'dist/cart-compatibility.js',
-          ]
 
     uglify:
       build:
@@ -58,11 +47,10 @@ module.exports = (grunt) ->
         files:
           'dist/cart.min.js': 'dist/cart.js'
           'dist/rivets-cart.min.js': 'dist/rivets-cart.js'
-          'dist/rivets-cart-compatibility.min.js': 'dist/rivets-cart-compatibility.js'
 
     clean:
       build:
-        src: ['dist/rivets-cart-compatibility.js', 'dist/cart-compatibility.js']
+        src: []
 
     terraform:
       docs:
@@ -93,9 +81,6 @@ module.exports = (grunt) ->
         files: [
           src: 'dist/rivets-cart.min.js'
           dest: 'docs/theme/assets/rivets-cart.min.js'
-        ,
-          src: 'dist/rivets-cart-compatibility.min.js'
-          dest: 'docs/theme/assets/rivets-cart-compatibility.min.js'
         ,
           src: 'cartjs.zip'
           dest: 'docs/theme/assets/cartjs.zip'
