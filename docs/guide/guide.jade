@@ -9,6 +9,14 @@
                     for subsection, subanchor in section.sections
                         h3(id= anchor + '-' + subanchor)= subsection.title
                         != partial('sections/' + anchor + '/' + subanchor)
+                .example.example-live
+                    != partial('../index/sections/demo-advanced')
+
+                .example-code.collapse(id="demo-advanced-code")
+                    != partial('../index/sections/demo-advanced-code')
+
+                .example-footer
+                    a(data-toggle="collapse" href="#demo-advanced-code") Show markup for this example
 
             aside.col-md-2.hidden-sm.hidden-xs
                 .aside

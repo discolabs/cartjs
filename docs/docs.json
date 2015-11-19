@@ -203,7 +203,17 @@
     },
     "dom-binding": {
       "title": "DOM Binding",
-      "sections": {}
+      "sections": {
+        "eq": {
+          "title": "eq"
+        },
+        "includes": {
+          "title": "includes"
+        },
+        "match": {
+          "title": "match"
+        }
+      }
     }
   },
   "builtwith": {
