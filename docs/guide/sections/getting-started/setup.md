@@ -1,4 +1,4 @@
-The Cart.js distribution comes packaged with fours versions of the library:
+The Cart.js distribution comes packaged with three versions of the library:
 
 <div class="callout callout-success">
     <p>
