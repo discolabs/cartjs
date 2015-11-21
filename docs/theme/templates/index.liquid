@@ -1,11 +1,10 @@
 <section class="jumbotron jumbotron-primary"><div class="container text-center"><h3>A Javascript library to power your Shopify theme's cart.</h3><a href="{{ 'cartjs.zip' | asset_url }}" class="btn btn-lg btn-outline-inverse">Download Cart.js v0.3.9</a></div></section><section class="jumbotron"><div class="container"><div class="row"><div class="col-md-8 col-md-offset-2"><h2>What is Cart.js?</h2><p>Cart.js is a very small open source Javascript library that makes the addition of powerful Ajax cart functionality to your Shopify theme a breeze.</p>
 <p>It&#39;s designed to be simple to use, while providing some really powerful and nifty features, like:</p>
-<ul class="check-list">
-    <li><strong>Simple, consistent API</strong> for cart manipulation;</li>
-    <li><strong>Data API</strong> for markup-only use without needing to write a line of Javascript;</li>
-    <li><strong>DOM Binding</strong> to dynamically render HTML templates as your cart changes.</li>
+<ul>
+<li><strong>Simple, consistent API</strong> for cart manipulation;</li>
+<li><strong>Data API</strong> for markup-only use without needing to write a line of Javascript;</li>
+<li><strong>DOM Binding</strong> to dynamically render HTML templates as your cart changes.</li>
 </ul>
-
 <p>You don&#39;t need to worry about ensuring your Ajax requests are synchronous, binding event listeners, or updating the DOM.</p>
 </div></div><div class="row"><div class="col-md-10 col-md-offset-1"><div class="example example-live"><div class="well well-sm"><img src="{{ 'loader.gif' | asset_url }}" class="cart-visible-loading pull-right" width="16" height="11" alt="Loading..." />
 You have
@@ -115,9 +114,8 @@ decide to use. This means that themes using a <code>1.x</code> version of jQuery
 Cart.js will be able to support IE6+, Chrome, Firefox, Safari 5.1+ and up.</p>
 <p>If you&#39;re using the DOM binding functionality, there are some potential issues
 with older browser that don&#39;t support the ES5 Javascript standard (in practice,
-this means Internet Explorer 8 and below). If you need to support these older
-browsers, you&#39;re able to serve them a &quot;compatibile&quot; version of Cart.js which
-provides full functionality. See <a href="/pages/guide#getting-started-browser-support">Browser Support</a> in the Guide for details.</p>
+this means Internet Explorer 8 and below). See <a href="/pages/guide#getting-started-browser-support">Browser Support</a> in the Guide
+for more detail.</p>
 <h3>I have a bug report / feature request.</h3><p>Please add it to the <a href="https://github.com/discolabs/cartjs/issues">issues tracker</a> on GitHub.</p>
 <h3>Can I contribute?</h3><p>Absolutely!
 Just head to the <a href="https://github.com/discolabs/cartjs">GitHub</a> page, fork the repository and manage development 

@@ -526,16 +526,10 @@
       model: null,
       boundViews: [],
       init: function() {
-        CartJS.Rivets.bindViews();
-        if (CartJS.IE8 != null) {
-          return CartJS.IE8.init();
-        }
+        return CartJS.Rivets.bindViews();
       },
       destroy: function() {
-        CartJS.Rivets.unbindViews();
-        if (CartJS.IE8 != null) {
-          return CartJS.IE8.destroy();
-        }
+        return CartJS.Rivets.unbindViews();
       },
       bindViews: function() {
         CartJS.Utils.log('Rivets.js is present, binding views.');
