@@ -34,7 +34,7 @@ module.exports = (grunt) ->
           banner: '<%= meta.banner %>'
         files:
           'dist/rivets-cart.js': [
-            'node_modules/rivets/node_modules/sightglass/index.js',
+            'node_modules/sightglass/index.js',
             'node_modules/rivets/dist/rivets.js',
             'dist/cart.js'
           ]
