@@ -207,25 +207,37 @@
     }
   },
   "builtwith": {
+    "pure-health-delivered" : {
+      "title": "Pure Health Delivered",
+      "url": "http://www.phd.co.nz"
+    },
+    "the-foodbank-project" : {
+      "title": "The Foodbank Project",
+      "url": "http://www.foodbank.org.nz"
+    },
+    "lainee-hermsen" : {
+      "title": "Lainee Hermsen",
+      "url": "http://www.laineehermsen.co.nz"
+    },
     "writeyboards" : {
       "title": "Writey Boards",
-      "url": "http://writeyboards.com/"
+      "url": "http://writeyboards.com"
     },
     "budweiser" : {
       "title": "Budweiser Goal Lab",
-      "url": "http://shop.budweiser.ca/"
+      "url": "http://shop.budweiser.ca"
     },
     "kagami-theme": {
       "title": "Kagami Shopify Theme",
-      "url": "https://themes.shopify.com/themes/kagami/"
+      "url": "https://themes.shopify.com/themes/kagami"
     },
     "mast-brothers": {
       "title": "Mast Brothers",
-      "url": "http://mastbrothers.com/"
+      "url": "http://mastbrothers.com"
     },
     "go-defense": {
       "title": "GoDefense",
-      "url": "http://godefense.fr/"
+      "url": "http://godefense.fr"
     }
   }
 }
