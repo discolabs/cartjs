@@ -2,6 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+### Added
+- products_in_cart, all_products_in_cart formatters returning boolean results
 ### Removed
 - IE8 Compatibility mode
 

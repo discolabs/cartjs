@@ -83,6 +83,24 @@ if 'rivets' of window
   rivets.formatters.append = (a, b) ->
     a + b
 
+  # Returns true if any of the provided product handles (as comma-separated string) are found in `items`
+  rivets.formatters.products_in_cart = (items, query) ->
+    query.replace(' ', '').split(',')
+    result = $.map(items, (item) ->
+      if query.indexOf(item.handle) > -1
+        return item
+    )
+    result.length > 0
+
+  # Returns true if all of the provided product handles (as comma-separated string) are found in `items`
+  rivets.formatters.all_products_in_cart = (items, query) ->
+    query = query.replace(' ', '').split(',')
+    result = $.map(items, (item) ->
+      if query.indexOf(item.handle) > -1
+        return item
+    )
+    result.length == query.length
+
   # Add Shopify-specific formatters for Rivets.js.
   rivets.formatters.money = (value, currency) ->
     CartJS.Utils.formatMoney(value, CartJS.settings.moneyFormat, 'money_format', currency)
