@@ -2,6 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+### Added
+- New Rivets formatter: `array_element` for accessing a specific element within a provided array
 ### Removed
 - IE8 Compatibility mode
 
