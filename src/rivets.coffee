@@ -86,6 +86,12 @@ if 'rivets' of window
   rivets.formatters.array_element = (array, index) ->
     array[index];
 
+  rivets.formatters.array_first = (array) ->
+    array[0];
+
+  rivets.formatters.array_last = (array) ->
+    array[array.length - 1];
+
   # Add Shopify-specific formatters for Rivets.js.
   rivets.formatters.money = (value, currency) ->
     CartJS.Utils.formatMoney(value, CartJS.settings.moneyFormat, 'money_format', currency)
