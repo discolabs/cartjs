@@ -207,6 +207,10 @@
     }
   },
   "builtwith": {
+    "focal-theme" : {
+      "title": "Focal Shopify Theme",
+      "url": "https://themes.shopify.com/themes/focal"
+    },
     "pure-health-delivered" : {
       "title": "Pure Health Delivered",
       "url": "http://www.phd.co.nz"
