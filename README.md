@@ -1,3 +1,5 @@
+[![Build Status](https://api.travis-ci.org/discolabs/cartjs.svg?branch=master)](http://travis-ci.org/discolabs/cartjs)
+
 # Cart.js
 Cart.js is a Javascript library that makes it easy to add dynamic cart features
 to Shopify themes.
