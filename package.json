@@ -16,7 +16,7 @@
     "url": "https://github.com/discolabs/cartjs.git"
   },
   "scripts": {
-    "test": "grunt mocha_phantomjs",
+    "test": "grunt test",
     "build": "grunt build",
     "docs": "grunt docs"
   },

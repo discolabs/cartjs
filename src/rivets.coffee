@@ -83,6 +83,10 @@ if 'rivets' of window
   rivets.formatters.append = (a, b) ->
     a + b
 
+  rivets.formatters.pluralize = (input, singular, plural = singular + 's') ->
+    input = input.length if CartJS.Utils.isArray(input)
+    if input == 1 then singular else plural
+
   rivets.formatters.array_element = (array, index) ->
     array[index];
 

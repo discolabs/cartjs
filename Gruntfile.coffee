@@ -120,4 +120,5 @@ module.exports = (grunt) ->
 
   grunt.registerTask 'default', ['watch']
   grunt.registerTask 'build',   ['coffee:build', 'concat:build', 'uglify:build', 'clean:build']
+  grunt.registerTask 'test',    ['build', 'mocha_phantomjs']
   grunt.registerTask 'docs',    ['build', 'terraform:docs', 'compress:docs', 'copy:docs', 'less:docs']

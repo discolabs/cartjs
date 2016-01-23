@@ -23,4 +23,42 @@ describe('Formatters', function() {
     });
   });
 
+  describe('pluralize', function() {
+    it("returns plural form for 0", function() {
+      rivets.formatters.pluralize(0, 'item').should.equal('items');
+    });
+
+    it("returns singular form for 1", function() {
+      rivets.formatters.pluralize(1, 'item').should.equal('item');
+    });
+
+    it("returns plural form for 9", function() {
+      rivets.formatters.pluralize(9, 'item').should.equal('items');
+    });
+
+    it("returns special singular form for 1", function() {
+      rivets.formatters.pluralize(1, 'mouse', 'mice').should.equal('mouse');
+    });
+
+    it("returns special plural form for 9", function() {
+      rivets.formatters.pluralize(9, 'mouse', 'mice').should.equal('mice');
+    });
+
+    it("returns singular form for array of size 1", function() {
+      rivets.formatters.pluralize([1], 'item').should.equal('item');
+    });
+
+    it("returns plural form for array of size 3", function() {
+      rivets.formatters.pluralize([1, 2, 3], 'item').should.equal('items');
+    });
+
+    it("returns special singular form for array of size 1", function() {
+      rivets.formatters.pluralize([1], 'mouse', 'mice').should.equal('mouse');
+    });
+
+    it("returns special singular form for array of size 3", function() {
+      rivets.formatters.pluralize([1, 2, 3], 'mouse', 'mice').should.equal('mice');
+    });
+  });
+
 });
