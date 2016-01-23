@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mocha Test Runner</title>
+    <link rel="stylesheet" href="../node_modules/mocha/mocha.css">
+  </head>
+
+  <body>
+    <div id="mocha"></div>
+
+    <!-- Testing framework. -->
+    <script src="../node_modules/mocha/mocha.js"></script>
+    <script src="../node_modules/should/should.js"></script>
+
+    <!-- JS Libraries provided by Shopify. -->
+    <script src="shopify/option_selection.js"></script>
+    <script src="shopify/currencies.js"></script>
+
+    <!-- Cart.js dependencies and Cart.js libary. -->
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/sightglass/index.js"></script>
+    <script src="../node_modules/rivets/dist/rivets.js"></script>
+    <script src="../dist/cart.js"></script>
+
+    <script>mocha.setup('bdd')</script>
+
+    <!-- Fixtures -->
+    <script src="fixtures/carts.js"></script>
+
+    <!-- Our tests. -->
+    <script src="cartjs/formatters.js"></script>
+
+    <script>
+      if (window.mochaPhantomJS) {
+        mochaPhantomJS.run();
+      } else {
+        mocha.run();
+      }
+    </script>
+  </body>
+</html>
