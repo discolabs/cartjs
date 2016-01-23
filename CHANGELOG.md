@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 ### Added
 - New Rivets formatter: `array_element`, `array_first`, `array_last`
+- CONTRIBUTING.md
+- Simple Mocha-based test framework
+
 ### Removed
 - IE8 Compatibility mode
 

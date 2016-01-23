@@ -83,8 +83,10 @@ for a full list of changes.
 
 
 ## Contributions
-Contributions are very much welcome! Just open a pull request, or raise an issue
-to discuss a proposed change.
+Contributions are very much welcome! Read our [contribution guidelines][] for
+details on submitting pull requests that will be accepted.
+
+[contribution guidelines]: https://github.com/discolabs/cartjs/blob/master/CONTRIBUTING.md
 
 ---
 
