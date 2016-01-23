@@ -107,6 +107,9 @@ module.exports = (grunt) ->
     mocha:
       test:
         src: ['spec/**/*.html']
+        options:
+          run: true
+          reporter: 'Dot'
 
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-contrib-compress'
