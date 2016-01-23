@@ -104,6 +104,10 @@ module.exports = (grunt) ->
         files: 'docs/**/*.less'
         tasks: ['less:docs']
 
+    mocha:
+      test:
+        src: ['spec/**/*.html']
+
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-contrib-compress'
   grunt.loadNpmTasks 'grunt-contrib-concat'
@@ -113,6 +117,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-terraform'
+  grunt.loadNpmTasks 'grunt-mocha'
 
   grunt.registerTask 'default', ['watch']
   grunt.registerTask 'build',   ['coffee:build', 'concat:build', 'uglify:build', 'clean:build']
