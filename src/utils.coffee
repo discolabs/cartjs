@@ -73,6 +73,27 @@ CartJS.Utils =
       return value
     if value? then [value] else []
 
+  # Extract an
+  extractForm: (form) ->
+    dataArray = jQuery(form).serializeArray()
+
+    # Set up default.
+    id = undefined
+    quantity = undefined
+    properties = {}
+
+    # Iterate through each serialized part of the form.
+    jQuery.each dataArray, (i, item) ->
+      if item.name == 'id'
+        id = item.value
+      else if item.name == 'quantity'
+        quantity = item.value
+      else
+        properties[item.name] = item.value
+
+    # Return a "triple" of id, quantity, properties.
+    [id, quantity, CartJS.Utils.unwrapKeys(properties)]
+
   # Format a monetary amount using Shopify's formatMoney if available.
   #
   # If it's not available, just return the value.

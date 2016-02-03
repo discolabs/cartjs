@@ -85,21 +85,7 @@ CartJS.Data =
   # Handle for [data-cart-submit] submit events.
   submit: (e) ->
     e.preventDefault()
-
-    dataArray = jQuery(this).serializeArray()
-
-    id = undefined
-    quantity = undefined
-    properties = {}
-    jQuery.each dataArray, (i, item) ->
-      if item.name == 'id'
-        id = item.value
-      else if item.name == 'quantity'
-        quantity = item.value
-      else
-        properties[item.name] = item.value
-
-    CartJS.Core.addItem(id, quantity, CartJS.Utils.unwrapKeys(properties))
+    CartJS.Core.addItemFromForm(this)
 
   # Handler for rendering simple cart properties to bound elements.
   render: (e, cart) ->
