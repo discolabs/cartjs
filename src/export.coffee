@@ -17,6 +17,7 @@ CartJS.factory = (exports) ->
   # Export core API as top-level methods.
   exports.getCart = CartJS.Core.getCart
   exports.addItem = CartJS.Core.addItem
+  exports.addItemFromForm = CartJS.Core.addItemFromForm
   exports.updateItem = CartJS.Core.updateItem
   exports.updateItemById = CartJS.Core.updateItemById
   exports.updateItemQuantitiesById = CartJS.Core.updateItemQuantitiesById
@@ -30,6 +31,9 @@ CartJS.factory = (exports) ->
   exports.clearAttributes = CartJS.Core.clearAttributes
   exports.getNote = CartJS.Core.getNote
   exports.setNote = CartJS.Core.setNote
+
+  # Export utilities
+  exports.extractForm = CartJS.Utils.extractForm
 
   # Export the render() method for the Data API so that it can be manually triggered if needed.
   exports.render = CartJS.Data.render
