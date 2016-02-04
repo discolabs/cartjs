@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 - CONTRIBUTING.md
 - Simple Mocha-based test framework
 - `pluralize` formatter
+- `slice` formatter
 
 ### Removed
 - IE8 Compatibility mode
