@@ -415,10 +415,11 @@
     }
   };
 
-  $document = jQuery(document);
+  $document = null;
 
   CartJS.Data = {
     init: function() {
+      $document = jQuery(document);
       CartJS.Data.setEventListeners('on');
       return CartJS.Data.render(null, CartJS.cart);
     },
@@ -588,6 +589,31 @@
     };
     rivets.formatters.append = function(a, b) {
       return a + b;
+    };
+    rivets.formatters.slice = function(value, start, end) {
+      return value.slice(start, end);
+    };
+    rivets.formatters.pluralize = function(input, singular, plural) {
+      if (plural == null) {
+        plural = singular + 's';
+      }
+      if (CartJS.Utils.isArray(input)) {
+        input = input.length;
+      }
+      if (input === 1) {
+        return singular;
+      } else {
+        return plural;
+      }
+    };
+    rivets.formatters.array_element = function(array, index) {
+      return array[index];
+    };
+    rivets.formatters.array_first = function(array) {
+      return array[0];
+    };
+    rivets.formatters.array_last = function(array) {
+      return array[array.length - 1];
     };
     rivets.formatters.money = function(value, currency) {
       return CartJS.Utils.formatMoney(value, CartJS.settings.moneyFormat, 'money_format', currency);

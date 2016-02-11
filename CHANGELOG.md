@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+No unreleased changes.
+
+## 0.4.0 - 2016-02-11
 ### Added
 - New Rivets formatter: `array_element`, `array_first`, `array_last`
 - CONTRIBUTING.md
