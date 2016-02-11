@@ -3,12 +3,13 @@
 # --------------------
 
 # Reference to the document element.
-$document = jQuery(document)
+$document = null
 
 CartJS.Data =
 
   # Initialise the Data API.
   init: () ->
+    $document = jQuery(document)
     CartJS.Data.setEventListeners('on')
     CartJS.Data.render(null, CartJS.cart)
 

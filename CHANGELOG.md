@@ -9,6 +9,9 @@ All notable changes to this project will be documented in this file.
 - `pluralize` formatter
 - `slice` formatter
 
+### Changed
+- Fixed jQuery dependency from load-time to run-time
+
 ### Removed
 - IE8 Compatibility mode
 
