@@ -10,12 +10,18 @@
 <h2 id="getting-started">Getting Started</h2><p>Getting started with Cart.js is designed to be pretty easy.</p>
 <p>You just need to fetch a copy of the library, include it in your theme, and call a single initialisation method.
 Then you can make calls to Cart.js from within your theme code.</p>
-<h3 id="getting-started-installation">Installation</h3><p>You can install Cart.js via <code>npm</code>, <code>bower</code> or simply by downloading the latest copy of the library.</p>
+<h3 id="getting-started-installation">Installation</h3><p>Cart.js is available via the <code>npm</code> or <code>bower</code> package managers, from
+<a href="https://cdnjs.com">cdnjs</a>, or simply by downloading the latest version of the
+library. </p>
 <h4>NPM</h4><pre><code class="language-shell">npm install shopify-cartjs
 </code></pre>
 <h4>Bower</h4><pre><code class="language-shell">bower install shopify-cartjs
 </code></pre>
-<h4>Download</h4><p>Download the latest stable release of Cart.js from <a href="{{ "cartjs.zip" | asset_url }}">here</a>.</p>
+<h4>CDNJS</h4><pre><code class="language-html">&lt;!-- Only include one of the below in your theme. --&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/shopify-cartjs/{{ version }}/cart.min.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/shopify-cartjs/{{ version }}/rivets-cart.min.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<h4>Download</h4><p>Download the latest version of the library: <a href="{{ "cartjs.zip" | asset_url }}">cartjs.zip</a>.</p>
 <h3 id="getting-started-setup">Setup</h3><p>The Cart.js distribution comes packaged with three versions of the library:</p>
 <div class="callout callout-success">
     <p>
