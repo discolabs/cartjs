@@ -20,4 +20,4 @@ You can use Liquid to render the appropriate format from the shop's settings, fo
 When using money formatting options, don't forget to include Shopify's `option_selection.js` on all pages.
 See the note "[Dependency when formatting monetary values][]" in the Guide for more detail.
 
-[Dependency when formatting monetary values]: http://cartjs.org/pages/guide#getting-started-setup
+[Dependency when formatting monetary values]: https://cartjs.org/pages/guide#getting-started-setup

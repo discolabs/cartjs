@@ -11,7 +11,7 @@
     "ajax"
   ],
   "license": "MIT",
-  "homepage": "http://cartjs.org",
+  "homepage": "https://cartjs.org",
   "ignore": [
     "**/.*",
     "node_modules",

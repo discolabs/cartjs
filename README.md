@@ -62,8 +62,8 @@ Documentation and examples are available on the [home page][].
 You can check out a list of who's using Cart.js in production on the
 [Built with Cart.js][] page.
 
-[home page]: http://cartjs.org?utm_source=github&utm_medium=readme&utm_campaign=cartjs
-[Built with Cart.js]: http://cartjs.org/pages/built-with-cart-js
+[home page]: https://cartjs.org?utm_source=github&utm_medium=readme&utm_campaign=cartjs
+[Built with Cart.js]: https://cartjs.org/pages/built-with-cart-js
 
 
 ## Dependencies
@@ -102,7 +102,7 @@ development. Related projects:
 - [Bootstrap for Shopify][]
 
 [Gavin Ballard]: http://gavinballard.com/?utm_source=github&utm_medium=readme&utm_campaign=cartjs
-[Disco]: http://discolabs.com/?utm_source=github&utm_medium=readme&utm_campaign=cartjs
+[Disco]: https://www.discolabs.com/?utm_source=github&utm_medium=readme&utm_campaign=cartjs
 [Mastering Shopify Themes]: http://gavinballard.com/mastering-shopify-themes/?utm_source=github&utm_medium=readme&utm_campaign=cartjs
 [Mastering Shopify Apps]: http://gavinballard.com/mastering-shopify-apps/?utm_source=github&utm_medium=readme&utm_campaign=cartjs
 [Shopify Theme Scaffold]: https://github.com/discolabs/shopify-theme-scaffold
