@@ -60,6 +60,7 @@ module.exports = (grunt) ->
             version: '<%= pkg.version %>'
           }
         files:
+          'docs/theme/snippets/variables.liquid': 'docs/snippets/variables.jade'
           'docs/theme/templates/index.liquid': 'docs/index/index.jade'
           'docs/theme/templates/page.guide.liquid': 'docs/guide/guide.jade'
           'docs/theme/templates/page.reference.liquid': 'docs/reference/reference.jade'
