@@ -1,4 +1,6 @@
 [![Build Status](https://api.travis-ci.org/discolabs/cartjs.svg?branch=master)](http://travis-ci.org/discolabs/cartjs)
+[![npm version](https://badge.fury.io/js/shopify-cartjs.svg)](https://badge.fury.io/js/shopify-cartjs)
+[![Bower version](https://badge.fury.io/bo/shopify-cartjs.svg)](https://badge.fury.io/bo/shopify-cartjs)
 
 # Cart.js
 Cart.js is a Javascript library that makes it easy to add dynamic cart features
