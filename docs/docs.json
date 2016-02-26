@@ -207,6 +207,14 @@
     }
   },
   "builtwith": {
+    "greater-goods" : {
+      "title": "Greater Goods Roasting",
+      "url": "http://greatergoodsroasting.com"
+    },
+    "rallier" : {
+      "title": "Rallier",
+      "url": "http://rallier.com"
+    },
     "focal-theme" : {
       "title": "Focal Shopify Theme",
       "url": "https://themes.shopify.com/themes/focal"
