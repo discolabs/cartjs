@@ -207,6 +207,10 @@
     }
   },
   "builtwith": {
+    "yeezy" : {
+      "title": "Yeezy Supply",
+      "url": "http://shop.yeezysupply.com"
+    },
     "greater-goods" : {
       "title": "Greater Goods Roasting",
       "url": "http://greatergoodsroasting.com"
