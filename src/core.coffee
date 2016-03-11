@@ -15,6 +15,10 @@ CartJS.Core =
     data = CartJS.Utils.wrapKeys(properties)
     data.id = id
     data.quantity = quantity
+    if !options.success
+      options = $.extend(options, {success: ->
+        $(document).trigger('cart.itemsAdded', [CartJS.cart])
+      })
     CartJS.Queue.add '/cart/add.js', data, options
     CartJS.Core.getCart()
 
@@ -29,6 +33,10 @@ CartJS.Core =
 
   # Remove an existing line item.
   removeItem: (line, options = {}) ->
+    if !options.success
+      options = $.extend(options, {success: ->
+        $(document).trigger('cart.itemsRemoved', [CartJS.cart])
+      })
     CartJS.Core.updateItem line, 0, {}, options
 
   # Update item by ID

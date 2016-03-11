@@ -198,6 +198,12 @@
         },
         "request-complete": {
           "title": "cart.requestComplete"
+        },
+        "items-added": {
+          "title": "cart.itemsAdded"
+        },
+        "items-removed": {
+          "title": "cart.itemsRemoved"
         }
       }
     },

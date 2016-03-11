@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 No unreleased changes.
+### Added
+- New events - `cart.itemsAdded` and `cart.itemsRemoved`, triggered when either event is successful
 
 ## 0.4.0 - 2016-02-11
 ### Added
