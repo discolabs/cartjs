@@ -207,6 +207,10 @@
     }
   },
   "builtwith": {
+    "bevybar" : {
+      "title": "Bevy Bar",
+      "url": "https://www.bevybar.com.ar/"
+    },
     "yeezy" : {
       "title": "Yeezy Supply",
       "url": "http://shop.yeezysupply.com"
