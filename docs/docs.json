@@ -212,6 +212,45 @@
         },
         "match": {
           "title": "match"
+        },
+        "lt": {
+          "title": "lt"
+        },
+        "gt": {
+          "title": "gt"
+        },
+        "not": {
+          "title": "not"
+        },
+        "empty": {
+          "title": "empty"
+        },
+        "plus": {
+          "title": "plus"
+        },
+        "minus": {
+          "title": "minus"
+        },
+        "prepend": {
+          "title": "prepend"
+        },
+        "append": {
+          "title": "append"
+        },
+        "money": {
+          "title": "money"
+        },
+        "money_with_currency": {
+          "title": "money with currency"
+        },
+        "weight": {
+          "title": "weight"
+        },
+        "weight_with_unit": {
+          "title": "weight with unit"
+        },
+        "product_image_size": {
+          "title": "product image size"
         }
       }
     }

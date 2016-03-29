@@ -1,9 +1,9 @@
 `model.property | empty`
 
-Returns `true` if the property's length is 0.
+Returns true if the provided property has a length of 0
 
 ```html
-  <div rv-show="item.description | empty">
-    <!-- Element will be shown if the item description is empty -->
+  <div rv-show="item.product_description | empty">
+    <!-- Element will be shown if the item's product_description is blank -->
   </div>
 ```
