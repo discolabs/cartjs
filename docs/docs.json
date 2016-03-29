@@ -77,7 +77,18 @@
     "dom-binding": {
       "title": "DOM Binding",
       "sections": {
-
+        "getting-started": {
+          "title": "Getting Started"
+        },
+        "rivets-binders": {
+          "title": "Rivets Binders"
+        },
+        "formatters": {
+          "title": "Formatters"
+        },
+        "live-example": {
+          "title": "DOM Binding Live Example"
+        }
       }
     }
   },
