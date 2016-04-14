@@ -207,6 +207,10 @@
     }
   },
   "builtwith": {
+    "intributeto" : {
+      "title": "InTributeTo",
+      "url": "http://intributeto.us"
+    },
     "bevybar" : {
       "title": "Bevy Bar",
       "url": "https://www.bevybar.com.ar/"
