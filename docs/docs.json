@@ -207,6 +207,14 @@
     }
   },
   "builtwith": {
+    "dualitas" : {
+      "title": "Dualitas",
+      "url": "https://dualitas.com"
+    },
+    "usabaseball" : {
+      "title": "USA Baseball Shop",
+      "url": "https://usabaseballshop.com"
+    },
     "intributeto" : {
       "title": "InTributeTo",
       "url": "http://intributeto.us"
