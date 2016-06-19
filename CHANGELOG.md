@@ -2,7 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
-No unreleased changes.
+### Changed
+- Fix issue with unnecessary line item properties being added with form submit
 
 ## 0.4.0 - 2016-02-11
 ### Added
