@@ -97,7 +97,7 @@ CartJS.Data =
         id = item.value
       else if item.name == 'quantity'
         quantity = item.value
-      else
+      else if item.name.match /^properties\[\w+\]$/
         properties[item.name] = item.value
 
     CartJS.Core.addItem(id, quantity, CartJS.Utils.unwrapKeys(properties))
