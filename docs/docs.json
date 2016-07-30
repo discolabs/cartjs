@@ -207,6 +207,10 @@
     }
   },
   "builtwith": {
+    "susi-studio" : {
+      "title": "SUSI Studio",
+      "url": "https://susistudio.com"
+    },
     "sargossa" : {
       "title": "Sargossa",
       "url": "https://sargossa.com"
