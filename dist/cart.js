@@ -500,7 +500,7 @@
           return id = item.value;
         } else if (item.name === 'quantity') {
           return quantity = item.value;
-        } else {
+        } else if (item.name.match(/^properties\[\w+\]$/)) {
           return properties[item.name] = item.value;
         }
       });
@@ -669,7 +669,8 @@
     exports.clearAttributes = CartJS.Core.clearAttributes;
     exports.getNote = CartJS.Core.getNote;
     exports.setNote = CartJS.Core.setNote;
-    return exports.render = CartJS.Data.render;
+    exports.render = CartJS.Data.render;
+    return exports.Rivets = CartJS.Rivets;
   };
 
   if (typeof exports === 'object') {
