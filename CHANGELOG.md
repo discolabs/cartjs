@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+No unreleased changes.
+
+## 0.4.1 - 2016-08-16
+### Added
+- New Rivets formatters: `times`, `divided_by`, `modulo`
+
 ### Changed
 - Fix issue with unnecessary line item properties being added with form submit
 

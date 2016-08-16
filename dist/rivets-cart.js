@@ -1,5 +1,5 @@
 // Cart.js
-// version: 0.4.0
+// version: 0.4.1
 // author: Gavin Ballard
 // license: MIT
 (function() {
@@ -2103,7 +2103,7 @@
           return id = item.value;
         } else if (item.name === 'quantity') {
           return quantity = item.value;
-        } else {
+        } else if (item.name.match(/^properties\[\w+\]$/)) {
           return properties[item.name] = item.value;
         }
       });
@@ -2186,6 +2186,15 @@
     };
     rivets.formatters.minus = function(a, b) {
       return parseInt(a) - parseInt(b);
+    };
+    rivets.formatters.times = function(a, b) {
+      return a * b;
+    };
+    rivets.formatters.divided_by = function(a, b) {
+      return a / b;
+    };
+    rivets.formatters.modulo = function(a, b) {
+      return a % b;
     };
     rivets.formatters.prepend = function(a, b) {
       return b + a;
