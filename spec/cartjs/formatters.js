@@ -61,4 +61,18 @@ describe('Formatters', function() {
     });
   });
 
+  describe('math', function() {
+    it("multiplies correctly", function() {
+      rivets.formatters.times(2, 8).should.equal(16);
+    });
+
+    it("divides correctly", function() {
+      rivets.formatters.divided_by(10, 2.0).should.equal(5.0);
+    });
+
+    it("modulos correctly", function() {
+      rivets.formatters.modulo(7, 5).should.equal(2);
+    });
+  });
+
 });

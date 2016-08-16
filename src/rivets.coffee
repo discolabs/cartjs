@@ -77,6 +77,15 @@ if 'rivets' of window
   rivets.formatters.minus = (a, b) ->
     parseInt(a) - parseInt(b)
 
+  rivets.formatters.times = (a, b) ->
+    a * b
+
+  rivets.formatters.divided_by = (a, b) ->
+    a / b
+
+  rivets.formatters.modulo = (a, b) ->
+    a % b
+
   rivets.formatters.prepend = (a, b) ->
     b + a
 
