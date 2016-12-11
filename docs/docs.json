@@ -207,6 +207,10 @@
     }
   },
   "builtwith": {
+    "trytheworld" : {
+      "title": "Try The World",
+      "url": "https://www.trytheworld.com"
+    },
     "susi-studio" : {
       "title": "SUSI Studio",
       "url": "https://susistudio.com"
