@@ -59,6 +59,9 @@ if 'rivets' of window
   rivets.formatters.match = (a, regexp, flags) ->
     a.match(new RegExp(regexp, flags))
 
+  rivets.formatters.property = (properties, property) ->
+    properties[property];
+
   rivets.formatters.lt = (a, b) ->
     a < b
 

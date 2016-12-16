@@ -24,6 +24,7 @@ No unreleased changes.
 
 ### Removed
 - IE8 Compatibility mode
+- New Rivets formatter: `property` - returns passed in line item property
 
 ## 0.3.9 - 2015-11-11
 ### Added
