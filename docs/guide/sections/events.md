@@ -8,7 +8,7 @@ For example, if we wanted to update a `<span>` element with the number of items 
 ```html
 You have <span id="counter">{{ cart.item_count }}</span> items in your cart.
 
-<script type="text/javscript">
+<script type="text/javascript">
     $(document).on('cart.requestComplete', function(event, cart) {
         $('#counter').html(cart.item_count);
     });

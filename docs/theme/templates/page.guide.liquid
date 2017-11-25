@@ -367,7 +367,7 @@ All of the usual inputs - <code>id</code> to specify the variant ID, <code>quant
 <p>{% raw %}</p>
 <pre><code class="language-html">You have &lt;span id=&quot;counter&quot;&gt;{{ cart.item_count }}&lt;/span&gt; items in your cart.
 
-&lt;script type=&quot;text/javscript&quot;&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
     $(document).on(&#39;cart.requestComplete&#39;, function(event, cart) {
         $(&#39;#counter&#39;).html(cart.item_count);
     });
