@@ -34,7 +34,7 @@ module.exports = (grunt) ->
           banner: '<%= meta.banner %>'
         files:
           'dist/rivets-cart.js': [
-            'node_modules/rivets/node_modules/sightglass/index.js',
+            'node_modules/sightglass/index.js',
             'node_modules/rivets/dist/rivets.js',
             'dist/cart.js'
           ]
@@ -60,6 +60,7 @@ module.exports = (grunt) ->
             version: '<%= pkg.version %>'
           }
         files:
+          'docs/theme/snippets/variables.liquid': 'docs/snippets/variables.jade'
           'docs/theme/templates/index.liquid': 'docs/index/index.jade'
           'docs/theme/templates/page.guide.liquid': 'docs/guide/guide.jade'
           'docs/theme/templates/page.reference.liquid': 'docs/reference/reference.jade'
@@ -104,6 +105,9 @@ module.exports = (grunt) ->
         files: 'docs/**/*.less'
         tasks: ['less:docs']
 
+    mocha_phantomjs:
+      test: ['spec/**/*.html']
+
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-contrib-compress'
   grunt.loadNpmTasks 'grunt-contrib-concat'
@@ -113,7 +117,9 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-terraform'
+  grunt.loadNpmTasks 'grunt-mocha-phantomjs'
 
   grunt.registerTask 'default', ['watch']
   grunt.registerTask 'build',   ['coffee:build', 'concat:build', 'uglify:build', 'clean:build']
+  grunt.registerTask 'test',    ['build', 'mocha_phantomjs']
   grunt.registerTask 'docs',    ['build', 'terraform:docs', 'compress:docs', 'copy:docs', 'less:docs']

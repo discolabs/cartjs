@@ -267,25 +267,81 @@
     }
   },
   "builtwith": {
+    "trytheworld" : {
+      "title": "Try The World",
+      "url": "https://www.trytheworld.com"
+    },
+    "susi-studio" : {
+      "title": "SUSI Studio",
+      "url": "https://susistudio.com"
+    },
+    "sargossa" : {
+      "title": "Sargossa",
+      "url": "https://sargossa.com"
+    },
+    "dualitas" : {
+      "title": "Dualitas",
+      "url": "https://dualitas.com"
+    },
+    "usabaseball" : {
+      "title": "USA Baseball Shop",
+      "url": "https://usabaseballshop.com"
+    },
+    "intributeto" : {
+      "title": "InTributeTo",
+      "url": "http://intributeto.us"
+    },
+    "bevybar" : {
+      "title": "Bevy Bar",
+      "url": "https://www.bevybar.com.ar/"
+    },
+    "yeezy" : {
+      "title": "Yeezy Supply",
+      "url": "http://shop.yeezysupply.com"
+    },
+    "greater-goods" : {
+      "title": "Greater Goods Roasting",
+      "url": "http://greatergoodsroasting.com"
+    },
+    "rallier" : {
+      "title": "Rallier",
+      "url": "http://rallier.com"
+    },
+    "focal-theme" : {
+      "title": "Focal Shopify Theme",
+      "url": "https://themes.shopify.com/themes/focal"
+    },
+    "pure-health-delivered" : {
+      "title": "Pure Health Delivered",
+      "url": "http://www.phd.co.nz"
+    },
+    "the-foodbank-project" : {
+      "title": "The Foodbank Project",
+      "url": "http://www.foodbank.org.nz"
+    },
+    "lainee-hermsen" : {
+      "title": "Lainee Hermsen",
+      "url": "http://www.laineehermsen.co.nz"
+    },
     "writeyboards" : {
       "title": "Writey Boards",
-      "url": "http://writeyboards.com/"
+      "url": "http://writeyboards.com"
     },
     "budweiser" : {
       "title": "Budweiser Goal Lab",
-      "url": "http://shop.budweiser.ca/"
+      "url": "http://shop.budweiser.ca"
     },
     "kagami-theme": {
       "title": "Kagami Shopify Theme",
-      "url": "https://themes.shopify.com/themes/kagami/"
+      "url": "https://themes.shopify.com/themes/kagami"
     },
     "mast-brothers": {
-      "title": "Mast Brothers Chocolate Makers",
-      "url": "http://mastbrothers.com/"
+      "title": "Mast Brothers",
+      "url": "http://mastbrothers.com"
     },
     "go-defense": {
       "title": "GoDefense",
-      "url": "http://godefense.fr/"
+      "url": "http://godefense.fr"
     }
   }
 }

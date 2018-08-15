@@ -47,4 +47,4 @@ If you're keen to help but don't know where to start, contact me
 [Browser Support]: /pages/guide#getting-started-browser-support
 [issues tracker]: https://github.com/discolabs/cartjs/issues
 [GitHub]: https://github.com/discolabs/cartjs
-[on Twitter]: http://twitter.com/gavinballard
+[on Twitter]: https://twitter.com/gavinballard

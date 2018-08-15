@@ -2,6 +2,26 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+No unreleased changes.
+
+## 0.4.1 - 2016-08-16
+### Added
+- New Rivets formatters: `times`, `divided_by`, `modulo`
+
+### Changed
+- Fix issue with unnecessary line item properties being added with form submit
+
+## 0.4.0 - 2016-02-11
+### Added
+- New Rivets formatter: `array_element`, `array_first`, `array_last`
+- CONTRIBUTING.md
+- Simple Mocha-based test framework
+- `pluralize` formatter
+- `slice` formatter
+
+### Changed
+- Fixed jQuery dependency from load-time to run-time
+
 ### Removed
 - IE8 Compatibility mode
 

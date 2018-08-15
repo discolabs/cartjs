@@ -1,4 +1,4 @@
-<div class="jumbotron"><section class="container"><div class="row"><article class="col-md-10 reference"><h2 id="options">Options</h2><p>Configuration options are passed to <code>CartJS.init()</code> when initialising Cart.js.</p>
+{% include 'variables' %}<div class="jumbotron"><section class="container"><div class="row"><article class="col-md-10 reference"><h2 id="options">Options</h2><p>Configuration options are passed to <code>CartJS.init()</code> when initialising Cart.js.</p>
 <p>See the <a href="/pages/guide#core-api-configuration">Configuration</a> section in the Guide for more.</p>
 <h3 id="options-data-api">dataAPI</h3><p><em>Boolean (default: <code>true</code>)</em></p>
 <p>When <code>true</code>, Cart.js will automatically bind <code>document</code> listeners for events related to element you&#39;ve marked up with <code>data-cart-</code> attributes.</p>
@@ -39,7 +39,7 @@
 </code></pre>
 <p>{% endraw %}</p>
 <p>When using money formatting options, don&#39;t forget to include Shopify&#39;s <code>option_selection.js</code> on all pages.
-See the note &quot;<a href="http://cartjs.org/pages/guide#getting-started-setup">Dependency when formatting monetary values</a>&quot; in the Guide for more detail.</p>
+See the note &quot;<a href="https://cartjs.org/pages/guide#getting-started-setup">Dependency when formatting monetary values</a>&quot; in the Guide for more detail.</p>
 <h3 id="options-money-with-currency-format">moneyWithCurrencyFormat</h3><p><em>String (default: <code>null</code>)</em></p>
 <p>Specifies the formatting to be used when rendering money amounts with currencies through elements marked up with <code>data-cart-render</code> or via the DOM Bindings.</p>
 <p>You can use Liquid to render the appropriate format from the shop&#39;s settings, for example:</p>
@@ -55,7 +55,7 @@ See the note &quot;<a href="http://cartjs.org/pages/guide#getting-started-setup"
 </code></pre>
 <p>{% endraw %}</p>
 <p>When using money formatting options, don&#39;t forget to include Shopify&#39;s <code>option_selection.js</code> on all pages.
-See the note &quot;<a href="http://cartjs.org/pages/guide#getting-started-setup">Dependency when formatting monetary values</a>&quot; in the Guide for more detail.</p>
+See the note &quot;<a href="https://cartjs.org/pages/guide#getting-started-setup">Dependency when formatting monetary values</a>&quot; in the Guide for more detail.</p>
 <h3 id="options-weight-unit">weightUnit</h3><p><em>String (default: <code>&#39;g&#39;</code>)</em></p>
 <p>Specifies the weight unit to use when rendering weights through the provided
 <code>weight</code> or <code>weightWithUnit</code> formatters. Possible values are <code>g</code>, <code>kg</code>, <code>oz</code> or

@@ -1,20 +1,20 @@
+| {% include 'variables' %}
+
 .jumbotron
     section.container
-        .row
-            article.col-md-10
-                h2 Built with Cart.js
-                p This pages lists sites using Cart.js in the wild. Built or know of a store that should be added to this list?
-                p
-                    a(href= 'https://github.com/discolabs/cartjs/issues/new?title=New%20site%20for%20%22Built%20With%22%20Page:%20http://')= "Add a request in the issue tracker."
+        h2 Built with Cart.js
+        p This pages lists sites using Cart.js in the wild.
+        p
+            a(href= 'https://github.com/discolabs/cartjs/issues/new?title=New%20site%20for%20%22Built%20With%22%20Page:%20http://')= "Add a site to this list."
 
-                hr
-                
-                .row
-                    for site, anchor in docs.builtwith
-                        .col-md-6
-                            .thumbnail
-                                a(href= site.url, target= '_blank')
-                                    img(src= "{{ '" + anchor + ".jpg' | asset_url }}", class='img-thumbnail')
-                                .caption
-                                    h4= site.title
-                                    a(href= site.url, target= '_blank')= site.url
+        hr
+
+        .row
+            for site, anchor in docs.builtwith
+                .col-md-4.col-sm-6
+                    .thumbnail
+                        a(href= site.url, target= '_blank')
+                            img(src= "{{ '" + anchor + ".jpg' | asset_url }}", class='img-thumbnail')
+                        .caption
+                            h4= site.title
+                            a(href= site.url, target= '_blank')= site.url

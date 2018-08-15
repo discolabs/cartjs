@@ -3,12 +3,13 @@
 # --------------------
 
 # Reference to the document element.
-$document = jQuery(document)
+$document = null
 
 CartJS.Data =
 
   # Initialise the Data API.
   init: () ->
+    $document = jQuery(document)
     CartJS.Data.setEventListeners('on')
     CartJS.Data.render(null, CartJS.cart)
 
@@ -96,7 +97,7 @@ CartJS.Data =
         id = item.value
       else if item.name == 'quantity'
         quantity = item.value
-      else
+      else if item.name.match /^properties\[\w+\]$/
         properties[item.name] = item.value
 
     CartJS.Core.addItem(id, quantity, CartJS.Utils.unwrapKeys(properties))

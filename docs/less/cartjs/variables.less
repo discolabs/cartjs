@@ -39,7 +39,7 @@
 //
 //## Font, line-height, and color for body text, headings, and more.
 
-@font-family-sans-serif:  "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+@font-family-sans-serif:  "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
 @font-family-serif:       Georgia, "Times New Roman", Times, serif;
 //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
 @font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace;
@@ -361,9 +361,9 @@
 @navbar-default-brand-hover-bg:            transparent;
 
 // Navbar toggle
-@navbar-default-toggle-hover-bg:           #ddd;
-@navbar-default-toggle-icon-bar-bg:        #888;
-@navbar-default-toggle-border-color:       #ddd;
+@navbar-default-toggle-hover-bg:           #fff;
+@navbar-default-toggle-icon-bar-bg:        lighten(@brand-primary, 15%);
+@navbar-default-toggle-border-color:       lighten(@brand-primary, 15%);
 
 
 // Inverted navbar
@@ -464,7 +464,7 @@
 //
 //##
 
-@jumbotron-padding:              10px;
+@jumbotron-padding:              50px 25px;
 @jumbotron-color:                inherit;
 @jumbotron-bg:                   white;
 @jumbotron-heading-color:        inherit;

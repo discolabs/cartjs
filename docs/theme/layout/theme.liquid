@@ -6,7 +6,6 @@
   <meta name="author" content="{{ shop.name }}">
 
   <!-- Core CSS -->
-  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,400italic,700italic" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/github.min.css">
   <link href="{{ 'cartjs.min.css' | asset_url }}" rel="stylesheet">
 
@@ -26,6 +25,10 @@
   <meta name="description" content="{{ page_description }}" />
   {% endif %}
   <link rel="canonical" href="{{ canonical_url | replace: 'cart-js.myshopify.com', 'cartjs.org' }}" />
+
+  <!-- Load TypeKit -->
+  <script src="https://use.typekit.net/dhd1vht.js"></script>
+  <script>try{Typekit.load({ async: true });}catch(e){}</script>
 </head>
 
 <body data-spy="scroll" data-target="#nav">

@@ -1,7 +1,9 @@
+| {% include 'variables' %}
+
 section.jumbotron.jumbotron-primary
     .container.text-center
         h3 A Javascript library to power your Shopify theme's cart.
-        a.btn.btn-lg.btn-outline-inverse(href="{{ 'cartjs.zip' | asset_url }}") Download Cart.js v#{version}
+        a.btn.btn-lg.btn-outline-inverse(href="{{ 'cartjs.zip' | asset_url }}") Download Cart.js v{{ version }}
 
 section.jumbotron
     .container

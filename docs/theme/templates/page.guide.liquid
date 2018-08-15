@@ -1,4 +1,4 @@
-<div class="jumbotron"><section class="container"><div class="row"><article class="col-md-10 guide"><h2 id="introduction">Introduction</h2><h3 id="introduction-what">What is Cart.js?</h3><p>Cart.js is a very small open source Javascript library that makes the addition of powerful Ajax cart functionality to your Shopify theme a breeze.</p>
+{% include 'variables' %}<div class="jumbotron"><section class="container"><div class="row"><article class="col-md-10 guide"><h2 id="introduction">Introduction</h2><h3 id="introduction-what">What is Cart.js?</h3><p>Cart.js is a very small open source Javascript library that makes the addition of powerful Ajax cart functionality to your Shopify theme a breeze.</p>
 <p>It&#39;s designed to be simple to use, while providing some really powerful and nifty features, like:</p>
 <ul class="check-list">
     <li><strong>Simple, consistent API</strong> for cart manipulation;</li>
@@ -10,13 +10,19 @@
 <h2 id="getting-started">Getting Started</h2><p>Getting started with Cart.js is designed to be pretty easy.</p>
 <p>You just need to fetch a copy of the library, include it in your theme, and call a single initialisation method.
 Then you can make calls to Cart.js from within your theme code.</p>
-<h3 id="getting-started-installation">Installation</h3><p>You can install Cart.js via <code>npm</code>, <code>bower</code> or simply by downloading the latest copy of the library.</p>
+<h3 id="getting-started-installation">Installation</h3><p>Cart.js is available via the <code>npm</code> or <code>bower</code> package managers, from
+<a href="https://cdnjs.com">cdnjs</a>, or simply by downloading the latest version of the
+library. </p>
 <h4>NPM</h4><pre><code class="language-shell">npm install shopify-cartjs
 </code></pre>
 <h4>Bower</h4><pre><code class="language-shell">bower install shopify-cartjs
 </code></pre>
-<h4>Download</h4><p>Download the latest stable release of Cart.js from <a href="{{ "cartjs.zip" | asset_url }}">here</a>.</p>
-<h3 id="getting-started-setup">Setup</h3><p>The Cart.js distribution comes packaged with fours versions of the library:</p>
+<h4>CDNJS</h4><pre><code class="language-html">&lt;!-- Only include one of the below in your theme. --&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/shopify-cartjs/{{ version }}/cart.min.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;https://cdnjs.cloudflare.com/ajax/libs/shopify-cartjs/{{ version }}/rivets-cart.min.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<h4>Download</h4><p>Download the latest version of the library: <a href="{{ "cartjs.zip" | asset_url }}">cartjs.zip</a>.</p>
+<h3 id="getting-started-setup">Setup</h3><p>The Cart.js distribution comes packaged with three versions of the library:</p>
 <div class="callout callout-success">
     <p>
         <code>cart.js</code> is the unminified source code, containing the Core and Data APIs.
@@ -29,14 +35,7 @@ Then you can make calls to Cart.js from within your theme code.</p>
     <p>
         <code>rivets-cart.min.js</code> is a minified version of Cart.js that also bundles the Rivets.js library.
         Together, they provide support for the DOM Binding functionality.
-    </p>
-
-    <p>
-        <code>rivets-cart-compatibility.min.js</code> is a version of the Cart.js and Rivets.js bundle that provides
-         support for older browsers (Internet Explorer 8 and below).
-         See <a href="#getting-started-browser-support">Browser Support</a>.
-    </p>
-</div>
+    </p><br></div>
 
 <p>Once you&#39;ve selected the version you&#39;d like to use, add the relevant file to your theme&#39;s <code>/assets</code> directory.</p>
 <p>You then just need to include the script on your page and call <code>CartJS.init()</code>.
@@ -104,28 +103,11 @@ you to support IE6+, Chrome, Firefox, Safari 5.1+ and up.</p>
 <p>If you&#39;re using the DOM Binding functionality (that is, you&#39;re using the
 <code>rivets-cart.min.js</code> library in your theme), then you may see problems on
 browsers that don&#39;t support the ES5 Javascript standard (namely, Internet 
-Explorer 8 and below). If you need to support these browsers, then Cart.js
-providers an alternate version of the library that bundles Rivets, Cart.js
-and a number of shims and polyfills to make things work (named
-<code>rivets-cart-compatibility.min.js</code>).</p>
-<p>Because the shims and polyfills are redundant on most browsers, you should make
-sure that you&#39;re only serving this alternate version to the browsers that need
-it. The following shows how to serve the compatible version of the library to
-IE8 and below, while providing the standard version to all other browsers:</p>
-<p>{% raw %}</p>
-<pre><code class="language-html">  &lt;!-- Include Cart.js, conditionally loading Compatible version on older browsers --&gt;
-  &lt;!--[if lt IE 9]&gt;
-  {{ &#39;rivets-cart-compatibility.min.js&#39; | asset_url | script_tag }}
-  &lt;![endif]--&gt;
-  &lt;!--[if gt IE 8]&gt; &lt;!-- --&gt;
-  {{ &#39;rivets-cart.min.js&#39; | asset_url | script_tag }}
-  &lt;!-- &lt;![endif]--&gt;
-</code></pre>
-<p>{% endraw %}</p>
-<p>If you&#39;re already using Modernizr or a similar feature-detection library,
-you may wish to use that to detect whether the user&#39;s browser supports ES5 and
-load the appropriate script file, instead of using the conditional comment
-approach outlined above. </p>
+Explorer 8 and below).</p>
+<p>As of November 2015, Shopify no longer requires themes submitted to the theme
+store to support Internet Explorer 8, so as long as you don&#39;t have a special use
+case that requires supporting these older browsers, you can happily use the DOM
+Binding library in your themes. </p>
 <div class="callout callout-success">
     <h4>What&#39;s the issue with older browsers?</h4>
 
@@ -136,16 +118,12 @@ approach outlined above. </p>
     </p>
 
     <p>
-        The compatible version of Cart.js provides a workaround for this, by
-        bundling a number of ES5 shims and polyfills into the library, as well
-        as forcibly binding and re-binding Rivets views whenever a charge to
-        the cart occurs.
-    </p>
-
-    <p>
-        As a result of this workaround, if the cart model is being updated
-        outside of Cart.js&#39;s regular methods, a <code>CartJS.getCart()</code> call should
-        be made to force a re-render on non-ES5 browsers.
+        Earlier versions of Cart.js provided a workaround for this by bundling
+        a number of ES5 shims and polyfills into the library, as well as
+        forcibly binding and re-binding Rivets views whenever a charge to the
+        cart occurred. This &quot;compatibility mode&quot; was dropped once Shopify
+        changed their theme guidelines to only require support for Internet
+        Explorer 9+.
     </p><br></div>
 <h2 id="core-api">Core API</h2><p>The Core API consists of methods called on the global <code>CartJS</code> object.
 You can use the Core API to do pretty much everything you&#39;d expect of a cart manipulation library - add items, update quantities and custom properties, and so on.</p>
@@ -373,7 +351,7 @@ We want to inform the user of the success or failure of their action, and potent
 </code></pre>
 <p>{% endraw %}</p>
 <p>When the customer clicks &quot;Buy Now&quot;, Cart.js will intercept the form submission and convert it to an Ajax request.
-All of the usual inputs - <code>id</code> to specify the variant ID, <code>quantity</code> to specify the quantity, and <code>property[]</code> inputs - are supported.</p>
+All of the usual inputs - <code>id</code> to specify the variant ID, <code>quantity</code> to specify the quantity, and <code>properties[]</code> to specify line item properties - are supported.</p>
 <div class="callout callout-danger">
     <h4>Form submission doesn&#39;t work with files</h4>
     <p>
@@ -389,7 +367,7 @@ All of the usual inputs - <code>id</code> to specify the variant ID, <code>quant
 <p>{% raw %}</p>
 <pre><code class="language-html">You have &lt;span id=&quot;counter&quot;&gt;{{ cart.item_count }}&lt;/span&gt; items in your cart.
 
-&lt;script type=&quot;text/javscript&quot;&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
     $(document).on(&#39;cart.requestComplete&#39;, function(event, cart) {
         $(&#39;#counter&#39;).html(cart.item_count);
     });
