@@ -1,5 +1,5 @@
 // Cart.js
-// version: 0.4.2
+// version: 0.4.3
 // author: Gavin Ballard
 // license: MIT
 (function() {
@@ -1604,7 +1604,7 @@
 }).call(this);
 
 (function() {
-  var $document, Cart, CartJS, Item, processing, queue,
+  var $document, Cart, CartJS, FORMAT_MONEY_WARNING, Item, processing, queue,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   Cart = (function() {
@@ -1723,9 +1723,14 @@
     window.console.log = function() {};
   }
 
+  FORMAT_MONEY_WARNING = 'A money formatting filter was used, but Shopify.formatMoney is not available. See the note "Dependency when formatting monetary values" on this page: https://cartjs.org/pages/guide#getting-started-setup.';
+
   CartJS.Utils = {
     log: function() {
       return CartJS.Utils.console(console.log, arguments);
+    },
+    warn: function() {
+      return CartJS.Utils.console(console.warn, arguments);
     },
     error: function() {
       return CartJS.Utils.console(console.error, arguments);
@@ -1811,6 +1816,7 @@
       if (((_ref1 = window.Shopify) != null ? _ref1.formatMoney : void 0) != null) {
         return Shopify.formatMoney(value, format);
       } else {
+        CartJS.Utils.warn(FORMAT_MONEY_WARNING);
         return value;
       }
     },
@@ -2105,7 +2111,7 @@
           return id = item.value;
         } else if (item.name === 'quantity') {
           return quantity = item.value;
-        } else if (item.name.match(/^properties\[\w+\]$/)) {
+        } else if (item.name.match(/^properties\[[\w ]+\]$/)) {
           return properties[item.name] = item.value;
         }
       });

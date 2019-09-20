@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 No unreleased changes.
 
+## 0.4.3 - 2019-08-20
+### Added
+- Warning when trying to use money formatters without Shopify library support.
+
+### Changed
+- Fixed bug preventing spaces in line item property names in `data-cart-submit` forms.
+
 ## 0.4.2 - 2019-08-20
 ### Added
 - Additional "built with" sites, dependency locks.
