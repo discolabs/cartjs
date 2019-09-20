@@ -207,6 +207,10 @@
     }
   },
   "builtwith": {
+    "moderncitizen" : {
+      "title": "Modern Citizen",
+      "url": "https://www.moderncitizen.com"
+    },
     "carbon" : {
       "title": "Carbon Theme",
       "url": "https://carbon.heliumdev.com"
