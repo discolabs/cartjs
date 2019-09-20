@@ -2,11 +2,17 @@
 # Utility methods.
 # ----------------
 
+FORMAT_MONEY_WARNING = 'A money formatting filter was used, but Shopify.formatMoney is not available. See the note "Dependency when formatting monetary values" on this page: https://cartjs.org/pages/guide#getting-started-setup.'
+
 CartJS.Utils =
 
   # Log an informational message to the console iff debug mode is on and a console is available.
   log: () ->
     CartJS.Utils.console(console.log, arguments)
+
+  # Log a warning message to the console iff debug mode is on and a console is available.
+  warn: () ->
+    CartJS.Utils.console(console.warn, arguments)
 
   # Log an error message to the console iff debug mode is on and a console is available.
   error: () ->
@@ -90,7 +96,11 @@ CartJS.Utils =
         format = window.Currency.moneyFormats[currency][formatName]
 
     # Render the formatted amount using the Shopify formatter if available, else just the value.
-    if window.Shopify?.formatMoney? then Shopify.formatMoney(value, format) else value
+    if window.Shopify?.formatMoney?
+      Shopify.formatMoney(value, format)
+    else
+      CartJS.Utils.warn(FORMAT_MONEY_WARNING)
+      value
 
   # Return a resized image URL using Shopify's getSizedImageUrl if available.
   #
