@@ -28,3 +28,10 @@ All of the usual inputs - `id` to specify the variant ID, `quantity` to specify 
         This is something that we hope to auto-detect in future, but for now you should avoid using `data-cart-submit` on forms that need to upload files.
     </p>
 </div>
+
+<div class="callout callout-danger">
+    <h4>Form submission doesn't work with checkout forms</h4>
+    <p>
+        Be careful not to add the `data-cart-submit` attribute to forms that target `action="/checkout"`, as Cart.js will intercept the event and customers won't be redirected to the checkout. 
+    </p>
+</div>
