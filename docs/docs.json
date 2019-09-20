@@ -207,6 +207,14 @@
     }
   },
   "builtwith": {
+    "tattly" : {
+      "title": "Tattly",
+      "url": "https://tattly.com"
+    },
+    "keetsa" : {
+      "title": "Keetsa",
+      "url": "https://www.keetsa.com"
+    },
     "moderncitizen" : {
       "title": "Modern Citizen",
       "url": "https://www.moderncitizen.com"
