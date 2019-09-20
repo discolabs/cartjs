@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 No unreleased changes.
 
+## 0.4.2 - 2019-08-20
+### Added
+- Additional "built with" sites, dependency locks.
+
 ## 0.4.1 - 2016-08-16
 ### Added
 - New Rivets formatters: `times`, `divided_by`, `modulo`
