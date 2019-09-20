@@ -207,6 +207,10 @@
     }
   },
   "builtwith": {
+    "atlascoffeeclub" : {
+      "title": "Atlas Coffee Club",
+      "url": "https://atlascoffeeclub.com"
+    },
     "trytheworld" : {
       "title": "Try The World",
       "url": "https://www.trytheworld.com"
