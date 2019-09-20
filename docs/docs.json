@@ -207,6 +207,10 @@
     }
   },
   "builtwith": {
+    "carbon" : {
+      "title": "Carbon Theme",
+      "url": "https://carbon.heliumdev.com"
+    },
     "netaya" : {
       "title": "Netaya",
       "url": "https://netaya.com"
