@@ -93,17 +93,9 @@ details on submitting pull requests that will be accepted.
 ---
 
 #### About the Author
-[Gavin Ballard][] is a developer at [Disco][], specialising in Shopify
-development. Related projects:
-
-- [Mastering Shopify Themes][]
-- [Mastering Shopify Apps][]
-- [Shopify Theme Scaffold][]
-- [Bootstrap for Shopify][]
+[Gavin Ballard][] is the founder, CEO, and occasional developer at [Disco Labs][],
+a Shopify Plus partner agency specialising in solutions for merchants with complex
+needs.
 
 [Gavin Ballard]: http://gavinballard.com/?utm_source=github&utm_medium=readme&utm_campaign=cartjs
-[Disco]: https://www.discolabs.com/?utm_source=github&utm_medium=readme&utm_campaign=cartjs
-[Mastering Shopify Themes]: http://gavinballard.com/mastering-shopify-themes/?utm_source=github&utm_medium=readme&utm_campaign=cartjs
-[Mastering Shopify Apps]: http://gavinballard.com/mastering-shopify-apps/?utm_source=github&utm_medium=readme&utm_campaign=cartjs
-[Shopify Theme Scaffold]: https://github.com/discolabs/shopify-theme-scaffold
-[Bootstrap for Shopify]: http://bootstrapforshopify.com/?utm_source=github&utm_medium=readme&utm_campaign=cartjs
+[Disco Labs]: https://www.discolabs.com/?utm_source=github&utm_medium=readme&utm_campaign=cartjs
