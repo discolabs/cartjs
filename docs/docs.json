@@ -207,6 +207,10 @@
     }
   },
   "builtwith": {
+    "netaya" : {
+      "title": "Netaya",
+      "url": "https://netaya.com"
+    },
     "atlascoffeeclub" : {
       "title": "Atlas Coffee Club",
       "url": "https://atlascoffeeclub.com"
