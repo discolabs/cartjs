@@ -1,5 +1,5 @@
 // Cart.js
-// version: 0.4.1
+// version: 0.4.2
 // author: Gavin Ballard
 // license: MIT
 (function() {
@@ -19,6 +19,7 @@
     this.keypath = keypath
     this.callback = callback
     this.objectPath = []
+    this.update = this.update.bind(this)
     this.parse()
 
     if (isObject(this.target = this.realize())) {
@@ -84,12 +85,12 @@
       if (isObject(current)) {
         if (typeof this.objectPath[index] !== 'undefined') {
           if (current !== (prev = this.objectPath[index])) {
-            this.set(false, token, prev, this.update.bind(this))
-            this.set(true, token, current, this.update.bind(this))
+            this.set(false, token, prev, this.update)
+            this.set(true, token, current, this.update)
             this.objectPath[index] = current
           }
         } else {
-          this.set(true, token, current, this.update.bind(this))
+          this.set(true, token, current, this.update)
           this.objectPath[index] = current
         }
 
@@ -100,7 +101,7 @@
         }
 
         if (prev = this.objectPath[index]) {
-          this.set(false, token, prev, this.update.bind(this))
+          this.set(false, token, prev, this.update)
         }
       }
     }, this)
@@ -128,7 +129,8 @@
       oldValue = this.value()
       this.target = next
 
-      if (this.value() !== oldValue) this.callback()
+      // Always call callback if value is a function. If not a function, call callback only if value changed
+      if (this.value() instanceof Function || this.value() !== oldValue) this.callback()
     }
   }
 
@@ -184,7 +186,7 @@
 
     this.tokens.forEach(function(token, index) {
       if (obj = this.objectPath[index]) {
-        this.set(false, token, obj, this.update.bind(this))
+        this.set(false, token, obj, this.update)
       }
     }, this)
 
