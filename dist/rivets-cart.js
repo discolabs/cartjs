@@ -1907,6 +1907,18 @@
       CartJS.Queue.add('/cart/add.js', data, options);
       return CartJS.Core.getCart();
     },
+    addItems: function(data, options) {
+      if (options == null) {
+        options = {};
+      }
+      data = data;
+
+      /* Example of sending multiple items
+      https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#add-to-cart
+       */
+      CartJS.Queue.add('/cart/add.js', data, options);
+      return CartJS.Core.getCart();
+    },
     updateItem: function(line, quantity, properties, options) {
       var data;
       if (properties == null) {
@@ -2276,6 +2288,7 @@
     exports.settings = CartJS.settings;
     exports.getCart = CartJS.Core.getCart;
     exports.addItem = CartJS.Core.addItem;
+    exports.addItems = CartJS.Core.addItems;
     exports.updateItem = CartJS.Core.updateItem;
     exports.updateItemById = CartJS.Core.updateItemById;
     exports.updateItemQuantitiesById = CartJS.Core.updateItemQuantitiesById;
