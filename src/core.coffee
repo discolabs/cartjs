@@ -18,6 +18,15 @@ CartJS.Core =
     CartJS.Queue.add '/cart/add.js', data, options
     CartJS.Core.getCart()
 
+  # Add array of item objects to the cart.
+  addItems: (data, options = {}) ->
+    data = data
+    ### Example of sending multiple items
+    https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#add-to-cart
+    ###
+    CartJS.Queue.add '/cart/add.js', data, options
+    CartJS.Core.getCart()
+
   # Update an existing line item.
   updateItem: (line, quantity, properties = {}, options = {}) ->
     data = CartJS.Utils.wrapKeys(properties)

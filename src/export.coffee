@@ -17,6 +17,7 @@ CartJS.factory = (exports) ->
   # Export core API as top-level methods.
   exports.getCart = CartJS.Core.getCart
   exports.addItem = CartJS.Core.addItem
+  exports.addItems = CartJS.Core.addItems
   exports.updateItem = CartJS.Core.updateItem
   exports.updateItemById = CartJS.Core.updateItemById
   exports.updateItemQuantitiesById = CartJS.Core.updateItemQuantitiesById
