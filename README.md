@@ -21,6 +21,21 @@ function example() {
     "size": "XL"
   });
 
+  // Add multiple variants at once by sending multiple items
+  // https://help.shopify.com/en/themes/development/getting-started/using-ajax-api#add-to-cart
+  CartJS.addItems({
+    items: [
+      {
+        id: 12345678,
+        quantity: 1
+      },
+      {
+        id: 98765432,
+        quanity: 1
+      }
+    ]
+  });
+
   // Set a custom cart note.
   CartJS.setNote('This is a custom cart note.');
 }
