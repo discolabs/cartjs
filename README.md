@@ -114,3 +114,11 @@ needs.
 
 [Gavin Ballard]: http://gavinballard.com/?utm_source=github&utm_medium=readme&utm_campaign=cartjs
 [Disco Labs]: https://www.discolabs.com/?utm_source=github&utm_medium=readme&utm_campaign=cartjs
+
+#### Thanks
+Thanks to the following people who have contributed their time and code to Cart.js!
+
+* [Michaël Gallego](https://github.com/bakura10)
+* [Michael Shannon](https://github.com/michaelrshannon)
+* [Stewart Knapman](https://github.com/stewartknapman)
+* [Jonathan Moore](https://github.com/jonathanmoore)
