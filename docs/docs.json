@@ -213,6 +213,10 @@
     }
   },
   "builtwith": {
+    "olsatools" : {
+      "title": "Olsatools",
+      "url": "https://olsatools.com"
+    },
     "tattly" : {
       "title": "Tattly",
       "url": "https://tattly.com"
@@ -259,7 +263,7 @@
     },
     "intributeto" : {
       "title": "InTributeTo",
-      "url": "http://intributeto.us"
+      "url": "https://intributeto.us"
     },
     "bevybar" : {
       "title": "Bevy Bar",
@@ -267,39 +271,35 @@
     },
     "yeezy" : {
       "title": "Yeezy Supply",
-      "url": "http://shop.yeezysupply.com"
+      "url": "https://shop.yeezysupply.com"
     },
     "greater-goods" : {
       "title": "Greater Goods Roasting",
-      "url": "http://greatergoodsroasting.com"
+      "url": "https://greatergoodsroasting.com"
     },
     "rallier" : {
       "title": "Rallier",
-      "url": "http://rallier.com"
+      "url": "https://rallier.com"
     },
     "focal-theme" : {
       "title": "Focal Shopify Theme",
       "url": "https://themes.shopify.com/themes/focal"
     },
-    "pure-health-delivered" : {
-      "title": "Pure Health Delivered",
-      "url": "http://www.phd.co.nz"
-    },
     "the-foodbank-project" : {
       "title": "The Foodbank Project",
-      "url": "http://www.foodbank.org.nz"
+      "url": "https://www.foodbank.org.nz"
     },
     "lainee-hermsen" : {
       "title": "Lainee Hermsen",
-      "url": "http://www.laineehermsen.co.nz"
+      "url": "https://www.laineehermsen.co.nz"
     },
     "writeyboards" : {
       "title": "Writey Boards",
-      "url": "http://writeyboards.com"
+      "url": "https://writeyboards.com"
     },
     "budweiser" : {
       "title": "Budweiser Goal Lab",
-      "url": "http://shop.budweiser.ca"
+      "url": "https://shop.budweiser.ca"
     },
     "kagami-theme": {
       "title": "Kagami Shopify Theme",
@@ -307,11 +307,11 @@
     },
     "mast-brothers": {
       "title": "Mast Brothers",
-      "url": "http://mastbrothers.com"
+      "url": "https://mastbrothers.com"
     },
     "go-defense": {
       "title": "GoDefense",
-      "url": "http://godefense.fr"
+      "url": "https://godefense.fr"
     }
   }
 }
