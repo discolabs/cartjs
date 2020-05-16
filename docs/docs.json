@@ -213,6 +213,10 @@
     }
   },
   "builtwith": {
+    "ippodotea" : {
+      "title": "Ippodo Tea",
+      "url": "https://ippodotea.com"
+    },
     "olsatools" : {
       "title": "Olsatools",
       "url": "https://olsatools.com"
