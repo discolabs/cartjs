@@ -22,6 +22,9 @@
         },
         "browser-support": {
           "title": "Browser Support"
+        },
+        "module-loaders": {
+          "title": "Module Loaders"
         }
       }
     },
