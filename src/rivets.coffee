@@ -2,7 +2,7 @@
 # Adds Rivets.js functionality to CartJS if Rivets.js is available.
 # -----------------------------------------------------------------
 
-if 'rivets' of window
+if rivets
 
   # Rivets.js has been loaded, so declare the CartJS.Rivets module.
   CartJS.Rivets =
