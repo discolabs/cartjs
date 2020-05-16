@@ -1,13 +1,13 @@
 ## Further Questions
 
 ### Is it stable?
-Cart.js is still in beta, although it's been in development for over a year and 
-the API is quite stable. It's being used in production by a number of large
-Shopify stores, including our own clients.
+Cart.js is one of the most widely used front end Shopify libraries. It's being
+used in production by a vast number of Shopify stores, including our own
+clients.
 
-We're committed to supporting Cart.js now and in the future and always make the
-effort to respond to bug reports and feature requests in a timely manner as we
-move towards a 1.0 release.
+While it doesn't receive frequent updates, it is generally maintained and we do
+make the effort to respond to bug reports and feature requests in a timely
+manner.
 
 If you're interested in using Cart.js, we'll be happy to answer any questions 
 you have or help you get up and running.
