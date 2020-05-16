@@ -21,6 +21,21 @@ function example() {
     "size": "XL"
   });
 
+  // Add multiple items in a single call. 
+  CartJS.addItems([
+    {
+      id: 12345678,
+      quantity: 3,
+      properties: {
+        "size": "XL"
+      }
+    },
+    {
+      id: 87654321,
+      quantity: 2
+    }
+  ]);
+
   // Set a custom cart note.
   CartJS.setNote('This is a custom cart note.');
 }
