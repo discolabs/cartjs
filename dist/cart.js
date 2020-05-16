@@ -302,6 +302,17 @@
       CartJS.Queue.add('/cart/add.js', data, options);
       return CartJS.Core.getCart();
     },
+    addItems: function(items, options) {
+      var data;
+      if (options == null) {
+        options = {};
+      }
+      data = {
+        items: items
+      };
+      CartJS.Queue.add('/cart/add.js', data, options);
+      return CartJS.Core.getCart();
+    },
     updateItem: function(line, quantity, properties, options) {
       var data;
       if (properties == null) {
@@ -528,7 +539,7 @@
     }
   };
 
-  if ('rivets' in window) {
+  if (rivets) {
     CartJS.Rivets = {
       model: null,
       boundViews: [],
@@ -671,6 +682,7 @@
     exports.settings = CartJS.settings;
     exports.getCart = CartJS.Core.getCart;
     exports.addItem = CartJS.Core.addItem;
+    exports.addItems = CartJS.Core.addItems;
     exports.updateItem = CartJS.Core.updateItem;
     exports.updateItemById = CartJS.Core.updateItemById;
     exports.updateItemQuantitiesById = CartJS.Core.updateItemQuantitiesById;
