@@ -120,6 +120,9 @@
         "add-item": {
           "title": "addItem"
         },
+        "add-items": {
+          "title": "addItems"
+        },
         "update-item": {
           "title": "updateItem"
         },
