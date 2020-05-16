@@ -50,7 +50,19 @@ If we loaded this example, clicked "Add Five Widgets", then typed `CartJS.cart.i
 ```
 
 That's it!
-You can call `addItems()` as many times as you like in the same function, and Cart.js will queue up Ajax requests as needed.
+You can call `addItem()` as many times as you like in the same function, and Cart.js will queue up Ajax requests as needed.
+
+<div class="callout callout-success">
+    <h4>Adding multiple line items at once</h4>
+
+    <p>
+        If you're adding multiple line items at once, you can use the `CartJS.addItems()` method, rather than multiple calls to `CartJS.addItem()`.
+    </p>
+
+    <p>
+        This method leverages new functionality added to the Shopify Ajax API in January 2020 that supports multiple items being added at once.
+    </p>
+</div> 
 
 <div class="callout callout-warning">
     <h4>Note on multiple line items with the same variant ID</h4>

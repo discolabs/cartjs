@@ -18,6 +18,13 @@ CartJS.Core =
     CartJS.Queue.add '/cart/add.js', data, options
     CartJS.Core.getCart()
 
+  # Add multiple new line items to the cart.
+  addItems: (items, options = {}) ->
+    data =
+      items: items
+    CartJS.Queue.add '/cart/add.js', data, options
+    CartJS.Core.getCart()
+
   # Update an existing line item.
   updateItem: (line, quantity, properties = {}, options = {}) ->
     data = CartJS.Utils.wrapKeys(properties)

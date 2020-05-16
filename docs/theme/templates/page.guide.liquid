@@ -125,6 +125,19 @@ Binding library in your themes. </p>
         changed their theme guidelines to only require support for Internet
         Explorer 9+.
     </p><br></div>
+<h3 id="getting-started-module-loaders">Module Loaders</h3><p>If you&#39;re using Cart.js and Rivets with module loaders like Webpack, you&#39;ll
+need to make a couple of minor tweaks to ensure things work smoothly. </p>
+<p>Ensure you&#39;re pulling in jQuery and Rivets in your <code>webpack.config.js</code> or
+equivalent:</p>
+<p>{% raw %}</p>
+<pre><code class="language-js">new webpack.ProvidePlugin({ $: &quot;jquery&quot;, rivets: &quot;rivets&quot;, }),
+</code></pre>
+<p>{% endraw %}</p>
+<p>and also make sure that Rivets is available globally in your entrypoint file:</p>
+<p>{% raw %}</p>
+<pre><code class="language-js">global.rivets = rivets;
+</code></pre>
+<p>{% endraw %}</p>
 <h2 id="core-api">Core API</h2><p>The Core API consists of methods called on the global <code>CartJS</code> object.
 You can use the Core API to do pretty much everything you&#39;d expect of a cart manipulation library - add items, update quantities and custom properties, and so on.</p>
 <p>A full list of methods can be found in the <a href="/pages/reference/#core-api">API Reference</a>.</p>
@@ -205,7 +218,19 @@ Let&#39;s update our code to add five widgets when we click the button, and to s
 ]
 </code></pre>
 <p>That&#39;s it!
-You can call <code>addItems()</code> as many times as you like in the same function, and Cart.js will queue up Ajax requests as needed.</p>
+You can call <code>addItem()</code> as many times as you like in the same function, and Cart.js will queue up Ajax requests as needed.</p>
+<div class="callout callout-success">
+    <h4>Adding multiple line items at once</h4>
+
+    <p>
+        If you&#39;re adding multiple line items at once, you can use the <code>CartJS.addItems()</code> method, rather than multiple calls to <code>CartJS.addItem()</code>.
+    </p>
+
+    <p>
+        This method leverages new functionality added to the Shopify Ajax API in January 2020 that supports multiple items being added at once.
+    </p>
+</div> 
+
 <div class="callout callout-warning">
     <h4>Note on multiple line items with the same variant ID</h4>
 
@@ -384,4 +409,4 @@ All of the usual inputs - <code>id</code> to specify the variant ID, <code>quant
 <p>A complete list of the events triggered by Cart.js is available in the <a href="/pages/reference#events">Event Reference</a>.</p>
 <h2 id="dom-binding">DOM Binding</h2><p>Full documentation for the DOM Binding module is coming soon.</p>
 <p>In the meantime, you can check out the example on the <a href="/">front page</a> in combination with the <a href="http://rivetsjs.com/">Rivets.js documentation</a> to get an idea of how things work.</p>
-</article><aside class="col-md-2 hidden-sm hidden-xs"><div class="aside"><nav id="nav" data-spy="affix" data-offset-top="102"><ul class="nav nav-docs"><li><a href="#introduction">Introduction</a><ul class="nav"><li><a href="#introduction-what">What is Cart.js?</a></li></ul></li><li><a href="#getting-started">Getting Started</a><ul class="nav"><li><a href="#getting-started-installation">Installation</a></li><li><a href="#getting-started-setup">Setup</a></li><li><a href="#getting-started-next-steps">Next Steps</a></li><li><a href="#getting-started-browser-support">Browser Support</a></li></ul></li><li><a href="#core-api">Core API</a><ul class="nav"><li><a href="#core-api-configuration">Configuration</a></li><li><a href="#core-api-cart-state">Cart State</a></li><li><a href="#core-api-adding-items">Adding Items</a></li><li><a href="#core-api-updating-items">Updating Items</a></li><li><a href="#core-api-removing-items">Removing Items</a></li><li><a href="#core-api-attributes">Cart Attributes</a></li><li><a href="#core-api-callbacks">Callbacks</a></li></ul></li><li><a href="#data-api">Data API</a><ul class="nav"><li><a href="#data-api-adding-items">Adding Items</a></li><li><a href="#data-api-removing-items">Removing Items</a></li><li><a href="#data-api-toggling-items">Toggling Items</a></li><li><a href="#data-api-submitting-forms">Submitting Forms</a></li></ul></li><li><a href="#events">Events</a><ul class="nav"></ul></li><li><a href="#dom-binding">DOM Binding</a><ul class="nav"></ul></li></ul></nav></div></aside></div></section></div>
+</article><aside class="col-md-2 hidden-sm hidden-xs"><div class="aside"><nav id="nav" data-spy="affix" data-offset-top="102"><ul class="nav nav-docs"><li><a href="#introduction">Introduction</a><ul class="nav"><li><a href="#introduction-what">What is Cart.js?</a></li></ul></li><li><a href="#getting-started">Getting Started</a><ul class="nav"><li><a href="#getting-started-installation">Installation</a></li><li><a href="#getting-started-setup">Setup</a></li><li><a href="#getting-started-next-steps">Next Steps</a></li><li><a href="#getting-started-browser-support">Browser Support</a></li><li><a href="#getting-started-module-loaders">Module Loaders</a></li></ul></li><li><a href="#core-api">Core API</a><ul class="nav"><li><a href="#core-api-configuration">Configuration</a></li><li><a href="#core-api-cart-state">Cart State</a></li><li><a href="#core-api-adding-items">Adding Items</a></li><li><a href="#core-api-updating-items">Updating Items</a></li><li><a href="#core-api-removing-items">Removing Items</a></li><li><a href="#core-api-attributes">Cart Attributes</a></li><li><a href="#core-api-callbacks">Callbacks</a></li></ul></li><li><a href="#data-api">Data API</a><ul class="nav"><li><a href="#data-api-adding-items">Adding Items</a></li><li><a href="#data-api-removing-items">Removing Items</a></li><li><a href="#data-api-toggling-items">Toggling Items</a></li><li><a href="#data-api-submitting-forms">Submitting Forms</a></li></ul></li><li><a href="#events">Events</a><ul class="nav"></ul></li><li><a href="#dom-binding">DOM Binding</a><ul class="nav"></ul></li></ul></nav></div></aside></div></section></div>

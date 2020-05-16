@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 No unreleased changes.
 
+## 1.0.0 - 2020-05-16
+### Added
+- Support for adding multiple line items with new `CartJS.addItems()` method.
+
+### Changed
+- Updated some documentation. v1.0.0 - only took 6 years!
+
 ## 0.4.3 - 2019-08-20
 ### Added
 - Warning when trying to use money formatters without Shopify library support.
