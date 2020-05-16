@@ -26,7 +26,7 @@ Make your change. Add tests for your change. Make the tests pass:
 
     npm test
 
-Push to your fork and [submit a pull request].
+Push to your fork and [submit a pull request], based off the `develop` branch.
 
 [submit a pull request]: https://github.com/discolabs/cartjs/compare/
 
