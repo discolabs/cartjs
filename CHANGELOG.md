@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 No unreleased changes.
 
+## 1.0.1 - 2020-05-17
+### Changed
+- Minor documentation changes.
+
 ## 1.0.0 - 2020-05-16
 ### Added
 - Support for adding multiple line items with new `CartJS.addItems()` method.
