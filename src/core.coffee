@@ -8,7 +8,7 @@ CartJS.Core =
   getCart: (options = {}) ->
     options.type = 'GET'
     options.updateCart = true
-    CartJS.Queue.add '/cart.js?v=' + new Date().getTime(), {}, options
+    CartJS.Queue.add '/cart.js', {v: new Date().getTime()}, options
 
   # Add a new line item to the cart.
   addItem: (id, quantity = 1, properties = {}, options = {}) ->
