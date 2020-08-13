@@ -2,7 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
-No unreleased changes.
+### Added
+- Cache-busting `v` parameter when fetching cart contents.
 
 ## 1.0.1 - 2020-05-17
 ### Changed
