@@ -1,5 +1,5 @@
 // Cart.js
-// version: 1.0.0
+// version: 1.0.2
 // author: Gavin Ballard
 // license: MIT
 (function() {
@@ -1888,7 +1888,9 @@
       }
       options.type = 'GET';
       options.updateCart = true;
-      return CartJS.Queue.add('/cart.js', {}, options);
+      return CartJS.Queue.add('/cart.js', {
+        v: new Date().getTime()
+      }, options);
     },
     addItem: function(id, quantity, properties, options) {
       var data;
