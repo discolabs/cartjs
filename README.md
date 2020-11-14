@@ -66,7 +66,7 @@ contents of your cart change, like this:
 
 ```html
 <div data-cart-view>
-    You currently have {cart.item_count} item(s) in your cart, for a total of {cart.total_price | money_with_currency}.
+    You currently have {cart.total_items} item(s) in your cart, for a total of {cart.total_price | money_with_currency}.
 </div>
 ```
 
