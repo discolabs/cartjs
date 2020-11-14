@@ -16,7 +16,9 @@ Let's create a button customers can click to add a widget to their cart, and the
 Now when a customer clicks our button, Cart.js will make an Ajax request and add a single Widget to the customer's cart.
 
 When using the `addItem()` method, you can optionally specify the quantity to add and a hash of custom line item properties.
-Let's update our code to add five widgets when we click the button, and to set a custom "added_by" property on the resulting line item:
+You can also specify the special optional `selling_plan` property, which will be used by Cart.js to specify the [selling plan](https://shopify.dev/docs/themes/liquid/reference/objects/selling-plan) the item will be sold with.
+
+Let's update our code to add five widgets when we click the button, to use the selling plan `1425` and to set a custom "added_by" property on the resulting line item:
 
 ```html
 <button id="button">Add Five Widgets</button>
@@ -24,6 +26,7 @@ Let's update our code to add five widgets when we click the button, and to set a
 <script type="text/javascript">
     $('#button').click(function() {
         CartJS.addItem(12345678, 5, {
+            "selling_plan": 1425,
             "added_by": "Cart.js"
         });
     });
@@ -44,7 +47,12 @@ If we loaded this example, clicked "Add Five Widgets", then typed `CartJS.cart.i
         },
         "quantity": 5,
         "title": "Widget 1",
-        "variant_id": 12345678
+        "variant_id": 12345678,
+        "selling_plan_allocation": {
+            "selling_plan": {
+              "id": 1425
+            }
+        }
     }
 ]
 ```

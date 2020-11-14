@@ -122,3 +122,4 @@ Thanks to the following people who have contributed their time and code to Cart.
 * [Michael Shannon](https://github.com/michaelrshannon)
 * [Stewart Knapman](https://github.com/stewartknapman)
 * [Jonathan Moore](https://github.com/jonathanmoore)
+* [Ty Carlson](https://github.com/tywayne)
