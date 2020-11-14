@@ -35,10 +35,14 @@ CartJS.Utils =
   # all values will be set to that of the override. This is primarily useful
   # when wanting to reset values by setting them to an empty string. Note
   # null values for override will be ignored.
-  wrapKeys: (obj, type = 'properties', override) ->
+  #
+  # Any keys in the provided 'skip' list will, as you'd expect, be skipped in
+  # the wrapping but will still be present in the resulting hash.
+  wrapKeys: (obj, type = 'properties', override, skip = []) ->
     wrapped = {}
     for key, value of obj
-      wrapped["#{type}[#{key}]"] = if override? then override else value
+      mappedKey = if key in skip then key else "#{type}[#{key}]"
+      wrapped[mappedKey] = if override? then override else value
     wrapped
 
   # Perform the opposite function to wrapKeys above.

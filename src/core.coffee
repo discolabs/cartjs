@@ -12,11 +12,9 @@ CartJS.Core =
 
   # Add a new line item to the cart.
   addItem: (id, quantity = 1, properties = {}, options = {}) ->
-    data = CartJS.Utils.wrapKeys(properties)
+    data = CartJS.Utils.wrapKeys(properties, null, null, ['selling_plan'])
     data.id = id
     data.quantity = quantity
-    if properties.selling_plan?
-      data.selling_plan = CartJS.Utils.delete(properties, 'selling_plan')
     CartJS.Queue.add '/cart/add.js', data, options
     CartJS.Core.getCart()
 
@@ -29,7 +27,7 @@ CartJS.Core =
 
   # Update an existing line item.
   updateItem: (line, quantity, properties = {}, options = {}) ->
-    data = CartJS.Utils.wrapKeys(properties)
+    data = CartJS.Utils.wrapKeys(properties, null, null, ['selling_plan'])
     data.line = line
     if quantity?
       data.quantity = quantity
@@ -42,7 +40,7 @@ CartJS.Core =
 
   # Update item by ID
   updateItemById: (id, quantity, properties = {}, options = {}) ->
-    data = CartJS.Utils.wrapKeys(properties)
+    data = CartJS.Utils.wrapKeys(properties, null, null, ['selling_plan'])
     data.id = id
     if quantity?
       data.quantity = quantity
