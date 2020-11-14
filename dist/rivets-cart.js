@@ -1,5 +1,5 @@
 // Cart.js
-// version: 1.0.2
+// version: 1.1.0
 // author: Gavin Ballard
 // license: MIT
 (function() {
@@ -1605,7 +1605,8 @@
 
 (function() {
   var $document, Cart, CartJS, FORMAT_MONEY_WARNING, Item, processing, queue,
-    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+    __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   Cart = (function() {
     function Cart() {
@@ -1742,15 +1743,19 @@
         return method.apply(console, args);
       }
     },
-    wrapKeys: function(obj, type, override) {
-      var key, value, wrapped;
+    wrapKeys: function(obj, type, override, skip) {
+      var key, mappedKey, value, wrapped;
       if (type == null) {
         type = 'properties';
+      }
+      if (skip == null) {
+        skip = [];
       }
       wrapped = {};
       for (key in obj) {
         value = obj[key];
-        wrapped["" + type + "[" + key + "]"] = override != null ? override : value;
+        mappedKey = __indexOf.call(skip, key) >= 0 ? key : "" + type + "[" + key + "]";
+        wrapped[mappedKey] = override != null ? override : value;
       }
       return wrapped;
     },
@@ -1785,6 +1790,12 @@
         newInstance[key] = clone(object[key]);
       }
       return newInstance;
+    },
+    "delete": function(object, key) {
+      var val;
+      val = object[key];
+      delete object[key];
+      return val;
     },
     isArray: Array.isArray || function(value) {
       return {}.toString.call(value) === '[object Array]';
@@ -1853,6 +1864,7 @@
         data: data,
         type: options.type || 'POST',
         dataType: options.dataType || 'json',
+        cache: !!options.cache,
         success: CartJS.Utils.ensureArray(options.success),
         error: CartJS.Utils.ensureArray(options.error),
         complete: CartJS.Utils.ensureArray(options.complete)
@@ -1903,7 +1915,7 @@
       if (options == null) {
         options = {};
       }
-      data = CartJS.Utils.wrapKeys(properties);
+      data = CartJS.Utils.wrapKeys(properties, null, null, ['selling_plan']);
       data.id = id;
       data.quantity = quantity;
       CartJS.Queue.add('/cart/add.js', data, options);
@@ -1928,7 +1940,7 @@
       if (options == null) {
         options = {};
       }
-      data = CartJS.Utils.wrapKeys(properties);
+      data = CartJS.Utils.wrapKeys(properties, null, null, ['selling_plan']);
       data.line = line;
       if (quantity != null) {
         data.quantity = quantity;
@@ -1950,7 +1962,7 @@
       if (options == null) {
         options = {};
       }
-      data = CartJS.Utils.wrapKeys(properties);
+      data = CartJS.Utils.wrapKeys(properties, null, null, ['selling_plan']);
       data.id = id;
       if (quantity != null) {
         data.quantity = quantity;
@@ -2063,10 +2075,12 @@
       return $document[method]('cart.requestComplete', CartJS.Data.render);
     },
     add: function(e) {
-      var $this;
+      var $this, properties;
       e.preventDefault();
       $this = jQuery(this);
-      return CartJS.Core.addItem($this.attr('data-cart-add'), $this.attr('data-cart-quantity'));
+      properties = {};
+      properties.selling_plan = $this.attr('data-cart-selling-plan');
+      return CartJS.Core.addItem($this.attr('data-cart-add'), $this.attr('data-cart-quantity'), properties);
     },
     remove: function(e) {
       var $this;
@@ -2081,16 +2095,20 @@
       return CartJS.Core.removeItemById($this.attr('data-cart-remove-id'));
     },
     update: function(e) {
-      var $this;
+      var $this, properties;
       e.preventDefault();
       $this = jQuery(this);
-      return CartJS.Core.updateItem($this.attr('data-cart-update'), $this.attr('data-cart-quantity'));
+      properties = {};
+      properties.selling_plan = $this.attr('data-cart-selling-plan');
+      return CartJS.Core.updateItem($this.attr('data-cart-update'), $this.attr('data-cart-quantity'), properties);
     },
     updateById: function(e) {
-      var $this;
+      var $this, properties;
       e.preventDefault();
       $this = jQuery(this);
-      return CartJS.Core.updateItemById($this.attr('data-cart-update-id'), $this.attr('data-cart-quantity'));
+      properties = {};
+      properties.selling_plan = $this.attr('data-cart-selling-plan');
+      return CartJS.Core.updateItemById($this.attr('data-cart-update-id'), $this.attr('data-cart-quantity'), properties);
     },
     clear: function(e) {
       e.preventDefault();
@@ -2124,7 +2142,9 @@
           return id = item.value;
         } else if (item.name === 'quantity') {
           return quantity = item.value;
-        } else if (item.name.match(/^properties\[[\w ]+\]$/)) {
+        } else if (item.name === 'selling_plan') {
+          return properties.selling_plan = item.value;
+        } else if (item.name.match(/^properties\[[\w-_ ]*\]$/)) {
           return properties[item.name] = item.value;
         }
       });
@@ -2146,7 +2166,7 @@
     }
   };
 
-  if (rivets) {
+  if (typeof rivets !== "undefined" && rivets !== null) {
     CartJS.Rivets = {
       model: null,
       boundViews: [],

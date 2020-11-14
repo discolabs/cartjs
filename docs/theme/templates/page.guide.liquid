@@ -190,12 +190,14 @@ Let&#39;s create a button customers can click to add a widget to their cart, and
 </code></pre>
 <p>Now when a customer clicks our button, Cart.js will make an Ajax request and add a single Widget to the customer&#39;s cart.</p>
 <p>When using the <code>addItem()</code> method, you can optionally specify the quantity to add and a hash of custom line item properties.
-Let&#39;s update our code to add five widgets when we click the button, and to set a custom &quot;added_by&quot; property on the resulting line item:</p>
+You can also specify the special optional <code>selling_plan</code> property, which will be used by Cart.js to specify the <a href="https://shopify.dev/docs/themes/liquid/reference/objects/selling-plan">selling plan</a> the item will be sold with.</p>
+<p>Let&#39;s update our code to add five widgets when we click the button, to use the selling plan <code>1425</code> and to set a custom &quot;added_by&quot; property on the resulting line item:</p>
 <pre><code class="language-html">&lt;button id=&quot;button&quot;&gt;Add Five Widgets&lt;/button&gt;
 
 &lt;script type=&quot;text/javascript&quot;&gt;
     $(&#39;#button&#39;).click(function() {
         CartJS.addItem(12345678, 5, {
+            &quot;selling_plan&quot;: 1425,
             &quot;added_by&quot;: &quot;Cart.js&quot;
         });
     });
@@ -213,7 +215,12 @@ Let&#39;s update our code to add five widgets when we click the button, and to s
         },
         &quot;quantity&quot;: 5,
         &quot;title&quot;: &quot;Widget 1&quot;,
-        &quot;variant_id&quot;: 12345678
+        &quot;variant_id&quot;: 12345678,
+        &quot;selling_plan_allocation&quot;: {
+            &quot;selling_plan&quot;: {
+              &quot;id&quot;: 1425
+            }
+        }
     }
 ]
 </code></pre>
@@ -343,6 +350,9 @@ We want to inform the user of the success or failure of their action, and potent
 {% endfor %}
 </code></pre>
 <p>{% endraw %}</p>
+<p>You can also optionally specify a quantity and selling plan for the add action:</p>
+<pre><code class="language-html">&lt;button data-cart-add=&quot;12345678&quot; data-cart-quantity=&quot;2&quot; data-cart-selling-plan=&quot;1425&quot;&gt;Subscribe to 2 widgets&lt;/button&gt;
+</code></pre>
 <h3 id="data-api-removing-items">Removing Items</h3><p>To create an element that removes a line item from the cart on a <code>click</code> event, use <code>data-cart-remove</code> or <code>data-cart-remove-id</code>.</p>
 <p>The difference between these two is that <code>data-cart-remove</code> expects the index of the line item you&#39;d like to remove from the cart, while <code>data-cart-remove-id</code> expects a variant ID.</p>
 <p>See <a href="#core-api-updating-items">Updating Items</a> in the Core API section for an explanation of why this distinction is required.</p>
@@ -376,7 +386,7 @@ We want to inform the user of the success or failure of their action, and potent
 </code></pre>
 <p>{% endraw %}</p>
 <p>When the customer clicks &quot;Buy Now&quot;, Cart.js will intercept the form submission and convert it to an Ajax request.
-All of the usual inputs - <code>id</code> to specify the variant ID, <code>quantity</code> to specify the quantity, and <code>properties[]</code> to specify line item properties - are supported.</p>
+All of the usual inputs - <code>id</code> to specify the variant ID, <code>quantity</code> to specify the quantity, <code>selling_plan</code> to specify the selling plan, and <code>properties[]</code> to specify line item properties - are supported.</p>
 <div class="callout callout-danger">
     <h4>Form submission doesn&#39;t work with files</h4>
     <p>
