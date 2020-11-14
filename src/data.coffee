@@ -37,7 +37,9 @@ CartJS.Data =
   add: (e) ->
     e.preventDefault()
     $this = jQuery(this)
-    CartJS.Core.addItem $this.attr('data-cart-add'), $this.attr('data-cart-quantity')
+    properties = {}
+    properties.selling_plan = $this.attr('data-cart-selling-plan')
+    CartJS.Core.addItem $this.attr('data-cart-add'), $this.attr('data-cart-quantity'), properties
 
   # Handler for [data-cart-remove] click events.
   remove: (e) ->
@@ -55,13 +57,17 @@ CartJS.Data =
   update: (e) ->
     e.preventDefault()
     $this = jQuery(this)
-    CartJS.Core.updateItem $this.attr('data-cart-update'), $this.attr('data-cart-quantity')
+    properties = {}
+    properties.selling_plan = $this.attr('data-cart-selling-plan')
+    CartJS.Core.updateItem $this.attr('data-cart-update'), $this.attr('data-cart-quantity'), properties
 
   # Handler for [data-cart-update-id] click events.
   updateById: (e) ->
     e.preventDefault()
     $this = jQuery(this)
-    CartJS.Core.updateItemById $this.attr('data-cart-update-id'), $this.attr('data-cart-quantity')
+    properties = {}
+    properties.selling_plan = $this.attr('data-cart-selling-plan')
+    CartJS.Core.updateItemById $this.attr('data-cart-update-id'), $this.attr('data-cart-quantity'), properties
 
   # Handler for [data-cart-clear] click events.
   clear: (e) ->
@@ -97,6 +103,8 @@ CartJS.Data =
         id = item.value
       else if item.name == 'quantity'
         quantity = item.value
+      else if item.name == 'selling_plan'
+        properties.selling_plan = item.value
       else if item.name.match /^properties\[[\w ]+\]$/
         properties[item.name] = item.value
 
