@@ -69,6 +69,12 @@ CartJS.Utils =
       newInstance[key] = clone object[key]
     return newInstance
 
+  # Return a key from an object and delete it.
+  delete: (object, key) ->
+    val = object[key]
+    delete object[key]
+    val
+
   # Return true if the given value is an array.
   isArray: Array.isArray || (value) ->
     {}.toString.call(value) is '[object Array]'

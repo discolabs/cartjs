@@ -15,6 +15,8 @@ CartJS.Core =
     data = CartJS.Utils.wrapKeys(properties)
     data.id = id
     data.quantity = quantity
+    if properties.selling_plan?
+      data.selling_plan = CartJS.Utils.delete(properties, 'selling_plan')
     CartJS.Queue.add '/cart/add.js', data, options
     CartJS.Core.getCart()
 
