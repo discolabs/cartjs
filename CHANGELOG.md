@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## 1.1.0 - 2020-11-14
 ### Added
 - Explicitly pass `cache: false` in Ajax calls by default.
 - Add support for `selling_plan` property to `CartJS.addItem` method.
