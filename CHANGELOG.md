@@ -6,6 +6,10 @@ All notable changes to this project will be documented in this file.
 - Explicitly pass `cache: false` in Ajax calls by default.
 - Add support for `selling_plan` property to `CartJS.addItem` method.
 
+### Changed
+- Fix for non-Rivets build triggering reference errors.
+- Include hyphen and underscore as valid separators in properties for form submission.
+
 ## 1.0.2 - 2020-08-14
 ### Added
 - Cache-busting `v` parameter when fetching cart contents.
