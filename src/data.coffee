@@ -105,7 +105,7 @@ CartJS.Data =
         quantity = item.value
       else if item.name == 'selling_plan'
         properties.selling_plan = item.value
-      else if item.name.match /^properties\[[\w ]+\]$/
+      else if item.name.match /^properties\[[\w-_ ]*\]$/
         properties[item.name] = item.value
 
     CartJS.Core.addItem(id, quantity, CartJS.Utils.unwrapKeys(properties))
