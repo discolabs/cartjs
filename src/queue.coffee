@@ -15,6 +15,7 @@ CartJS.Queue =
       data: data
       type: options.type || 'POST'
       dataType: options.dataType || 'json'
+      cache: !!options.cache
       success: CartJS.Utils.ensureArray(options.success)
       error: CartJS.Utils.ensureArray(options.error)
       complete: CartJS.Utils.ensureArray(options.complete)

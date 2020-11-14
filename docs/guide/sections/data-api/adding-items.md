@@ -13,3 +13,9 @@ Of course, you can always use Liquid to render these elements dynamically in you
 {% endfor %}
 ```
 {% endraw %}
+
+You can also optionally specify a quantity and selling plan for the add action:
+
+```html
+<button data-cart-add="12345678" data-cart-quantity="2" data-cart-selling-plan="1425">Subscribe to 2 widgets</button>
+```
