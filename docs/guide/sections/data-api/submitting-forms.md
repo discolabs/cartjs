@@ -17,7 +17,7 @@ You can convert these existing forms to use Cart.js simply by adding a `data-car
 {% endraw %}
 
 When the customer clicks "Buy Now", Cart.js will intercept the form submission and convert it to an Ajax request.
-All of the usual inputs - `id` to specify the variant ID, `quantity` to specify the quantity, and `properties[]` to specify line item properties - are supported.
+All of the usual inputs - `id` to specify the variant ID, `quantity` to specify the quantity, `selling_plan` to specify the selling plan, and `properties[]` to specify line item properties - are supported.
 
 <div class="callout callout-danger">
     <h4>Form submission doesn't work with files</h4>
