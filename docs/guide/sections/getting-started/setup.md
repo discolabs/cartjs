@@ -28,10 +28,10 @@ Because Cart.js depends on jQuery, you should load it after you've included the 
 
         <!-- Include jQuery from Google's CDN. -->
         <!-- Your theme may already include jQuery - if so, you can skip this line. -->
-        {{ '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js' | script_tag }}
+        <script src="{{ '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js' }}" defer></script>
 
         <!-- Include Cart.js -->
-        {{ 'cart.min.js' | asset_url | script_tag }}
+        <script src="{{ 'cart.min.js' | asset_url }}" defer></script>
 
         <!-- Initialise Cart.js once the page has loaded -->
         <script type="text/javascript">
